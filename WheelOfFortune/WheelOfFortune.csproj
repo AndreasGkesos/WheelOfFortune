@@ -207,15 +207,22 @@
     <Compile Include="Migrations\201710151059048_AddindDomainModels2.Designer.cs">
       <DependentUpon>201710151059048_AddindDomainModels2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710152325340_Refactor and and new Domains.cs" />
+    <Compile Include="Migrations\201710152325340_Refactor and and new Domains.Designer.cs">
+      <DependentUpon>201710152325340_Refactor and and new Domains.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Domain\Coupon.cs" />
     <Compile Include="Models\Domain\Balance.cs" />
+    <Compile Include="Models\Domain\CouponValues.cs" />
     <Compile Include="Models\Domain\Spin.cs" />
     <Compile Include="Models\Domain\Transaction.cs" />
+    <Compile Include="Models\Domain\WheelConfigurationSlice.cs" />
     <Compile Include="Models\Domain\WheelConfiguration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\TransactionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -302,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710151059048_AddindDomainModels2.resx">
       <DependentUpon>201710151059048_AddindDomainModels2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710152325340_Refactor and and new Domains.resx">
+      <DependentUpon>201710152325340_Refactor and and new Domains.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

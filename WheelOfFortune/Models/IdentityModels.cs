@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WheelOfFortune.Models.Domain;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace WheelOfFortune.Models
 {
@@ -18,7 +19,6 @@ namespace WheelOfFortune.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
-
         }
 
         [Required]
@@ -40,13 +40,26 @@ namespace WheelOfFortune.Models
 
         public DbSet<Coupon> Coupons { get; set; }
 
+        public DbSet<CouponValues> CouponValues { get; set; }
+
         public DbSet<Balance> Balances { get; set; }
 
         public DbSet<Transaction> Transactions { get; set;}
 
         public DbSet<WheelConfiguration> WheelConfigurations { get; set; }
 
+        public DbSet<WheelConfigurationSlice> WheelConfigurationSlices { get; set; }
 
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+        }
 
         public static ApplicationDbContext Create()
         {

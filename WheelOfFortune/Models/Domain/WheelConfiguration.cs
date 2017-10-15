@@ -8,29 +8,21 @@ namespace WheelOfFortune.Models.Domain
 {
     public class WheelConfiguration
     {
-
         public WheelConfiguration()
         {
             Spins = new List<Spin>();
+            Slices = new List<WheelConfigurationSlice>();
         }
 
         public int Id { get; set; }
 
         [Required]
-        public double Propability { get; set; }
-        [Required]
-        public string Type { get; set; }
-        [Required]
-        public string Value{get; set;}
-        [Required]
-        public bool Win { get; set; }
-        [Required]
-        public string ResultText { get; set; }
-        [Required]
-        public double Score { get; set; }
+        public DateTime DateCreated { get; set; }
 
-        [Required]
         public ICollection<Spin> Spins { get; set; }
+        public ICollection<WheelConfigurationSlice> Slices { get; set; }
 
+        [Required]
+        public ApplicationUser User { get; set; }
     }
 }

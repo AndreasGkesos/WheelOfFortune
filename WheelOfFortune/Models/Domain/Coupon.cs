@@ -15,7 +15,7 @@ namespace WheelOfFortune.Models.Domain
         public string Code { get; set; }
 
         [Required]
-        public int  Value { get; set; }
+        public CouponValues Value { get; set; }
 
         public DateTime DateCreated { get; set; }
 
@@ -25,7 +25,6 @@ namespace WheelOfFortune.Models.Domain
         [Required]
         public bool Active { get; set; }
 
-        [Required]
         public ApplicationUser User { get; set; }
     }
 }
