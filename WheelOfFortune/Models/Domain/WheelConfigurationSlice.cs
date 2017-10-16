@@ -8,11 +8,6 @@ namespace WheelOfFortune.Models.Domain
 {
     public class WheelConfigurationSlice
     {
-        public WheelConfigurationSlice()
-        {
-            WheelConfigurations = new List<WheelConfiguration>();
-        }
-
         public int Id { get; set; }
 
         [Required]
@@ -28,7 +23,7 @@ namespace WheelOfFortune.Models.Domain
         [Required]
         public double Score { get; set; }
 
-        public ICollection<WheelConfiguration> WheelConfigurations { get; set; }
+        public WheelConfiguration WheelConfiguration { get; set; }
 
         [Required]
         public ApplicationUser User { get; set; }

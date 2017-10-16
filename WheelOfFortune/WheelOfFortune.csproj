@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201710152325340_Refactor and and new Domains.Designer.cs">
       <DependentUpon>201710152325340_Refactor and and new Domains.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710161044418_Update domains.cs" />
+    <Compile Include="Migrations\201710161044418_Update domains.Designer.cs">
+      <DependentUpon>201710161044418_Update domains.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Domain\Coupon.cs" />
@@ -312,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710152325340_Refactor and and new Domains.resx">
       <DependentUpon>201710152325340_Refactor and and new Domains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710161044418_Update domains.resx">
+      <DependentUpon>201710161044418_Update domains.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
