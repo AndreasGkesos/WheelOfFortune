@@ -40,7 +40,7 @@ namespace WheelOfFortune.Models
 
         public DbSet<Coupon> Coupons { get; set; }
 
-        public DbSet<CouponValues> CouponValues { get; set; }
+        public DbSet<CouponValue> CouponValues { get; set; }
 
         public DbSet<Balance> Balances { get; set; }
 

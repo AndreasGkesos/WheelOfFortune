@@ -256,11 +256,15 @@
     <Compile Include="Migrations\201710161044418_Update domains.Designer.cs">
       <DependentUpon>201710161044418_Update domains.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710182112341_SmallChangeToMakeBalnceDefautt100.cs" />
+    <Compile Include="Migrations\201710182112341_SmallChangeToMakeBalnceDefautt100.Designer.cs">
+      <DependentUpon>201710182112341_SmallChangeToMakeBalnceDefautt100.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Domain\Coupon.cs" />
     <Compile Include="Models\Domain\Balance.cs" />
-    <Compile Include="Models\Domain\CouponValues.cs" />
+    <Compile Include="Models\Domain\CouponValue.cs" />
     <Compile Include="Models\Domain\Spin.cs" />
     <Compile Include="Models\Domain\Transaction.cs" />
     <Compile Include="Models\Domain\WheelConfigurationSlice.cs" />
@@ -362,6 +366,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710161044418_Update domains.resx">
       <DependentUpon>201710161044418_Update domains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710182112341_SmallChangeToMakeBalnceDefautt100.resx">
+      <DependentUpon>201710182112341_SmallChangeToMakeBalnceDefautt100.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

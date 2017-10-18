@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WheelOfFortune.Models.Domain
 {
-    public class CouponValues
+    public class CouponValue
     {
         public int Id { get; set; }
 
