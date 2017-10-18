@@ -25,6 +25,8 @@ namespace WheelOfFortune.Models
         [Display(Name = "User Photo")]
         public byte[] UserPhoto { get; set; }
 
+
+        public string UserName { get; set; }
 //        [Required]
 //        public virtual Balance Balance { get; set; }
     }

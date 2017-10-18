@@ -49,9 +49,8 @@ namespace WheelOfFortune.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string Username { get;set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +63,11 @@ namespace WheelOfFortune.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name="Username")]
+        public string Username { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +83,10 @@ namespace WheelOfFortune.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "User Photo")]
+        public byte[] UserPhoto { get; set; }
     }
 
     public class ResetPasswordViewModel
