@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WheelOfFortune.Models;
+using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelOfFortune.Controllers
 {
@@ -17,9 +18,19 @@ namespace WheelOfFortune.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext context;
+        private readonly IBalanceRepo balanceRepo;
 
-        public AccountController()
+        public AccountController ()
         {
+
+        }
+
+        public AccountController(ApplicationDbContext context,
+            IBalanceRepo balanceRepo)
+        {
+            this.context = context;
+            this.balanceRepo = balanceRepo;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -155,6 +166,8 @@ namespace WheelOfFortune.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    balanceRepo.CreateBalance(user);
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
