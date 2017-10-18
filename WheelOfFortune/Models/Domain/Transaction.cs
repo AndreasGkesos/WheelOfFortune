@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using static WheelOfFortune.Models.ViewModels.TransactionViewModel;
 
 namespace WheelOfFortune.Models.Domain
 {
+    public enum TransactionType
+    {
+        FromCoupon,
+        FromSpin
+    }
+
     public class Transaction
     {
         public int  Id { get; set; }
