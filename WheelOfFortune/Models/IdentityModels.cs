@@ -21,12 +21,11 @@ namespace WheelOfFortune.Models
             return userIdentity;
         }
 
-        [Required]
-        [Display(Name = "User Photo")]
+      
         public byte[] UserPhoto { get; set; }
 
 
-        public string UserName { get; set; }
+        public string UName { get; set; }
 //        [Required]
 //        public virtual Balance Balance { get; set; }
     }

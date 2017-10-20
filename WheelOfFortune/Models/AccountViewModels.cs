@@ -84,7 +84,7 @@ namespace WheelOfFortune.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+//        [Required]
         [Display(Name = "User Photo")]
         public byte[] UserPhoto { get; set; }
     }
