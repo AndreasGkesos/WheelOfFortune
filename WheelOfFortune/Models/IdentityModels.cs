@@ -21,10 +21,11 @@ namespace WheelOfFortune.Models
             return userIdentity;
         }
 
-        [Required]
-        [Display(Name = "User Photo")]
+      
         public byte[] UserPhoto { get; set; }
 
+
+        public string UName { get; set; }
 //        [Required]
 //        public virtual Balance Balance { get; set; }
     }
@@ -40,7 +41,7 @@ namespace WheelOfFortune.Models
 
         public DbSet<Coupon> Coupons { get; set; }
 
-        public DbSet<CouponValues> CouponValues { get; set; }
+        public DbSet<CouponValue> CouponValues { get; set; }
 
         public DbSet<Balance> Balances { get; set; }
 

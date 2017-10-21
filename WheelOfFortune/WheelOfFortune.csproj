@@ -256,11 +256,23 @@
     <Compile Include="Migrations\201710161044418_Update domains.Designer.cs">
       <DependentUpon>201710161044418_Update domains.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710182112341_SmallChangeToMakeBalnceDefautt100.cs" />
+    <Compile Include="Migrations\201710182112341_SmallChangeToMakeBalnceDefautt100.Designer.cs">
+      <DependentUpon>201710182112341_SmallChangeToMakeBalnceDefautt100.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710202045332_smallChangesToidentiyUser.cs" />
+    <Compile Include="Migrations\201710202045332_smallChangesToidentiyUser.Designer.cs">
+      <DependentUpon>201710202045332_smallChangesToidentiyUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710202100567_ChangeUsernamePropertyName.cs" />
+    <Compile Include="Migrations\201710202100567_ChangeUsernamePropertyName.Designer.cs">
+      <DependentUpon>201710202100567_ChangeUsernamePropertyName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Domain\Coupon.cs" />
     <Compile Include="Models\Domain\Balance.cs" />
-    <Compile Include="Models\Domain\CouponValues.cs" />
+    <Compile Include="Models\Domain\CouponValue.cs" />
     <Compile Include="Models\Domain\Spin.cs" />
     <Compile Include="Models\Domain\Transaction.cs" />
     <Compile Include="Models\Domain\WheelConfigurationSlice.cs" />
@@ -275,6 +287,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Wheel\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -284,6 +297,14 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="WheelContent\media\pencil_draw.svg" />
+    <Content Include="WheelContent\media\tip_circle.svg" />
+    <Content Include="WheelContent\media\tip_hex.svg" />
+    <Content Include="WheelContent\media\tip_oct.svg" />
+    <Content Include="WheelContent\media\tip_sqr.svg" />
+    <Content Include="WheelContent\media\tip_star.svg" />
+    <Content Include="WheelContent\media\tip_triangle.svg" />
+    <Content Include="WheelContent\media\wheel_tick.mp3" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -295,6 +316,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Wheel\index.js" />
+    <Content Include="Scripts\Wheel\Spin2WinWheel.min.js" />
+    <Content Include="Scripts\Wheel\ThrowPropsPlugin.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -329,6 +353,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="WheelContent\wheel_data.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -362,6 +387,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710161044418_Update domains.resx">
       <DependentUpon>201710161044418_Update domains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710182112341_SmallChangeToMakeBalnceDefautt100.resx">
+      <DependentUpon>201710182112341_SmallChangeToMakeBalnceDefautt100.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710202045332_smallChangesToidentiyUser.resx">
+      <DependentUpon>201710202045332_smallChangesToidentiyUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710202100567_ChangeUsernamePropertyName.resx">
+      <DependentUpon>201710202100567_ChangeUsernamePropertyName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
