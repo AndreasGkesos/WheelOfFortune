@@ -33,7 +33,10 @@ namespace WheelOfFortune
             container.Register(() => new ApplicationDbContext(), Lifestyle.Scoped);
             container.Register<IUserStore<ApplicationUser>>(() => new UserStore<ApplicationUser>(new ApplicationDbContext()), Lifestyle.Scoped);
             container.Register<ICouponRepo, CouponRepo>(Lifestyle.Scoped);
+            container.Register<ICouponValueRepo, CouponValueRepo>(Lifestyle.Scoped);
             container.Register<IBalanceRepo, BalanceRepo>(Lifestyle.Scoped);
+            container.Register<ISpinRepo, SpinRepo>(Lifestyle.Scoped);
+            container.Register<ITransactionRepo, TransactionRepo>(Lifestyle.Scoped);
             container.Register<ApplicationUserManager>(Lifestyle.Scoped);
 
             return container;
