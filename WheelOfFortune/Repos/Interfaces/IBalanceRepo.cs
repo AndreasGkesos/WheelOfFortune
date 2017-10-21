@@ -12,5 +12,6 @@ namespace WheelOfFortune.Repos.Interfaces
         Balance GetByUserId(string userId);
         Balance UpdateBalance(long balance);
         Balance CreateBalance(ApplicationUser user);
+        
     }
 }

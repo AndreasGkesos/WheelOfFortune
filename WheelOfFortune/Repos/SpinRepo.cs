@@ -14,7 +14,7 @@ namespace WheelOfFortune.Repos
     public class SpinRepo : ISpinRepo
     {
         private readonly ApplicationDbContext context;
-        public DbSet<Spin> DbSet { get; }
+        
 
         public SpinRepo(ApplicationDbContext context)
         {

@@ -12,7 +12,7 @@ namespace WheelOfFortune.Repos
     public class CouponRepo : ICouponRepo
     {
         private readonly ApplicationDbContext context;
-        public DbSet<Coupon> DbSet { get; }
+      
 
         public CouponRepo(ApplicationDbContext context)
         {
