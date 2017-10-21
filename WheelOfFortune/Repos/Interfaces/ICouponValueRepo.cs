@@ -8,7 +8,7 @@ namespace WheelOfFortune.Repos.Interfaces
 {
     public interface ICouponValueRepo
     {
-        CouponValues CreateCouponValue(int value);
-        CouponValues UpdateCouponValue(int id, int value);
+        CouponValue CreateCouponValue(int value);
+        CouponValue UpdateCouponValue(int id, int value);
     }
 }

@@ -12,16 +12,16 @@ namespace WheelOfFortune.Repos
     public class CouponValueRepo : ICouponValueRepo
     {
         private readonly ApplicationDbContext context;
-        public DbSet<CouponValues> DbSet { get; }
+        public DbSet<CouponValue> DbSet { get; }
 
         public CouponValueRepo(ApplicationDbContext context)
         {
             this.context = context;
         }
 
-        public CouponValues CreateCouponValue(int value)
+        public CouponValue CreateCouponValue(int value)
         {
-            var cv = new CouponValues();
+            var cv = new CouponValue();
             cv.Value = value;
 
             using (var dbCtx = new ApplicationDbContext())
@@ -32,7 +32,7 @@ namespace WheelOfFortune.Repos
             }
         }
 
-        public CouponValues UpdateCouponValue(int id, int value)
+        public CouponValue UpdateCouponValue(int id, int value)
         {
             var cv = context.CouponValues.Where(c => c.Id == id).SingleOrDefault();
             cv.Value = value;
