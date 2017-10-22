@@ -8,8 +8,8 @@ namespace WheelOfFortune.Controllers
 {
     public class TransactionsController : Controller
     {
-        // GET: Transactions
-        public ActionResult ShowTransactionHistory()
+        
+        public ActionResult ShowTransactionsHistory()
         {
             return View();
         }

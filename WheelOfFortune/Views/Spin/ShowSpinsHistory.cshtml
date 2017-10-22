@@ -3,6 +3,23 @@
     ViewBag.Title = "My Spins History";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    @Styles.Render("~/Content/SpinHistoryView.css")
+    
+
 
 <h2>My Spins History</h2>
 
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/SpinsHistoryView")
+    <script type="text/javascript">
+        $(function() {
+            SpinsController_init();
+        });
+    </script>
+}

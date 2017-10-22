@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "ShowTransactionHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/TransactionsHistoryView.css")
+
+
+<h2>ShowTransactionHistory</h2>
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/TransactionHistoryView")
+    <script type="text/javascript">
+        $(function() {
+            TransactionsController_init();
+        });
+    </script>
+}
