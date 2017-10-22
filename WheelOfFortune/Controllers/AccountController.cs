@@ -154,7 +154,7 @@ namespace WheelOfFortune.Controllers
         {
             var appContext = new ApplicationDbContext();
             var balanceRepo = new BalanceRepo(appContext);
-            if (UserPhoto.ContentLength <= 0)
+            if ((UserPhoto==null) || (UserPhoto.ContentLength <= 0))
             {
                 ModelState.AddModelError("error", "Please Select a profile picture");
             }
