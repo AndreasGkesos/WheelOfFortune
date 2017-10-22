@@ -30,14 +30,11 @@ namespace WheelOfFortune.Repos
             var userId = HttpContext.Current.User.Identity.GetUserId();
             var blc = GetByUserId(userId);
 
-            blc.BalanceValue = balance;
+            blc.BalanceValue = blc.BalanceValue + balance;
 
-            using (var dbCtx = new ApplicationDbContext())
-            {
-                dbCtx.Entry(blc).State = EntityState.Modified;
-                dbCtx.SaveChanges();
-                return blc;
-            }
+            context.Entry(blc).State = EntityState.Modified;
+            context.SaveChanges();
+            return blc;
         }
 
         public Balance CreateBalance()
