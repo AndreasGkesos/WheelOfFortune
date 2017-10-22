@@ -7,14 +7,9 @@ namespace WheelOfFortune.Models.Domain
         public int Id { get; set; }
 
         [Required]
-        public long BalanceValue { get; set; }
+        public decimal BalanceValue { get; set; }
 
         [Required]
         public virtual ApplicationUser User { get; set; }
-
-        public Balance()
-        {
-            BalanceValue = 100;
-        }
     }
 }

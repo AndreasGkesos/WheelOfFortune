@@ -11,6 +11,6 @@ namespace WheelOfFortune.Models.Domain
         public int Id { get; set; }
 
         [Required]
-        public int Value { get; set; }
+        public decimal Value { get; set; }
     }
 }
