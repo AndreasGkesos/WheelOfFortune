@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WheelOfFortune.Models;
+using WheelOfFortune.Repos.Interfaces;
+using Microsoft.AspNet.SignalR.Messaging;
+using WheelOfFortune.Repos;
 
 namespace WheelOfFortune.Controllers
 {
@@ -149,6 +152,12 @@ namespace WheelOfFortune.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register([Bind(Exclude = "UserPhoto")]RegisterViewModel model, HttpPostedFileBase UserPhoto)
         {
+            var appContext = new ApplicationDbContext();
+            var balanceRepo = new BalanceRepo(appContext);
+            if ((UserPhoto==null) || (UserPhoto.ContentLength <= 0))
+            {
+                ModelState.AddModelError("error", "Please Select a profile picture");
+            }
            
             if (ModelState.IsValid)
           {
@@ -171,12 +180,20 @@ namespace WheelOfFortune.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        try
+                        {
+                            balanceRepo.CreateBalance(user.Id);
+                        }
+                        catch (Exception e)
+                        {
+                        Console.WriteLine(e.Message + "Account Controller");
+                    }
+                        
                         return RedirectToAction("Index", "Home");
                     }
                     AddErrors(result);
