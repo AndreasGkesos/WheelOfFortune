@@ -26,7 +26,7 @@ namespace WheelOfFortune.Repos
             return context.Balances.Where(x => x.User.Id == userId).First();
         }
 
-        public Balance UpdateBalance(long balance)
+        public Balance UpdateBalance(decimal balance)
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
             var blc = GetByUserId(userId);

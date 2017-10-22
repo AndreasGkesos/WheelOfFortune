@@ -14,7 +14,7 @@ namespace WheelOfFortune.Models.Domain
         public int  Id { get; set; }
 
         [Required]
-        public double Value { get; set; }
+        public decimal Value { get; set; }
 
         [Required]
         public TransactionType Type { get; set; }

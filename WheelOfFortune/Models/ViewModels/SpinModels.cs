@@ -8,9 +8,9 @@ namespace WheelOfFortune.Models.ViewModels
 {
     public class SpinBindingModel
     {
-        public double ScoreValue { get; set; }
-        public double BetValue { get; set; }
-        public double ResultValue { get; set; }
+        public decimal ScoreValue { get; set; }
+        public decimal BetValue { get; set; }
+        public decimal ResultValue { get; set; }
         public DateTime ExecutionDate { get; set; }
 
         public int WheelConfigurationId { get; set; }

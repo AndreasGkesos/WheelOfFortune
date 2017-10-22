@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WheelOfFortune.Models.Domain
 {
@@ -7,14 +8,11 @@ namespace WheelOfFortune.Models.Domain
         public int Id { get; set; }
 
         [Required]
-        public long BalanceValue { get; set; }
+        public decimal BalanceValue { get; set; }
 
         [Required]
         public virtual ApplicationUser User { get; set; }
 
-        public Balance()
-        {
-            //BalanceValue = 100;
-        }
+       
     }
 }

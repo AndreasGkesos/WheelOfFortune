@@ -11,11 +11,11 @@ namespace WheelOfFortune.Models.Domain
         public int Id { get; set; }
 
         [Required]
-        public double ScoreValue { get; set;}
+        public decimal ScoreValue { get; set;}
         [Required]
-        public double BetValue { get; set;}
+        public decimal BetValue { get; set;}
         [Required]
-        public double ResultValue { get; set;}
+        public decimal ResultValue { get; set;}
         [Required]
         public DateTime ExecutionDate { get; set; }
 
