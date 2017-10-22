@@ -14,7 +14,7 @@ namespace WheelOfFortune.Repos
     public class TransactionRepo : ITransactionRepo
     {
         private readonly ApplicationDbContext context;
-        public DbSet<Balance> DbSet { get; }
+       
 
         public TransactionRepo(ApplicationDbContext context)
         {
