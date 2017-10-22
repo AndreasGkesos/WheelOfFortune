@@ -14,7 +14,7 @@ namespace WheelOfFortune.Models.Domain
 
         public Balance()
         {
-            BalanceValue = 100;
+            //BalanceValue = 100;
         }
     }
 }

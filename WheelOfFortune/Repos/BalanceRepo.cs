@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Results;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Repos.Interfaces;
@@ -40,19 +41,25 @@ namespace WheelOfFortune.Repos
             }
         }
 
-        public Balance CreateBalance()
+        public Balance CreateBalance(string userId)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
-            var user = context.Users.Where(x => x.Id == userId).First();
+           // var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
+            var user = context.Users.FirstOrDefault(x => x.Id == userId);
 
-            var balance = new Balance();
-            if (user != null)
+            if (user == null)
+               throw new InvalidOperationException();
+
+            var balance = new Balance
             {
-                context.Balances.Add(balance);
-                context.SaveChanges();
-                return balance;
-            }
-            else { return null; }
+                User = user,
+
+            };
+
+            context.Balances.Add(balance);
+            context.SaveChanges();
+            return balance;
+            
+            
 
         }
     }
