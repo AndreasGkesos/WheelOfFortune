@@ -243,6 +243,8 @@
     <Compile Include="Controllers\API\CouponController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SpinController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -316,6 +318,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Index.css" />
+    <Content Include="Content\SpinsHistoryView.css" />
+    <Content Include="Content\TransactionsHistoryView.css" />
     <Content Include="Content\Wheel\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -326,16 +331,22 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Controllers\IndexControllerJs.js" />
+    <Content Include="Scripts\Controllers\SpinsControllerJs.js" />
+    <Content Include="Scripts\Controllers\TransactionsControllerJs.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
-    <Content Include="WheelContent\media\pencil_draw.svg" />
-    <Content Include="WheelContent\media\tip_circle.svg" />
-    <Content Include="WheelContent\media\tip_hex.svg" />
-    <Content Include="WheelContent\media\tip_oct.svg" />
-    <Content Include="WheelContent\media\tip_sqr.svg" />
-    <Content Include="WheelContent\media\tip_star.svg" />
-    <Content Include="WheelContent\media\tip_triangle.svg" />
-    <Content Include="WheelContent\media\wheel_tick.mp3" />
+    <Content Include="Scripts\Wheel\Draggable.min.js" />
+    <Content Include="Scripts\Wheel\TextPlugin.min.js" />
+    <Content Include="Scripts\Wheel\TweenMax.min.js" />
+    <Content Include="Scripts\Wheel\media\pencil_draw.svg" />
+    <Content Include="Scripts\Wheel\media\tip_circle.svg" />
+    <Content Include="Scripts\Wheel\media\tip_hex.svg" />
+    <Content Include="Scripts\Wheel\media\tip_oct.svg" />
+    <Content Include="Scripts\Wheel\media\tip_sqr.svg" />
+    <Content Include="Scripts\Wheel\media\tip_star.svg" />
+    <Content Include="Scripts\Wheel\media\tip_triangle.svg" />
+    <Content Include="Scripts\Wheel\media\wheel_tick.mp3" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -385,6 +396,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="WheelContent\wheel_data.json" />
+    <Content Include="Views\Spin\ShowSpinsHistory.cshtml" />
+    <Content Include="Views\Transactions\ShowTransactionsHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
