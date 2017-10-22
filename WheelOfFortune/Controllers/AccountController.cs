@@ -193,7 +193,7 @@ namespace WheelOfFortune.Controllers
                         {
                         Console.WriteLine(e.Message + "Account Controller");
                     }
-                        balanceRepo.CreateBalance(user.Id);
+                        
                         return RedirectToAction("Index", "Home");
                     }
                     AddErrors(result);

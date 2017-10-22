@@ -43,7 +43,7 @@ namespace WheelOfFortune.Repos
 
         public Balance CreateBalance(string userId)
         {
-           // var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
+         
             var user = context.Users.FirstOrDefault(x => x.Id == userId);
 
             if (user == null)
@@ -52,15 +52,12 @@ namespace WheelOfFortune.Repos
             var balance = new Balance
             {
                 User = user,
-
+                BalanceValue = 100
             };
 
             context.Balances.Add(balance);
             context.SaveChanges();
             return balance;
-            
-            
-
         }
     }
 }
