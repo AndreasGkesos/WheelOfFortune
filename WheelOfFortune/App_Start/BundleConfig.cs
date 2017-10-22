@@ -22,10 +22,16 @@ namespace WheelOfFortune
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
+            // Custom ScriptBundle
+            bundles.Add(new ScriptBundle("~/bundles/GsBundle").Include(
+                      "~/Scripts/Core/jquery.3.2.1.js",
+                      "~/Scripts/Core/popper.js",
+                      "~/Scripts/Core/bootstrap.js",
+                      "~/Scripts/Core/indexGs.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/Core/css").Include(
+                      "~/Content/Core/bootstrap.css",
+                      "~/Content/Core/site.css"));
         }
     }
 }

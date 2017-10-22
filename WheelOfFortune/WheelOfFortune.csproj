@@ -314,18 +314,24 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Core\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\blurred-image-1.jpg" />
+    <Content Include="Content\img\login.jpg" />
+    <Content Include="Content\img\now-logo.png" />
     <Content Include="Content\Wheel\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Core\site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Core\bootstrap.js" />
+    <Content Include="Scripts\Core\indexGs.js" />
+    <Content Include="Scripts\Core\popper.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="WheelContent\media\pencil_draw.svg" />
@@ -336,6 +342,7 @@
     <Content Include="WheelContent\media\tip_star.svg" />
     <Content Include="WheelContent\media\tip_triangle.svg" />
     <Content Include="WheelContent\media\wheel_tick.mp3" />
+    <Content Include="Scripts\Core\jquery.3.2.1.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
