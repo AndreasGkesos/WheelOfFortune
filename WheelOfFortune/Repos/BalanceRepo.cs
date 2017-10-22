@@ -28,16 +28,20 @@ namespace WheelOfFortune.Repos
 
         public Balance UpdateBalance(decimal balance)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
-            var blc = GetByUserId(userId);
-
-            blc.BalanceValue = balance;
-
-            using (var dbCtx = new ApplicationDbContext())
+            try
             {
-                dbCtx.Entry(blc).State = EntityState.Modified;
-                dbCtx.SaveChanges();
+                var userId = HttpContext.Current.User.Identity.GetUserId();
+                var blc = GetByUserId(userId);
+
+                blc.BalanceValue = blc.BalanceValue + balance;
+
+                context.Entry(blc).State = EntityState.Modified;
+                context.SaveChanges();
                 return blc;
+            }
+            catch (NullReferenceException e)
+            {
+                return null;
             }
         }
 

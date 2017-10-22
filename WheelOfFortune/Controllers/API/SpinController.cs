@@ -33,8 +33,7 @@ namespace WheelOfFortune.Controllers.API
         public Spin AddSpin(SpinBindingModel model)
         {
             var s = repo.CreateSpin(model);
-            
-
+            UpdateTransactionAndBalance(s);
             return s;
         }
 
