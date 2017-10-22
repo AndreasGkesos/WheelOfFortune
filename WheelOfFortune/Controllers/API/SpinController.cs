@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WheelOfFortune.Models.Domain;
+using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelOfFortune.Controllers.API
@@ -24,10 +25,10 @@ namespace WheelOfFortune.Controllers.API
             return repo.GetByUserId(userId);
         }
 
-        [HttpGet]
-        public Spin AddSpin(string userId)
+        [HttpPost]
+        public Spin AddSpin(SpinBindingModel model)
         {
-            return repo.CreateSpin(userId);
+            return repo.CreateSpin(model);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,7 +13,6 @@ namespace WheelOfFortune.Repos
     public class CouponValueRepo : ICouponValueRepo
     {
         private readonly ApplicationDbContext context;
-        public DbSet<CouponValue> DbSet { get; }
 
         public CouponValueRepo(ApplicationDbContext context)
         {
@@ -21,15 +21,20 @@ namespace WheelOfFortune.Repos
 
         public CouponValue CreateCouponValue(int value)
         {
-            var cv = new CouponValue();
-            cv.Value = value;
+            var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
+            var user = context.Users.Where(x => x.Id == userId).First();
 
-            using (var dbCtx = new ApplicationDbContext())
+            var cv = new CouponValue();
+            
+            if (user != null)
             {
-                dbCtx.CouponValues.Add(cv);
-                dbCtx.SaveChanges();
+                cv.Value = value;
+
+                context.CouponValues.Add(cv);
+                context.SaveChanges();
                 return cv;
             }
+            else { return null; }
         }
 
         public CouponValue UpdateCouponValue(int id, int value)

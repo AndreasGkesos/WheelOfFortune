@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WheelOfFortune.Models.Domain;
+using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelOfFortune.Controllers.API
@@ -22,6 +23,12 @@ namespace WheelOfFortune.Controllers.API
         public IList<Coupon> GetByUserId(string userId)
         {
             return repo.GetByUserId(userId);
+        }
+
+        [HttpPost]
+        public Coupon AddCoupon(CouponBindingModel model)
+        {
+            return repo.CreateCoupon(model);
         }
     }
 }

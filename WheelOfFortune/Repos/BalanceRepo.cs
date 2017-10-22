@@ -14,7 +14,6 @@ namespace WheelOfFortune.Repos
     public class BalanceRepo : IBalanceRepo
     {
         private readonly ApplicationDbContext context;
-        public DbSet<Balance> DbSet { get; }
 
         public BalanceRepo(ApplicationDbContext context)
         {
@@ -41,16 +40,20 @@ namespace WheelOfFortune.Repos
             }
         }
 
-        public Balance CreateBalance(ApplicationUser user)
+        public Balance CreateBalance()
         {
-            var balance = new Balance();
+            var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
+            var user = context.Users.Where(x => x.Id == userId).First();
 
-            using (var dbCtx = new ApplicationDbContext())
+            var balance = new Balance();
+            if (user != null)
             {
-                dbCtx.Balances.Add(balance);
-                dbCtx.SaveChanges();
+                context.Balances.Add(balance);
+                context.SaveChanges();
                 return balance;
             }
+            else { return null; }
+
         }
     }
 }

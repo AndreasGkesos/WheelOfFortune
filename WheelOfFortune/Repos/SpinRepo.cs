@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
+using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelOfFortune.Repos
@@ -14,7 +15,6 @@ namespace WheelOfFortune.Repos
     public class SpinRepo : ISpinRepo
     {
         private readonly ApplicationDbContext context;
-        public DbSet<Spin> DbSet { get; }
 
         public SpinRepo(ApplicationDbContext context)
         {
@@ -26,19 +26,28 @@ namespace WheelOfFortune.Repos
             return context.Spins.Where(x => x.User.Id == userId).ToList();
         }
 
-        public Spin CreateSpin(string userId)
+        public Spin CreateSpin(SpinBindingModel model)
         {
-            var spin = new Spin();
-            ApplicationUser user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(HttpContext.Current.User.Identity.GetUserId());
+            var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
+            var user = context.Users.Where(x => x.Id == userId).First();
 
+            var spin = new Spin();
             if (user != null)
-                spin.User = user;
-            using (var dbCtx = new ApplicationDbContext())
             {
-                dbCtx.Spins.Add(spin);
-                dbCtx.SaveChanges();
+                spin = new Spin
+                {
+                    BetValue = model.BetValue,
+                    ResultValue = model.ResultValue,
+                    ScoreValue = model.ScoreValue,
+                    User = user,
+                    ExecutionDate = DateTime.Now
+                };
+
+                context.Spins.Add(spin);
+                context.SaveChanges();
                 return spin;
             }
+            else { return null; }
         }
     }
 }
