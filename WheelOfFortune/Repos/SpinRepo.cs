@@ -28,26 +28,33 @@ namespace WheelOfFortune.Repos
 
         public Spin CreateSpin(SpinBindingModel model)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
-            var user = context.Users.Where(x => x.Id == userId).First();
-
-            var spin = new Spin();
-            if (user != null)
+            try
             {
-                spin = new Spin
-                {
-                    BetValue = model.BetValue,
-                    ResultValue = model.ResultValue,
-                    ScoreValue = model.ScoreValue,
-                    User = user,
-                    ExecutionDate = DateTime.Now
-                };
+                var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
+                var user = context.Users.Where(x => x.Id == userId).First();
 
-                context.Spins.Add(spin);
-                context.SaveChanges();
-                return spin;
+                var spin = new Spin();
+                if (user != null)
+                {
+                    spin = new Spin
+                    {
+                        BetValue = model.BetValue,
+                        ResultValue = model.ResultValue,
+                        ScoreValue = model.ScoreValue,
+                        User = user,
+                        ExecutionDate = DateTime.Now
+                    };
+
+                    context.Spins.Add(spin);
+                    context.SaveChanges();
+                    return spin;
+                }
+                else { return null; }
             }
-            else { return null; }
+            catch (NullReferenceException e )
+            {
+                return null;
+            }          
         }
     }
 }
