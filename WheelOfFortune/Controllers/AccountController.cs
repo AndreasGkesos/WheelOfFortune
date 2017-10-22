@@ -152,6 +152,7 @@ namespace WheelOfFortune.Controllers
            
             if (ModelState.IsValid)
           {
+             
               var picture = new byte[UserPhoto.ContentLength];
               var readresult = UserPhoto.InputStream.Read(picture, 0, UserPhoto.ContentLength);
               model.UserPhoto = picture;
