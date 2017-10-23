@@ -10,7 +10,7 @@ namespace WheelOfFortune.Repos.Interfaces
     public interface IBalanceRepo
     {
         Balance GetByUserId(string userId);
-        Balance UpdateBalance(decimal balance);
+        Tuple<Balance, Exception> UpdateBalance(decimal balance);
         Balance CreateBalance(string userId);
     }
 }

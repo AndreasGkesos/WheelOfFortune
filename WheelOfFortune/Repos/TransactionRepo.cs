@@ -21,7 +21,7 @@ namespace WheelOfFortune.Repos
             this.context = context;
         }
 
-        public Transaction CreateTransaction(TransactionBindingModel model)
+        public Tuple<Transaction, Exception> CreateTransaction(TransactionBindingModel model)
         {
             try
             {
@@ -41,13 +41,13 @@ namespace WheelOfFortune.Repos
 
                     context.Transactions.Add(transaction);
                     context.SaveChanges();
-                    return transaction;
+                    return new Tuple<Transaction, Exception>(transaction, null);
                 }
-                else { return null; }
+                else { return new Tuple<Transaction, Exception>(null, new Exception("You are not Logged In")); }
             }
             catch (NullReferenceException e)
             {
-                return null;
+                return new Tuple<Transaction, Exception>(null, new Exception("You are not Logged In")); ;
             }
         }
 

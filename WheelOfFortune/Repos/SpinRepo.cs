@@ -26,7 +26,7 @@ namespace WheelOfFortune.Repos
             return context.Spins.Where(x => x.User.Id == userId).ToList();
         }
 
-        public Spin CreateSpin(SpinBindingModel model)
+        public Tuple<Spin, Exception> CreateSpin(SpinBindingModel model)
         {
             try
             {
@@ -47,13 +47,13 @@ namespace WheelOfFortune.Repos
 
                     context.Spins.Add(spin);
                     context.SaveChanges();
-                    return spin;
+                    return new Tuple<Spin, Exception>(spin, null);
                 }
-                else { return null; }
+                else { return new Tuple<Spin, Exception>(null, new Exception("You are not Logged In")); }
             }
             catch (NullReferenceException e )
             {
-                return null;
+                return new Tuple<Spin, Exception>(null, new Exception("You are not Logged In")); ;
             }          
         }
     }

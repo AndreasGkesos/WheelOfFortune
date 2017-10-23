@@ -26,23 +26,24 @@ namespace WheelOfFortune.Repos
             return context.Balances.Where(x => x.User.Id == userId).First();
         }
 
-        public Balance UpdateBalance(decimal balance)
+        public Tuple<Balance, Exception> UpdateBalance(decimal balance)
         {
             try
             {
                 var userId = HttpContext.Current.User.Identity.GetUserId();
                 var blc = GetByUserId(userId);
 
-                blc.BalanceValue = blc.BalanceValue + balance;
-
-                context.Entry(blc).State = EntityState.Modified;
-                context.SaveChanges();
-                return blc;
+                if (userId != null)
+                {
+                    blc.BalanceValue = blc.BalanceValue + balance;
+                    context.Entry(blc).State = EntityState.Modified;
+                    context.SaveChanges();
+                    return new Tuple<Balance, Exception>(blc, null);
+                }
+                else { return new Tuple<Balance, Exception>(null, new Exception("You are not Logged In")); }
             }
-            catch (NullReferenceException e)
-            {
-                return null;
-            }
+            catch (NullReferenceException e) {
+                return new Tuple<Balance, Exception>(null, new Exception("You are not Logged In")); }
         }
 
         public Balance CreateBalance(string userId)

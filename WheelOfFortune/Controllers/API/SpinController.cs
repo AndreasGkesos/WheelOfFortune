@@ -35,8 +35,8 @@ namespace WheelOfFortune.Controllers.API
         public Spin AddSpin(SpinBindingModel model)
         {
             var s = repo.CreateSpin(model);
-            UpdateTransactionAndBalance(s);
-            return s;
+            UpdateTransactionAndBalance(s.Item1);
+            return s.Item1;
         }
 
         private void UpdateTransactionAndBalance(Spin s)
@@ -48,7 +48,7 @@ namespace WheelOfFortune.Controllers.API
                     Type = TransactionType.FromSpin,
                     Value = s.ResultValue
                 });
-            balanceRepo.UpdateBalance(t.Value);
+            balanceRepo.UpdateBalance(t.Item1.Value);
         }
     }
 }

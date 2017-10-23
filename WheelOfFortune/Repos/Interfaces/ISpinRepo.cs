@@ -11,6 +11,6 @@ namespace WheelOfFortune.Repos.Interfaces
     public interface ISpinRepo
     {
         IList<Spin> GetByUserId(string userId);
-        Spin CreateSpin(SpinBindingModel model);
+        Tuple<Spin, Exception> CreateSpin(SpinBindingModel model);
     }
 }
