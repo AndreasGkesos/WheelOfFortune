@@ -50,6 +50,18 @@ namespace WheelOfFortune
             bundles.Add(new ScriptBundle("~/bundles/TransactionHistoryView").Include(
                 "~/Scripts/Controllers/TransactionsControllerJs.js"
             ));
+
+
+            // Custom ScriptBundle
+            bundles.Add(new ScriptBundle("~/bundles/GsBundle").Include(
+                "~/Scripts/Core/jquery.3.2.1.js",
+                "~/Scripts/Core/popper.js",
+                "~/Scripts/Core/bootstrap.js",
+                "~/Scripts/Core/indexGs.js"));
+
+            bundles.Add(new StyleBundle("~/Content/Core/css").Include(
+                "~/Content/Core/bootstrap.css",
+                "~/Content/Core/site.css"));
         }
     }
 }
