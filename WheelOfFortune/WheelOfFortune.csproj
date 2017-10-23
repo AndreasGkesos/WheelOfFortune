@@ -243,6 +243,7 @@
     <Compile Include="Controllers\API\CouponController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SpinController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -319,6 +320,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Index.css" />
+    <Content Include="Content\Profile.css" />
     <Content Include="Content\SpinsHistoryView.css" />
     <Content Include="Content\TransactionsHistoryView.css" />
     <Content Include="Content\Wheel\style.css" />
@@ -398,6 +400,8 @@
     <Content Include="WheelContent\wheel_data.json" />
     <Content Include="Views\Spin\ShowSpinsHistory.cshtml" />
     <Content Include="Views\Transactions\ShowTransactionsHistory.cshtml" />
+    <Content Include="Views\Home\WheelContainer.cshtml" />
+    <Content Include="Views\Profile\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

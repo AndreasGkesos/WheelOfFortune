@@ -18,14 +18,46 @@ function loadJSON(callback) {
 //your own function to capture the spin results
 function myResult(e) {
   //e is the result object
-    console.log('Spin Count: ' + e.spinCount + ' - ' + 'Win: ' + e.win + ' - ' + 'Message: ' +  e.msg);
+//    console.log($(e));
+
+
+    var betValue = 5;
+    var resultValue = betValue * e.userData.score;
+
+    var spinModelObject =
+    {
+        ScoreValue: e.userData.score,
+        BetValue: betValue,
+        ResultValue: resultValue,
+        ExecutionDate: Date.now(),
+        WheelConfigurationId: e.gameId
+    }
+
+    spinObjStringified = JSON.stringify(spinModelObject);
+
+
+    $.ajax({
+        type: "POST",
+        url: "/api/Spin/AddSpin",
+        data: spinObjStringified,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(msg) {
+            alert("everything all right");
+        },
+        fail:function(msg) {
+            alert("error");
+        }
+
+    });
+   // console.log('Spin Count: ' + e.spinCount + ' - ' + 'Win: ' + e.win + ' - ' + 'Message: ' +  e.msg);
 
     // if you have defined a userData object...
-    if(e.userData){
-      
-      console.log('User defined score: ' + e.userData.score)
-
-    }
+//    if(e.userData){
+//      
+//      console.log('User defined score: ' + e.userData.score)
+//
+//    }
 
   //if(e.spinCount == 3){
     //show the game progress when the spinCount is 3
