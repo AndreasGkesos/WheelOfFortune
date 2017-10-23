@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WheelOfFortune.Models.Domain
 {
@@ -11,5 +12,7 @@ namespace WheelOfFortune.Models.Domain
 
         [Required]
         public virtual ApplicationUser User { get; set; }
+
+       
     }
 }

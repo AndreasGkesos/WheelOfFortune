@@ -31,7 +31,7 @@ namespace WheelOfFortune.Repos
             try
             {
                 var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
-                var user = context.Users.Where(x => x.Id == userId).First();
+                var user = context.Users.First(x => x.Id == userId);
 
                 var spin = new Spin();
                 if (user != null)

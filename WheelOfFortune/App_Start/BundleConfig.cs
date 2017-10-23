@@ -22,16 +22,34 @@ namespace WheelOfFortune
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
-            // Custom ScriptBundle
-            bundles.Add(new ScriptBundle("~/bundles/GsBundle").Include(
-                      "~/Scripts/Core/jquery.3.2.1.js",
-                      "~/Scripts/Core/popper.js",
-                      "~/Scripts/Core/bootstrap.js",
-                      "~/Scripts/Core/indexGs.js"));
 
-            bundles.Add(new StyleBundle("~/Content/Core/css").Include(
-                      "~/Content/Core/bootstrap.css",
-                      "~/Content/Core/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css"));
+
+
+            //Index View
+            bundles.Add(new ScriptBundle("~/bundles/IndexView").Include(
+                "~/Scripts/Controllers/IndexControllerJs.js",
+                "~/Scripts/Wheel/TweenMax.min.js",
+                "~/Scripts/Wheel/ThrowPropsPlugin.min.js",
+                "~/Scripts/Wheel/Draggable.min.js",
+                "~/Scripts/Wheel/TextPlugin.min.js",
+                "~/Scripts/Wheel/Spin2WinWheel.min.js",
+                "~/Scripts/Wheel/index.js"
+                
+                
+            ));
+
+            //Spins View
+            bundles.Add(new ScriptBundle("~/bundles/SpinsHistoryView").Include(
+                "~/Scripts/Controllers/SpinsControllerJs.js"
+            ));
+
+            //Transactions View
+            bundles.Add(new ScriptBundle("~/bundles/TransactionHistoryView").Include(
+                "~/Scripts/Controllers/TransactionsControllerJs.js"
+            ));
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Results;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Repos.Interfaces;
@@ -27,30 +28,40 @@ namespace WheelOfFortune.Repos
 
         public Balance UpdateBalance(decimal balance)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
-            var blc = GetByUserId(userId);
+            try
+            {
+                var userId = HttpContext.Current.User.Identity.GetUserId();
+                var blc = GetByUserId(userId);
 
-            blc.BalanceValue = blc.BalanceValue + balance;
+                blc.BalanceValue = blc.BalanceValue + balance;
 
-            context.Entry(blc).State = EntityState.Modified;
-            context.SaveChanges();
-            return blc;
+                context.Entry(blc).State = EntityState.Modified;
+                context.SaveChanges();
+                return blc;
+            }
+            catch (NullReferenceException e)
+            {
+                return null;
+            }
         }
 
-        public Balance CreateBalance()
+        public Balance CreateBalance(string userId)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
-            var user = context.Users.Where(x => x.Id == userId).First();
+         
+            var user = context.Users.FirstOrDefault(x => x.Id == userId);
 
-            var balance = new Balance();
-            if (user != null)
+            if (user == null)
+               throw new InvalidOperationException();
+
+            var balance = new Balance
             {
-                context.Balances.Add(balance);
-                context.SaveChanges();
-                return balance;
-            }
-            else { return null; }
+                User = user,
+                BalanceValue = 100
+            };
 
+            context.Balances.Add(balance);
+            context.SaveChanges();
+            return balance;
         }
     }
 }
