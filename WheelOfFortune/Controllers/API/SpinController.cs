@@ -9,7 +9,8 @@ using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelOfFortune.Controllers.API
-{
+{   
+    
     public class SpinController : ApiController
     {
         private readonly ISpinRepo repo;
@@ -30,6 +31,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
+        
         public Spin AddSpin(SpinBindingModel model)
         {
             var s = repo.CreateSpin(model);
