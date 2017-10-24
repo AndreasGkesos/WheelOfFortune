@@ -9,5 +9,6 @@ namespace WheelOfFortune.Repos.Interfaces
     public interface IWheelConfigurationRepo
     {
         IList<WheelConfiguration> GetByUserId(string userId);
+        WheelConfiguration GetWheelConfiguration();
     }
 }
