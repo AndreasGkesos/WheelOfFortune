@@ -22,6 +22,40 @@ namespace WheelOfFortune.Repos
             this.context = context;
         }
 
+        public Tuple<WheelConfigurationSlice, Exception> CreateSlice(WheelConfigurationSliceBindingModel model)
+        {
+            try
+            {
+                var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
+                var user = context.Users.First(x => x.Id == userId);
+
+                var slice = new WheelConfigurationSlice();
+                if (user != null)
+                {
+                    slice = new WheelConfigurationSlice
+                    {
+                        Propability = model.Probability,
+                        Value = model.Value,
+                        Type = model.Type,
+                        Win = model.Win,
+                        ResultText = model.ResultText,
+                        Score = model.Score,
+                        User = user,
+                        WheelConfiguration = model.WheelConfiguration
+                    };
+
+                    context.WheelConfigurationSlices.Add(slice);
+                    context.SaveChanges();
+                    return new Tuple<WheelConfigurationSlice, Exception>(slice, null);
+                }
+                else { return new Tuple<WheelConfigurationSlice, Exception>(null, new Exception("You are not Logged In")); }
+            }
+            catch (NullReferenceException e)
+            {
+                return new Tuple<WheelConfigurationSlice, Exception>(null, new Exception("You are not Logged In")); ;
+            }
+        }
+
         public IList<WheelConfigurationSliceViewModel> GetByWheelConfigurationId(int configId)
         {
             var slices = context.WheelConfigurationSlices.Where(x => x.WheelConfiguration.Id == configId);

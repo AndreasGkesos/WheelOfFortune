@@ -22,6 +22,35 @@ namespace WheelOfFortune.Repos
             this.context = context;
         }
 
+        public Tuple<WheelConfiguration, Exception> CreateWheelConfig()
+        {
+            try
+            {
+                var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
+                var user = context.Users.First(x => x.Id == userId);
+
+                var wheel = new WheelConfiguration();
+                if (user != null)
+                {
+                    wheel = new WheelConfiguration
+                    {
+                        User = user,
+                        DateCreated = DateTime.Now
+                    };
+
+                    context.WheelConfigurations.Add(wheel);
+                    context.SaveChanges();
+
+                    return new Tuple<WheelConfiguration, Exception>(wheel, null);
+                }
+                else { return new Tuple<WheelConfiguration, Exception>(null, new Exception("You are not Logged In")); }
+            }
+            catch (NullReferenceException e)
+            {
+                return new Tuple<WheelConfiguration, Exception>(null, new Exception("You are not Logged In")); ;
+            }
+        }
+
         public IList<WheelConfiguration> GetByUserId(string userId)
         {
             return context.WheelConfigurations.Where(x => x.User.Id == userId).ToList();

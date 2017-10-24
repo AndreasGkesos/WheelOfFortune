@@ -41,6 +41,22 @@ namespace WheelOfFortune.Models.ViewModels
         public bool clickToSpin { get; set; }
     }
 
+    public class WheelConfigurationBindingModel
+    {
+        public IList<WheelConfigurationSliceBindingModel> Slices { get; set; }
+    }
+
+    public class WheelConfigurationSliceBindingModel
+    {
+        public double Probability { get; set; }
+        public string Type { get; set; }
+        public string Value { get; set; }
+        public bool Win { get; set; }
+        public string ResultText { get; set; }
+        public double Score { get; set; }
+        public WheelConfiguration WheelConfiguration { get; set; }
+    }
+
     public class WheelConfigurationSliceViewModel
     {
         public double probability { get; set; }

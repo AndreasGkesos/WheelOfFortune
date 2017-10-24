@@ -10,5 +10,6 @@ namespace WheelOfFortune.Repos.Interfaces
     public interface IWheelConfigurationSliceRepo
     {
         IList<WheelConfigurationSliceViewModel> GetByWheelConfigurationId(int configId);
+        Tuple<WheelConfigurationSlice, Exception> CreateSlice(WheelConfigurationSliceBindingModel model);
     }
 }
