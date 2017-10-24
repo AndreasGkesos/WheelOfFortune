@@ -37,6 +37,8 @@ namespace WheelOfFortune
             container.Register<IBalanceRepo, BalanceRepo>(Lifestyle.Scoped);
             container.Register<ISpinRepo, SpinRepo>(Lifestyle.Scoped);
             container.Register<ITransactionRepo, TransactionRepo>(Lifestyle.Scoped);
+            container.Register<IWheelConfigurationRepo, WheelConfigurationRepo>(Lifestyle.Scoped);
+            container.Register<IWheelConfigurationSliceRepo, WheelConfigurationSliceRepo>(Lifestyle.Scoped);
             container.Register<ApplicationUserManager>(Lifestyle.Scoped);
 
             return container;
