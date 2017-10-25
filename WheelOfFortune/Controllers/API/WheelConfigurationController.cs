@@ -71,17 +71,14 @@ namespace WheelOfFortune.Controllers.API
             var wheel = repo.CreateWheelConfig();
             if (wheel.Item2 == null)
             {
-                foreach (WheelConfigurationSliceBindingModel s in model.Slices)
+                foreach (var s in model.Slices)
                 {
                     s.WheelConfiguration = wheel.Item1;
                     slicesRepo.CreateSlice(s);
                 }
                 return new Tuple<WheelConfiguration, Exception>(wheel.Item1, null);
             }
-            else
-            {
-                return new Tuple<WheelConfiguration, Exception>(null, wheel.Item2);
-            }
+            return new Tuple<WheelConfiguration, Exception>(null, wheel.Item2);
         }
     }
 }

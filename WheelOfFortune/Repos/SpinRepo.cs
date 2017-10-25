@@ -21,7 +21,7 @@ namespace WheelOfFortune.Repos
             this.context = context;
         }
 
-        public IList<Spin> GetByUserId(string userId)
+        public IEnumerable<Spin> GetByUserId(string userId)
         {
             return context.Spins.Where(x => x.User.Id == userId).ToList();
         }

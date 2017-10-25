@@ -25,7 +25,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
-        public IList<Spin> GetByUserId(string userId)
+        public IEnumerable<Spin> GetByUserId(string userId)
         {
             return repo.GetByUserId(userId);
         }

@@ -7,7 +7,7 @@ function loadJSON(callback) {
   xobj.overrideMimeType("application/json");
   xobj.open('GET', '../../WheelContent/wheel_data.json', true); 
   xobj.onreadystatechange = function() {
-    if (xobj.readyState == 4 && xobj.status == "200") {
+    if (xobj.readyState === 4 && xobj.status === "200") {
       //Call the anonymous function (callback) passing in the response
       callback(xobj.responseText);
     }
@@ -33,7 +33,9 @@ function myResult(e) {
         WheelConfigurationId: e.gameId
     }
 
-    spinObjStringified = JSON.stringify(spinModelObject);
+
+
+    var spinObjStringified = JSON.stringify(spinModelObject);
 
 
     $.ajax({
