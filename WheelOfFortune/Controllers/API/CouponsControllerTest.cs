@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WheelOfFortune.Models;
@@ -15,19 +11,20 @@ namespace WheelOfFortune.Controllers.API
 {
     public class CouponsControllerTest : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: api/Coupons
         public IQueryable<Coupon> GetCoupons()
         {
-            return db.Coupons;
+            return _db.Coupons;
         }
 
         // GET: api/Coupons/5
         [ResponseType(typeof(Coupon))]
         public IHttpActionResult GetCoupon(int id)
         {
-            Coupon coupon = db.Coupons.Find(id);
+            var coupon = _db.Coupons.Find(id);
+
             if (coupon == null)
             {
                 return NotFound();
@@ -50,22 +47,17 @@ namespace WheelOfFortune.Controllers.API
                 return BadRequest();
             }
 
-            db.Entry(coupon).State = EntityState.Modified;
+            _db.Entry(coupon).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!CouponExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    return NotFound();  
+               
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -76,12 +68,11 @@ namespace WheelOfFortune.Controllers.API
         public IHttpActionResult PostCoupon(Coupon coupon)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
+            
 
-            db.Coupons.Add(coupon);
-            db.SaveChanges();
+            _db.Coupons.Add(coupon);
+            _db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = coupon.Id }, coupon);
         }
@@ -90,14 +81,14 @@ namespace WheelOfFortune.Controllers.API
         [ResponseType(typeof(Coupon))]
         public IHttpActionResult DeleteCoupon(int id)
         {
-            Coupon coupon = db.Coupons.Find(id);
-            if (coupon == null)
-            {
-                return NotFound();
-            }
+            var coupon = _db.Coupons.Find(id);
 
-            db.Coupons.Remove(coupon);
-            db.SaveChanges();
+            if (coupon == null)
+                return NotFound();
+            
+
+            _db.Coupons.Remove(coupon);
+            _db.SaveChanges();
 
             return Ok(coupon);
         }
@@ -105,15 +96,14 @@ namespace WheelOfFortune.Controllers.API
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                db.Dispose();
-            }
+                _db.Dispose();
+            
             base.Dispose(disposing);
         }
 
         private bool CouponExists(int id)
         {
-            return db.Coupons.Count(e => e.Id == id) > 0;
+            return _db.Coupons.Count(e => e.Id == id) > 0;
         }
     }
 }

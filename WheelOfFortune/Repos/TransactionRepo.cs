@@ -25,13 +25,13 @@ namespace WheelOfFortune.Repos
         {
             try
             {
-                var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
-                var user = context.Users.Where(x => x.Id == userId).First();
+                var userId = HttpContext.Current.User.Identity.GetUserId();
+                var user = context.Users.First(x => x.Id == userId);
 
-                var transaction = new Transaction();
-                if (user != null)
-                {
-                    transaction = new Transaction
+              if(user==null)
+                  return new Tuple<Transaction, Exception>(null, new Exception("You are not Logged In"));
+
+                var transaction = new Transaction
                     {
                         TransactionDate = model.TransactionDate,
                         Value = model.Value,
@@ -42,8 +42,8 @@ namespace WheelOfFortune.Repos
                     context.Transactions.Add(transaction);
                     context.SaveChanges();
                     return new Tuple<Transaction, Exception>(transaction, null);
-                }
-                else { return new Tuple<Transaction, Exception>(null, new Exception("You are not Logged In")); }
+              
+               
             }
             catch (NullReferenceException e)
             {

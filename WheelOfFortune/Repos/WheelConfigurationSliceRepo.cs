@@ -48,7 +48,7 @@ namespace WheelOfFortune.Repos
                     context.SaveChanges();
                     return new Tuple<WheelConfigurationSlice, Exception>(slice, null);
                 }
-                else { return new Tuple<WheelConfigurationSlice, Exception>(null, new Exception("You are not Logged In")); }
+                return new Tuple<WheelConfigurationSlice, Exception>(null, new Exception("You are not Logged In"));
             }
             catch (NullReferenceException e)
             {

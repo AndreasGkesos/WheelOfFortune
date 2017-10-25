@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
@@ -13,20 +10,20 @@ namespace WheelOfFortune.Controllers.API
     
     public class WheelConfigurationController : ApiController
     {
-        private readonly IWheelConfigurationRepo repo;
-        private readonly IWheelConfigurationSliceRepo slicesRepo;
+        private readonly IWheelConfigurationRepo _repo;
+        private readonly IWheelConfigurationSliceRepo _slicesRepo;
 
         public WheelConfigurationController(IWheelConfigurationRepo repo, IWheelConfigurationSliceRepo slicesRepo)
         {
-            this.repo = repo;
-            this.slicesRepo = slicesRepo;
+           _repo = repo;
+           _slicesRepo = slicesRepo;
         }
 
         [HttpGet]
         public WheelDataViewModel GetWheelConfiguration()
         {
-            var config = repo.GetWheelConfiguration();
-            var slices = slicesRepo.GetByWheelConfigurationId(config.Id);
+            var config = _repo.GetWheelConfiguration();
+            var slices = _slicesRepo.GetByWheelConfigurationId(config.Id);
 
             return new WheelDataViewModel
             {
@@ -68,17 +65,16 @@ namespace WheelOfFortune.Controllers.API
         [HttpPost]
         public Tuple<WheelConfiguration, Exception> AddWheelConfiguration(WheelConfigurationBindingModel model)
         {
-            var wheel = repo.CreateWheelConfig();
-            if (wheel.Item2 == null)
+            var wheel = _repo.CreateWheelConfig();
+
+            if (wheel.Item2 != null) return new Tuple<WheelConfiguration, Exception>(null, wheel.Item2);
+
+            foreach (var s in model.Slices)
             {
-                foreach (var s in model.Slices)
-                {
-                    s.WheelConfiguration = wheel.Item1;
-                    slicesRepo.CreateSlice(s);
-                }
-                return new Tuple<WheelConfiguration, Exception>(wheel.Item1, null);
+                s.WheelConfiguration = wheel.Item1;
+                _slicesRepo.CreateSlice(s);
             }
-            return new Tuple<WheelConfiguration, Exception>(null, wheel.Item2);
+            return new Tuple<WheelConfiguration, Exception>(wheel.Item1, null);
         }
     }
 }

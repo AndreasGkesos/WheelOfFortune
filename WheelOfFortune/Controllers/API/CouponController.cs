@@ -12,23 +12,23 @@ namespace WheelOfFortune.Controllers.API
 {
     public class CouponController : ApiController
     {
-        private readonly ICouponRepo repo;
+        private readonly ICouponRepo _repo;
 
         public CouponController(ICouponRepo repo)
         {
-            this.repo = repo;
+            this._repo = repo;
         }
 
         [HttpPost]
         public IList<Coupon> GetByUserId(string userId)
         {
-            return repo.GetByUserId(userId);
+            return _repo.GetByUserId(userId);
         }
 
         [HttpPost]
         public Coupon AddCoupon(CouponBindingModel model)
         {
-            return repo.CreateCoupon(model);
+            return _repo.CreateCoupon(model);
         }
     }
 }

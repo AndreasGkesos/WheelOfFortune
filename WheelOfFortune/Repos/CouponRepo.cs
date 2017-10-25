@@ -27,7 +27,7 @@ namespace WheelOfFortune.Repos
 
         public Coupon UpdateExpirationDate(Coupon coupon, DateTime date)
         {
-            var c = context.Coupons.Where(code => code.Id == coupon.Id).SingleOrDefault();
+            var c = context.Coupons.SingleOrDefault(code => code.Id == coupon.Id);
             c.DateExpired = date;
 
             context.Entry(c).State = EntityState.Modified;
@@ -37,13 +37,14 @@ namespace WheelOfFortune.Repos
 
         public Coupon CreateCoupon(CouponBindingModel model)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
-            var user = context.Users.Where(x => x.Id == userId).First();
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = context.Users.First(x => x.Id == userId);        
 
-            var coupon = new Coupon();
-            if (user != null)
-            {
-                coupon = new Coupon
+            if (user == null)
+                return null;
+
+           
+               var  coupon = new Coupon
                 {
                     Code = model.Code,
                     Value = model.Value,
@@ -56,8 +57,7 @@ namespace WheelOfFortune.Repos
                 context.Coupons.Add(coupon);
                 context.SaveChanges();
                 return coupon;
-            }
-            else { return null; }
+           
         }
     }
 }

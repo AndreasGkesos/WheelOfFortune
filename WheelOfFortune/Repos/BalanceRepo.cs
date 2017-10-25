@@ -23,7 +23,7 @@ namespace WheelOfFortune.Repos
 
         public Balance GetByUserId(string userId)
         {
-            return context.Balances.Where(x => x.User.Id == userId).First();
+            return context.Balances.First(x => x.User.Id == userId);
         }
 
         public Tuple<Balance, Exception> UpdateBalance(decimal balance)
@@ -33,14 +33,16 @@ namespace WheelOfFortune.Repos
                 var userId = HttpContext.Current.User.Identity.GetUserId();
                 var blc = GetByUserId(userId);
 
-                if (userId != null)
-                {
+                if(userId==null)
+                    return new Tuple<Balance, Exception>(null, new Exception("You are not Logged In"));
+
+               
                     blc.BalanceValue = blc.BalanceValue + balance;
                     context.Entry(blc).State = EntityState.Modified;
                     context.SaveChanges();
                     return new Tuple<Balance, Exception>(blc, null);
-                }
-                else { return new Tuple<Balance, Exception>(null, new Exception("You are not Logged In")); }
+                
+                
             }
             catch (NullReferenceException e) {
                 return new Tuple<Balance, Exception>(null, new Exception("You are not Logged In")); }

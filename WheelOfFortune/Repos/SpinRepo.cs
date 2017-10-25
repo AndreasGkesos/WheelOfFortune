@@ -33,10 +33,12 @@ namespace WheelOfFortune.Repos
                 var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
                 var user = context.Users.First(x => x.Id == userId);
 
-                var spin = new Spin();
-                if (user != null)
-                {
-                    spin = new Spin
+               
+
+                if(user==null)
+                    return new Tuple<Spin, Exception>(null, new Exception("You are not Logged In"));
+
+                   var  spin = new Spin
                     {
                         BetValue = model.BetValue,
                         ResultValue = model.ResultValue,
@@ -48,8 +50,7 @@ namespace WheelOfFortune.Repos
                     context.Spins.Add(spin);
                     context.SaveChanges();
                     return new Tuple<Spin, Exception>(spin, null);
-                }
-                else { return new Tuple<Spin, Exception>(null, new Exception("You are not Logged In")); }
+               
             }
             catch (NullReferenceException e )
             {

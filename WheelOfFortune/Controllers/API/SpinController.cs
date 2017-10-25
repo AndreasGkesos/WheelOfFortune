@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
@@ -13,42 +10,42 @@ namespace WheelOfFortune.Controllers.API
     
     public class SpinController : ApiController
     {
-        private readonly ISpinRepo repo;
-        private readonly ITransactionRepo transactionRepo;
-        private readonly IBalanceRepo balanceRepo;
+        private readonly ISpinRepo _repo;
+        private readonly ITransactionRepo _transactionRepo;
+        private readonly IBalanceRepo _balanceRepo;
 
         public SpinController(ISpinRepo repo, ITransactionRepo transactionRepo, IBalanceRepo balanceRepo)
         {
-            this.repo = repo;
-            this.transactionRepo = transactionRepo;
-            this.balanceRepo = balanceRepo;
+           _repo = repo;
+           _transactionRepo = transactionRepo;
+           _balanceRepo = balanceRepo;
         }
 
         [HttpGet]
         public IEnumerable<Spin> GetByUserId(string userId)
         {
-            return repo.GetByUserId(userId);
+            return _repo.GetByUserId(userId);
         }
 
         [HttpPost]
         
         public Spin AddSpin(SpinBindingModel model)
         {
-            var s = repo.CreateSpin(model);
-            UpdateTransactionAndBalance(s.Item1);
-            return s.Item1;
+            var spin = _repo.CreateSpin(model);
+            UpdateTransactionAndBalance(spin.Item1);
+            return spin.Item1;
         }
 
-        private void UpdateTransactionAndBalance(Spin s)
+        private void UpdateTransactionAndBalance(Spin spin)
         {
-            var t = transactionRepo.CreateTransaction(
+            var t = _transactionRepo.CreateTransaction(
                 new TransactionBindingModel
                 {
                     TransactionDate = DateTime.Now,
                     Type = TransactionType.FromSpin,
-                    Value = s.ResultValue
+                    Value = spin.ResultValue
                 });
-            balanceRepo.UpdateBalance(t.Item1.Value);
+            _balanceRepo.UpdateBalance(t.Item1.Value);
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -21,25 +19,30 @@ namespace WheelOfFortune.Repos
 
         public CouponValue CreateCouponValue(int value)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
-            var user = context.Users.Where(x => x.Id == userId).First();
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = context.Users.First(x => x.Id == userId);
 
-            var cv = new CouponValue();
-            
-            if (user != null)
-            {
-                cv.Value = value;
+            if (user == null)
+                return null;
+
+            var cv = new CouponValue{
+               Value = value
+            };
 
                 context.CouponValues.Add(cv);
                 context.SaveChanges();
                 return cv;
-            }
-            else { return null; }
+            
+           
         }
 
         public CouponValue UpdateCouponValue(int id, int value)
         {
-            var cv = context.CouponValues.Where(c => c.Id == id).SingleOrDefault();
+            var cv = context.CouponValues.SingleOrDefault(c => c.Id == id);
+
+            if (cv == null)
+                return null;
+
             cv.Value = value;
 
             using (var dbCtx = new ApplicationDbContext())

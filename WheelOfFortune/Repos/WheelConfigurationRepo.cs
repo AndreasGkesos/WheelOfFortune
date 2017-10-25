@@ -29,10 +29,10 @@ namespace WheelOfFortune.Repos
                 var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
                 var user = context.Users.First(x => x.Id == userId);
 
-                var wheel = new WheelConfiguration();
-                if (user != null)
-                {
-                    wheel = new WheelConfiguration
+                if (user == null)
+                    return new Tuple<WheelConfiguration, Exception>(null, new Exception("You are not Logged In"));
+                
+                   var wheel = new WheelConfiguration
                     {
                         User = user,
                         DateCreated = DateTime.Now
@@ -42,8 +42,7 @@ namespace WheelOfFortune.Repos
                     context.SaveChanges();
 
                     return new Tuple<WheelConfiguration, Exception>(wheel, null);
-                }
-                else { return new Tuple<WheelConfiguration, Exception>(null, new Exception("You are not Logged In")); }
+               
             }
             catch (NullReferenceException e)
             {
@@ -60,7 +59,7 @@ namespace WheelOfFortune.Repos
         {
             var currentWheel = Convert.ToInt32(ConfigurationManager.AppSettings["CurrentWheelConfiguration"]);
 
-            return context.WheelConfigurations.Where(x => x.Id == currentWheel).First();
+            return context.WheelConfigurations.First(x => x.Id == currentWheel);
         }
     }
 }
