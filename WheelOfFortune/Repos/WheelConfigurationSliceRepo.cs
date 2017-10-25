@@ -64,7 +64,7 @@ namespace WheelOfFortune.Repos
             {
                 results.Add(ToWheelConfigurationSliceViewModel(w));
             }
-            return results;
+            return results.ToList();
         }
 
         private WheelConfigurationSliceViewModel ToWheelConfigurationSliceViewModel(WheelConfigurationSlice model)

@@ -51,7 +51,7 @@ namespace WheelOfFortune.Repos
             }
         }
 
-        public IList<Transaction> GetByUserId(string userId)
+        public IEnumerable<Transaction> GetByUserId(string userId)
         {
             return context.Transactions.Where(x => x.User.Id == userId).ToList();
         }

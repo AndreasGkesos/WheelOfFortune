@@ -9,7 +9,7 @@ namespace WheelOfFortune.Repos.Interfaces
 {
     public interface ITransactionRepo
     {
-        IList<Transaction> GetByUserId(string userId);
+        IEnumerable<Transaction> GetByUserId(string userId);
         Tuple<Transaction, Exception> CreateTransaction(TransactionBindingModel model);
     }
 }
