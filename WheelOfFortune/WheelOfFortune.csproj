@@ -240,7 +240,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\WheelConfigurationController.cs" />
     <Compile Include="Controllers\API\SpinController.cs" />
-    <Compile Include="Controllers\API\CouponsControllerTest.cs" />
     <Compile Include="Controllers\API\CouponController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
