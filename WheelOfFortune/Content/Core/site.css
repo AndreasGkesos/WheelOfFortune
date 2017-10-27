@@ -6025,7 +6025,7 @@ a.link{
 			top: 0;
 			height: 53px;
 		}
-
+/*
 	.sidebar-collapse .navbar .dropdown.show .dropdown-menu,
 	.sidebar-collapse .navbar .dropdown .dropdown-menu {
 		background-color: transparent;
@@ -6062,7 +6062,7 @@ a.link{
 	.sidebar-collapse .navbar .dropdown-menu .dropdown-item:hover {
 		color: #FFFFFF;
 	}
-
+	*/
 	.sidebar-collapse .navbar .navbar-translate {
 		width: 100%;
 		position: relative;
@@ -6964,9 +6964,10 @@ a.link{
 		margin-left: -2px;
 	}
 
-	.button-dropdown {
+	/*.button-dropdown {
 		display: none;
 	}
+		 */
 
 	.section-nucleo-icons .container .row > [class*="col-"]:first-child {
 		text-align: center;

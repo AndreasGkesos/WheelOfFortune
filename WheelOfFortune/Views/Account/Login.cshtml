@@ -34,10 +34,14 @@
                                 
                           </div>
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                        <div>
+                            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input" })
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Remember me?</span>
+                            </label>
                         </div>
+
                     </div>
                     <div class="footer text-center">
                         <input type="submit" value="Log in" class="btn btn-primary btn-round btn-lg btn-block" />

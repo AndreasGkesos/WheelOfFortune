@@ -38,9 +38,9 @@
                             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                             </div>
                             @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-                        <div class="input-group form-group-no-border input-lg">
-                            @Html.LabelFor(m => m.UserPhoto, new { @class = "" })
-                            <input name="UserPhoto" type="file" accept=".BMP,.JPG,.GIF,.PNG,.TIFF" /> 
+                        <div class="form-group">
+                            <label for="exampleInputFile">User Photo</label>
+                            <input name="UserPhoto" type="file" accept=".BMP,.JPG,.GIF,.PNG,.TIFF" class="form-control-file" /> 
                         </div>
                             @Html.ValidationMessageFor(m => m.UserPhoto, "", new { @class = "text-danger" })
 
