@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.EnterpriseServices.CompensatingResourceManager;
+﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -58,11 +56,13 @@ namespace WheelOfFortune.Models
 
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
-            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityRole>().HasKey(r => r.Id);
             modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
         }
 
+#pragma warning disable 1591
         public static ApplicationDbContext Create()
+#pragma warning restore 1591
         {
             return new ApplicationDbContext();
         }

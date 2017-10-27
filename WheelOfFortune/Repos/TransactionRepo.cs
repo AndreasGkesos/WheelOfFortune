@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WheelOfFortune.Models;
@@ -14,11 +12,11 @@ namespace WheelOfFortune.Repos
 {
     public class TransactionRepo : ITransactionRepo
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public TransactionRepo(ApplicationDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public Tuple<Transaction, Exception> CreateTransaction(TransactionBindingModel model)
@@ -26,7 +24,7 @@ namespace WheelOfFortune.Repos
             try
             {
                 var userId = HttpContext.Current.User.Identity.GetUserId();
-                var user = context.Users.First(x => x.Id == userId);
+                var user = _context.Users.First(x => x.Id == userId);
 
               if(user==null)
                   return new Tuple<Transaction, Exception>(null, new Exception("You are not Logged In"));
@@ -39,21 +37,21 @@ namespace WheelOfFortune.Repos
                         User = user
                     };
 
-                    context.Transactions.Add(transaction);
-                    context.SaveChanges();
+                    _context.Transactions.Add(transaction);
+                    _context.SaveChanges();
                     return new Tuple<Transaction, Exception>(transaction, null);
               
                
             }
             catch (NullReferenceException e)
             {
-                return new Tuple<Transaction, Exception>(null, new Exception("You are not Logged In")); ;
+                return new Tuple<Transaction, Exception>(null, new Exception($"You are not Logged In {e.Message }"));
             }
         }
 
         public IEnumerable<Transaction> GetByUserId(string userId)
         {
-            return context.Transactions.Where(x => x.User.Id == userId).ToList();
+            return _context.Transactions.Where(x => x.User.Id == userId).ToList();
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using WheelOfFortune.Models.Domain;
 
 namespace WheelOfFortune.Models.ViewModels
 {
+    //Names like javascript varibles to be consumed easier
     public class WheelDataViewModel
     {
         public int configId { get; set; }

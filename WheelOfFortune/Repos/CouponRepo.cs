@@ -13,32 +13,34 @@ namespace WheelOfFortune.Repos
 {
     public class CouponRepo : ICouponRepo
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public CouponRepo(ApplicationDbContext context)
         {
-            this.context = context;
+          _context = context;
         }
 
         public IList<Coupon> GetByUserId(string userId)
         {
-            return context.Coupons.Where(x => x.User.Id == userId).ToList();
+            return _context.Coupons.Where(x => x.User.Id == userId).ToList();
         }
 
         public Coupon UpdateExpirationDate(Coupon coupon, DateTime date)
         {
-            var c = context.Coupons.SingleOrDefault(code => code.Id == coupon.Id);
+            var c = _context.Coupons.SingleOrDefault(code => code.Id == coupon.Id);
+            if (c == null) return null;
+
             c.DateExpired = date;
 
-            context.Entry(c).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(c).State = EntityState.Modified;
+            _context.SaveChanges();
             return c;
         }
 
         public Coupon CreateCoupon(CouponBindingModel model)
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
-            var user = context.Users.First(x => x.Id == userId);        
+            var user = _context.Users.First(x => x.Id == userId);        
 
             if (user == null)
                 return null;
@@ -54,8 +56,8 @@ namespace WheelOfFortune.Repos
                     User = user                    
                 };
 
-                context.Coupons.Add(coupon);
-                context.SaveChanges();
+                _context.Coupons.Add(coupon);
+                _context.SaveChanges();
                 return coupon;
            
         }
