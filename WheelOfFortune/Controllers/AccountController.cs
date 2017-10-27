@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,8 +7,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WheelOfFortune.Models;
-using WheelOfFortune.Repos.Interfaces;
-using Microsoft.AspNet.SignalR.Messaging;
 using WheelOfFortune.Repos;
 
 namespace WheelOfFortune.Controllers
@@ -86,10 +82,12 @@ namespace WheelOfFortune.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
+                    ModelState.AddModelError("", @"Invalid login attempt.");
+                    return View(model);
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", @"Invalid login attempt.");
                     return View(model);
             }
         }
@@ -131,8 +129,10 @@ namespace WheelOfFortune.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:
+                    ModelState.AddModelError("", @"Invalid code.");
+                    return View(model);
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", @"Invalid code.");
                     return View(model);
             }
         }
@@ -150,24 +150,26 @@ namespace WheelOfFortune.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register([Bind(Exclude = "UserPhoto")]RegisterViewModel model, HttpPostedFileBase UserPhoto)
+        public async Task<ActionResult> Register([Bind(Exclude = "UserPhoto")]RegisterViewModel model, HttpPostedFileBase userPhoto)
         {
             var appContext = new ApplicationDbContext();
             var balanceRepo = new BalanceRepo(appContext);
-            if ((UserPhoto==null) || (UserPhoto.ContentLength <= 0))
+            if ((userPhoto==null) || (userPhoto.ContentLength <= 0))
             {
-                ModelState.AddModelError("error", "Please Select a profile picture");
+                ModelState.AddModelError("error", @"Please Select a profile picture");
             }
            
             if (ModelState.IsValid)
           {
-             
-              var picture = new byte[UserPhoto.ContentLength];
-              var readresult = UserPhoto.InputStream.Read(picture, 0, UserPhoto.ContentLength);
-              model.UserPhoto = picture;
+              if (userPhoto != null)
+              {
+                  var picture = new byte[userPhoto.ContentLength];
+                  userPhoto.InputStream.Read(picture, 0, userPhoto.ContentLength);
+                  model.UserPhoto = picture;
+              }
 
-               
-                    var user = new ApplicationUser
+
+              var user = new ApplicationUser
                     {
                         UserName = model.Email,
                         Email = model.Email,
@@ -191,7 +193,7 @@ namespace WheelOfFortune.Controllers
                         }
                         catch (Exception e)
                         {
-                        Console.WriteLine(e.Message + "Account Controller");
+                        Console.WriteLine(e.Message + @"Account Controller");
                     }
                         
                         return RedirectToAction("Index", "Home");
@@ -347,7 +349,7 @@ namespace WheelOfFortune.Controllers
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider,  model.ReturnUrl, model.RememberMe });
         }
 
         //
@@ -372,6 +374,9 @@ namespace WheelOfFortune.Controllers
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
                 case SignInStatus.Failure:
+                    ViewBag.ReturnUrl = returnUrl;
+                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;

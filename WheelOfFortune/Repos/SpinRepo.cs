@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WheelOfFortune.Models;
@@ -14,24 +12,24 @@ namespace WheelOfFortune.Repos
 {
     public class SpinRepo : ISpinRepo
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public SpinRepo(ApplicationDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public IEnumerable<Spin> GetByUserId(string userId)
         {
-            return context.Spins.Where(x => x.User.Id == userId).ToList();
+            return _context.Spins.Where(x => x.User.Id == userId).ToList();
         }
 
         public Tuple<Spin, Exception> CreateSpin(SpinBindingModel model)
         {
             try
             {
-                var userId = HttpContext.Current.User.Identity.GetUserId().ToString();
-                var user = context.Users.First(x => x.Id == userId);
+                var userId = HttpContext.Current.User.Identity.GetUserId();
+                var user = _context.Users.First(x => x.Id == userId);
 
                
 
@@ -47,14 +45,14 @@ namespace WheelOfFortune.Repos
                         ExecutionDate = DateTime.Now
                     };
 
-                    context.Spins.Add(spin);
-                    context.SaveChanges();
+                    _context.Spins.Add(spin);
+                    _context.SaveChanges();
                     return new Tuple<Spin, Exception>(spin, null);
                
             }
             catch (NullReferenceException e )
             {
-                return new Tuple<Spin, Exception>(null, new Exception("You are not Logged In")); ;
+                return new Tuple<Spin, Exception>(null, new Exception($"You are not Logged In {e.Message}"));
             }          
         }
     }

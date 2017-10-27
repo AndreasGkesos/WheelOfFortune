@@ -10,17 +10,17 @@ namespace WheelOfFortune.Repos
 {
     public class CouponValueRepo : ICouponValueRepo
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public CouponValueRepo(ApplicationDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public CouponValue CreateCouponValue(int value)
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
-            var user = context.Users.First(x => x.Id == userId);
+            var user = _context.Users.First(x => x.Id == userId);
 
             if (user == null)
                 return null;
@@ -29,8 +29,8 @@ namespace WheelOfFortune.Repos
                Value = value
             };
 
-                context.CouponValues.Add(cv);
-                context.SaveChanges();
+                _context.CouponValues.Add(cv);
+                _context.SaveChanges();
                 return cv;
             
            
@@ -38,7 +38,7 @@ namespace WheelOfFortune.Repos
 
         public CouponValue UpdateCouponValue(int id, int value)
         {
-            var cv = context.CouponValues.SingleOrDefault(c => c.Id == id);
+            var cv = _context.CouponValues.SingleOrDefault(c => c.Id == id);
 
             if (cv == null)
                 return null;

@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using System.Web.Http.Results;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Repos.Interfaces;
@@ -14,16 +11,16 @@ namespace WheelOfFortune.Repos
 {
     public class BalanceRepo : IBalanceRepo
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public BalanceRepo(ApplicationDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public Balance GetByUserId(string userId)
         {
-            return context.Balances.First(x => x.User.Id == userId);
+            return _context.Balances.First(x => x.User.Id == userId);
         }
 
         public Tuple<Balance, Exception> UpdateBalance(decimal balance)
@@ -38,20 +35,20 @@ namespace WheelOfFortune.Repos
 
                
                     blc.BalanceValue = blc.BalanceValue + balance;
-                    context.Entry(blc).State = EntityState.Modified;
-                    context.SaveChanges();
+                    _context.Entry(blc).State = EntityState.Modified;
+                    _context.SaveChanges();
                     return new Tuple<Balance, Exception>(blc, null);
                 
                 
             }
             catch (NullReferenceException e) {
-                return new Tuple<Balance, Exception>(null, new Exception("You are not Logged In")); }
+                return new Tuple<Balance, Exception>(null, new Exception($"You are not Logged In {e.Message}")); }
         }
 
         public Balance CreateBalance(string userId)
         {
          
-            var user = context.Users.FirstOrDefault(x => x.Id == userId);
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
 
             if (user == null)
                throw new InvalidOperationException();
@@ -62,8 +59,8 @@ namespace WheelOfFortune.Repos
                 BalanceValue = 100
             };
 
-            context.Balances.Add(balance);
-            context.SaveChanges();
+            _context.Balances.Add(balance);
+            _context.SaveChanges();
             return balance;
         }
     }
