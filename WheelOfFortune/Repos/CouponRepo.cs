@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
@@ -14,6 +16,8 @@ namespace WheelOfFortune.Repos
     public class CouponRepo : ICouponRepo
     {
         private readonly ApplicationDbContext _context;
+        private readonly string _validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        private readonly int _codeLength = 8;
 
         public CouponRepo(ApplicationDbContext context)
         {
@@ -45,21 +49,69 @@ namespace WheelOfFortune.Repos
             if (user == null)
                 return null;
 
-           
-               var  coupon = new Coupon
-                {
-                    Code = model.Code,
-                    Value = model.Value,
-                    DateCreated = DateTime.Now,
-                    DateExpired = DateTime.Now.AddHours(24),
-                    Active = true,
-                    User = user                    
-                };
+            var cv = new CouponValue();
+            try
+            {
+                cv = _context.CouponValues.First(x => x.Value == model.Value);
+            }
+            catch (InvalidOperationException e)
+            {
+                return null; // value does not exist
+            }
+            
 
-                _context.Coupons.Add(coupon);
-                _context.SaveChanges();
-                return coupon;
+            var prefix = "";
+            switch(model.Value)
+            {
+                case 5:
+                    prefix = "05";
+                    break;
+                case 10:
+                    prefix = "10";
+                    break;
+                case 20:
+                    prefix = "20";
+                    break;
+                case 50:
+                    prefix = "50";
+                    break;
+                default:
+                    return null;
+            }
            
+            var  coupon = new Coupon
+            {
+                Code = prefix + GetCode(),
+                Value = cv,
+                DateCreated = DateTime.Now,
+                DateExpired = DateTime.Now.AddHours(24),
+                Active = true,
+                User = user                    
+            };
+
+            _context.Coupons.Add(coupon);
+            _context.SaveChanges();
+            return coupon;
+        }
+
+        private string GetCode()
+        {
+            StringBuilder sb = new StringBuilder();
+            using (RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider())
+            {
+                while (sb.Length < _codeLength)
+                {
+                    byte[] oneByte = new byte[1];
+                    provider.GetBytes(oneByte);
+                    char character = (char)oneByte[0];
+                    if (_validChars.Contains(character))
+                    {
+                        sb.Append(character);
+                    }
+                }
+
+                return sb.ToString();
+            }
         }
     }
 }
