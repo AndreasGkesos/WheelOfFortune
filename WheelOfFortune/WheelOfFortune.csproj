@@ -297,6 +297,8 @@
     <Compile Include="Models\Domain\WheelConfiguration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\ApplicationUserModels.cs" />
+    <Compile Include="Models\ViewModels\TransformModels.cs" />
     <Compile Include="Models\ViewModels\WheelConfigurationModels.cs" />
     <Compile Include="Models\ViewModels\CouponModels.cs" />
     <Compile Include="Models\ViewModels\TransactionModels.cs" />
