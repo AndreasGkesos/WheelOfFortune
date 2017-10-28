@@ -5,7 +5,7 @@ function loadJSON(callback) {
 
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', '../../WheelContent/wheel_data.json', true);
+    xobj.open('GET', '/api/WheelConfiguration/GetWheelConfiguration', true);
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
             //Call the anonymous function (callback) passing in the response
@@ -28,7 +28,7 @@ function myResult(e) {
                          BetValue: betValue,
                          ResultValue: resultValue,
                          ExecutionDate: Date.now(),
-                         WheelConfigurationId: e.gameId
+                         WheelConfigurationId: configId
             }
 
                 var spinObjStringified = JSON.stringify(spinModelObject);
@@ -81,6 +81,7 @@ function myGameEnd(e) {
 
 }
 
+var configId;
 function init() {
     loadJSON(function (response) {
         // Parse JSON string to an object
@@ -89,6 +90,8 @@ function init() {
         var mySpinBtn = document.querySelector('.spinBtn');
         //create a new instance of Spin2Win Wheel and pass in the vars object
         var myWheel = new Spin2WinWheel();
+
+        configId = jsonData.configId;
 
         //WITH your own button
         myWheel.init({ data: jsonData, onResult: myResult, onGameEnd: myGameEnd, onError: myError, spinTrigger: mySpinBtn });
