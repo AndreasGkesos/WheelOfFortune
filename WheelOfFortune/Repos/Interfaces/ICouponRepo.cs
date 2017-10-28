@@ -7,7 +7,7 @@ namespace WheelOfFortune.Repos.Interfaces
 {
     public interface ICouponRepo
     {
-        IList<Coupon> GetByUserId(string userId);
+        IEnumerable<Coupon> GetByUserId(string userId);
         Coupon UpdateExpirationDate(Coupon coupon, DateTime date);
         Coupon CreateCoupon(CouponBindingModel model);
     }

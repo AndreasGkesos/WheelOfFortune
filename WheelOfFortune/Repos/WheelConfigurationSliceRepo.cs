@@ -53,7 +53,7 @@ namespace WheelOfFortune.Repos
             }
         }
 
-        public IList<WheelConfigurationSliceViewModel> GetByWheelConfigurationId(int configId)
+        public IEnumerable<WheelConfigurationSliceViewModel> GetByWheelConfigurationId(int configId)
         {
             var slices = _context.WheelConfigurationSlices.Where(x => x.WheelConfiguration.Id == configId);
             var results = new List<WheelConfigurationSliceViewModel>();

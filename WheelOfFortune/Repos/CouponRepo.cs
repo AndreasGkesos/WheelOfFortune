@@ -20,7 +20,7 @@ namespace WheelOfFortune.Repos
           _context = context;
         }
 
-        public IList<Coupon> GetByUserId(string userId)
+        public IEnumerable<Coupon> GetByUserId(string userId)
         {
             return _context.Coupons.Where(x => x.User.Id == userId).ToList();
         }

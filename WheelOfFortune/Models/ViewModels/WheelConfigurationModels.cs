@@ -7,8 +7,8 @@ namespace WheelOfFortune.Models.ViewModels
     public class WheelDataViewModel
     {
         public int configId { get; set; }
-        public IList<string> colorArray { get; set; }
-        public IList<WheelConfigurationSliceViewModel> segmentValuesArray { get; set; }
+        public IEnumerable<string> colorArray { get; set; }
+        public IEnumerable<WheelConfigurationSliceViewModel> segmentValuesArray { get; set; }
         public int svgWidth { get; set; }
         public int svgHeight { get; set; }
         public string wheelStrokeColor { get; set; }
@@ -29,7 +29,7 @@ namespace WheelOfFortune.Models.ViewModels
         public int centerY { get; set; }
         public bool hasShadows { get; set; }
         public int numSpins { get; set; }
-        public IList<string> spinDestinationArray { get; set; }
+        public IEnumerable<string> spinDestinationArray { get; set; }
         public int minSpinDuration { get; set; }
         public string gameOverText { get; set; }
         public string invalidSpinText { get; set; }
@@ -41,7 +41,7 @@ namespace WheelOfFortune.Models.ViewModels
 
     public class WheelConfigurationBindingModel
     {
-        public IList<WheelConfigurationSliceBindingModel> Slices { get; set; }
+        public IEnumerable<WheelConfigurationSliceBindingModel> Slices { get; set; }
     }
 
     public class WheelConfigurationSliceBindingModel

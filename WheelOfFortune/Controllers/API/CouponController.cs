@@ -16,7 +16,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
-        public IList<Coupon> GetByUserId(string userId)
+        public IEnumerable<Coupon> GetByUserId(string userId)
         {
             return _repo.GetByUserId(userId);
         }
