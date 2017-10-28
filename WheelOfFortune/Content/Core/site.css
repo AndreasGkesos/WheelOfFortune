@@ -5530,7 +5530,7 @@ a.link{
 		max-height: 440px;
 	}
 
-	.page-header:after,
+	
 	.page-header:before {
 		position: absolute;
 		z-index: 0;

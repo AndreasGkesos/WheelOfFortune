@@ -23,23 +23,17 @@ namespace WheelOfFortune
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
-
 
             //Index View
             bundles.Add(new ScriptBundle("~/bundles/IndexView").Include(
                 "~/Scripts/Controllers/IndexControllerJs.js",
                 "~/Scripts/Wheel/TweenMax.min.js",
-                "~/Scripts/Wheel/ThrowPropsPlugin.min.js",
                 "~/Scripts/Wheel/Draggable.min.js",
-                "~/Scripts/Wheel/TextPlugin.min.js",
+                "~/Scripts/Wheel/ThrowPropsPlugin.min.js",
                 "~/Scripts/Wheel/Spin2WinWheel.min.js",
+                "~/Scripts/Wheel/TextPlugin.min.js",
                 "~/Scripts/Wheel/index.js"
-                
-                
-            ));
+                ));
 
             //Spins View
             bundles.Add(new ScriptBundle("~/bundles/SpinsHistoryView").Include(
@@ -57,6 +51,7 @@ namespace WheelOfFortune
                 "~/Scripts/Core/jquery.3.2.1.js",
                 "~/Scripts/Core/popper.js",
                 "~/Scripts/Core/bootstrap.js",
+                "~/Scripts/respond.js",
                 "~/Scripts/Core/indexGs.js"));
 
             bundles.Add(new StyleBundle("~/Content/Core/css").Include(

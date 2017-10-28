@@ -27,8 +27,8 @@ namespace WheelOfFortune.Controllers.API
 
             return new WheelDataViewModel
             {
-                ConfigId = config.Id,
-                ColorArray = new List<string> { "#364C62", "#F1C40F", "#E67E22", "#E74C3C", "#ECF0F1", "#95A5A6", "#16A085", "#27AE60", "#2980B9", "#8E44AD", "#2C3E50", "#F39C12", "#D35400", "#C0392B", "#BDC3C7","#1ABC9C", "#2ECC71", "#E87AC2", "#3498DB", "#9B59B6", "#7F8C8D" },
+                configId = config.Id,
+                colorArray = new List<string> { "#364C62", "#F1C40F", "#E67E22", "#E74C3C", "#ECF0F1", "#95A5A6", "#16A085", "#27AE60", "#2980B9", "#8E44AD", "#2C3E50", "#F39C12", "#D35400", "#C0392B", "#BDC3C7","#1ABC9C", "#2ECC71", "#E87AC2", "#3498DB", "#9B59B6", "#7F8C8D" },
                 segmentValuesArray = slices, 
                 svgWidth = 1024,
                 svgHeight = 768,
