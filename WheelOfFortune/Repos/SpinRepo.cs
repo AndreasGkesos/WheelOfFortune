@@ -19,12 +19,12 @@ namespace WheelOfFortune.Repos
             _context = context;
         }
 
-        public IEnumerable<Spin> GetByUserId(string userId)
+        public IEnumerable<SpinViewModel> GetByUserId(string userId)
         {
-            return _context.Spins.Where(x => x.User.Id == userId).ToList();
+            return _context.Spins.Where(x => x.User.Id == userId).Select(x => TransformModels.ToSpinViewModel(x)).ToList();
         }
 
-        public Tuple<Spin, Exception> CreateSpin(SpinBindingModel model)
+        public Tuple<SpinViewModel, Exception> CreateSpin(SpinBindingModel model)
         {
             try
             {
@@ -33,26 +33,28 @@ namespace WheelOfFortune.Repos
 
                
 
-                if(user==null)
-                    return new Tuple<Spin, Exception>(null, new Exception("You are not Logged In"));
+                if(user == null)
+                    return new Tuple<SpinViewModel, Exception>(null, new Exception("You are not Logged In"));
 
-                   var  spin = new Spin
-                    {
-                        BetValue = model.BetValue,
-                        ResultValue = model.ResultValue,
-                        ScoreValue = model.ScoreValue,
-                        User = user,
-                        ExecutionDate = DateTime.Now
-                    };
+                var spin = new Spin
+                {
+                    BetValue = model.BetValue,
+                    ResultValue = model.ResultValue,
+                    ScoreValue = model.ScoreValue,
+                    User = user,
+                    ExecutionDate = DateTime.Now,
+                    WheelConfiguration = _context.WheelConfigurations.First(x => x.Id == model.WheelConfigurationId)                
+                };
 
-                    _context.Spins.Add(spin);
-                    _context.SaveChanges();
-                    return new Tuple<Spin, Exception>(spin, null);
+                _context.Spins.Add(spin);
+                _context.SaveChanges();
+                var v = TransformModels.ToSpinViewModel(spin);
+                return new Tuple<SpinViewModel, Exception>(v, null);
                
             }
             catch (NullReferenceException e )
             {
-                return new Tuple<Spin, Exception>(null, new Exception($"You are not Logged In {e.Message}"));
+                return new Tuple<SpinViewModel, Exception>(null, new Exception($"You are not Logged In {e.Message}"));
             }          
         }
     }

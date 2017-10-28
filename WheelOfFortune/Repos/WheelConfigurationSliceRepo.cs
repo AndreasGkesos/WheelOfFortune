@@ -59,22 +59,9 @@ namespace WheelOfFortune.Repos
             var results = new List<WheelConfigurationSliceViewModel>();
             foreach (WheelConfigurationSlice w in slices)
             {
-                results.Add(ToWheelConfigurationSliceViewModel(w));
+                results.Add(TransformModels.ToWheelConfigurationSliceViewModel(w));
             }
             return results.ToList();
-        }
-
-        private WheelConfigurationSliceViewModel ToWheelConfigurationSliceViewModel(WheelConfigurationSlice model)
-        {
-            return new WheelConfigurationSliceViewModel
-            {
-                probability = model.Propability,
-                resultText = model.ResultText,
-                type = model.Type,
-                value = model.Type,
-                win = model.Win,
-                userData = new UserDataViewModel { score = model.Score }
-            };
-        }
+        } 
     }
 }

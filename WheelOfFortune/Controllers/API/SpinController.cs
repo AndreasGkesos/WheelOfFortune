@@ -22,21 +22,21 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
-        public IEnumerable<Spin> GetByUserId(string userId)
+        public IEnumerable<SpinViewModel> GetByUserId(string userId)
         {
             return _repo.GetByUserId(userId);
         }
 
         [HttpPost]
         
-        public Spin AddSpin(SpinBindingModel model)
+        public SpinViewModel AddSpin(SpinBindingModel model)
         {
             var spin = _repo.CreateSpin(model);
             UpdateTransactionAndBalance(spin.Item1);
             return spin.Item1;
         }
 
-        private void UpdateTransactionAndBalance(Spin spin)
+        private void UpdateTransactionAndBalance(SpinViewModel spin)
         {
             var t = _transactionRepo.CreateTransaction(
                 new TransactionBindingModel

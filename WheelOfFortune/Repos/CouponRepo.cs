@@ -24,12 +24,12 @@ namespace WheelOfFortune.Repos
           _context = context;
         }
 
-        public IEnumerable<Coupon> GetByUserId(string userId)
+        public IEnumerable<CouponViewModel> GetByUserId(string userId)
         {
-            return _context.Coupons.Where(x => x.User.Id == userId).ToList();
+            return _context.Coupons.Where(x => x.User.Id == userId).Select(x => TransformModels.ToCouponViewModel(x)).ToList();
         }
 
-        public Coupon UpdateExpirationDate(Coupon coupon, DateTime date)
+        public CouponViewModel UpdateExpirationDate(Coupon coupon, DateTime date)
         {
             var c = _context.Coupons.SingleOrDefault(code => code.Id == coupon.Id);
             if (c == null) return null;
@@ -38,10 +38,10 @@ namespace WheelOfFortune.Repos
 
             _context.Entry(c).State = EntityState.Modified;
             _context.SaveChanges();
-            return c;
+            return TransformModels.ToCouponViewModel(c);
         }
 
-        public Coupon CreateCoupon(CouponBindingModel model)
+        public CouponViewModel CreateCoupon(CouponBindingModel model)
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = _context.Users.First(x => x.Id == userId);        
@@ -85,13 +85,12 @@ namespace WheelOfFortune.Repos
                 Value = cv,
                 DateCreated = DateTime.Now,
                 DateExpired = DateTime.Now.AddHours(24),
-                Active = true,
-                User = user                    
+                Active = true,                 
             };
 
             _context.Coupons.Add(coupon);
             _context.SaveChanges();
-            return coupon;
+            return TransformModels.ToCouponViewModel(coupon);
         }
 
         private string GetCode()
