@@ -18,12 +18,40 @@ function loadJSON(callback) {
 //your own function to capture the spin results
 function myResult(e) {
     //e is the result object
-    console.log('Spin Count: ' + e.spinCount + ' - ' + 'Win: ' + e.win + ' - ' + 'Message: ' + e.msg);
+    console.log('Spin Count: '  + e.spinCount  + ' - ' +  'Win: '   +e.win +  ' - ' +  'Message: '  + e.msg);
+    var betValue = 5;
+    var resultValue = betValue * e.userData.score;
+     
+             var spinModelObject =
+             {
+                         ScoreValue: e.userData.score,
+                         BetValue: betValue,
+                         ResultValue: resultValue,
+                         ExecutionDate: Date.now(),
+                         WheelConfigurationId: e.gameId
+            }
 
+                var spinObjStringified = JSON.stringify(spinModelObject);
+     
+         
+             $.ajax({
+                     type: "POST",
+                     url: "/api/Spin/AddSpin",
+                     data: spinObjStringified,
+                     contentType: "application/json; charset=utf-8",
+                     dataType: "json",
+                     success: function (msg) {
+                             alert("everything all right");
+                         },
+                     fail:function (msg) {
+                                 alert("error");
+                             }
+                 
+                     });
     // if you have defined a userData object...
     if (e.userData) {
 
-        console.log('User defined score: ' + e.userData.score)
+        console.log('User defined score: '  + e.userData.score);
 
     }
 
@@ -39,7 +67,7 @@ function myResult(e) {
 //your own function to capture any errors
 function myError(e) {
     //e is error object
-    console.log('Spin Count: ' + e.spinCount + ' - ' + 'Message: ' + e.msg);
+    console.log('Spin Count: ' +  e.spinCount +  ' - ' +  'Message: ' +  e.msg);
 
 }
 
