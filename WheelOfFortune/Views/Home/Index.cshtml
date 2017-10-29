@@ -15,10 +15,16 @@
     
     <div class="panel panel-default" id="usersPlatform">
         <div class="panel-heading">
-            <p class="text-info">@User.Identity.Name Balance Value</p>
+           Balance Value
         </div>
         <div class="panel-body" id="balanceValueContainer" data-userId="@User.Identity.GetUserId()">
             
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="despositCodesContainer">
+            <div class="panel-info">Enter Deposit Code</div>
+            @Html.TextBox("DepositCodes")
+            <button id="depositCodeSubmit" class="btn btn-group">Enter Code</button>
         </div>
 
     </div>
