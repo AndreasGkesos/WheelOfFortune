@@ -10,7 +10,7 @@ namespace WheelOfFortune.Models.Domain
         public decimal BalanceValue { get; set; }
 
         [Required]
-        public virtual ApplicationUser User { get; set; }
+        public  ApplicationUser User { get; set; }
 
        
     }

@@ -3,9 +3,10 @@
 //load your JSON (you could jQuery if you prefer)
 function loadJSON(callback) {
 
-    var xobj = new XMLHttpRequest();
+    const xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', '/api/WheelConfiguration/GetWheelConfiguration', true);
+  xobj.open("GET", "/api/WheelConfiguration/GetWheelConfiguration", true);
+   //xobj.open("GET", "/WheelContent/wheel_data.json", true);
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
             //Call the anonymous function (callback) passing in the response
@@ -19,19 +20,18 @@ function loadJSON(callback) {
 function myResult(e) {
     //e is the result object
     console.log('Spin Count: '  + e.spinCount  + ' - ' +  'Win: '   +e.win +  ' - ' +  'Message: '  + e.msg);
-    var betValue = 5;
-    var resultValue = betValue * e.userData.score;
+    let betValue = 5;
+    const resultValue = betValue * e.userData.score;
      
-             var spinModelObject =
-             {
-                         ScoreValue: e.userData.score,
-                         BetValue: betValue,
-                         ResultValue: resultValue,
-                         ExecutionDate: Date.now(),
-                         WheelConfigurationId: configId
-            }
+           const spinModelObject = {
+               ScoreValue: e.userData.score,
+               BetValue: betValue,
+               ResultValue: resultValue,
+               ExecutionDate: Date.now(),
+               WheelConfigurationId: configId
+           };
 
-                var spinObjStringified = JSON.stringify(spinModelObject);
+          let spinObjStringified = JSON.stringify(spinModelObject);
      
          
              $.ajax({
@@ -47,7 +47,9 @@ function myResult(e) {
                                  alert("error");
                              }
                  
-                     });
+          });
+
+             UpdateBalanceContainer();
     // if you have defined a userData object...
     if (e.userData) {
 
@@ -81,15 +83,15 @@ function myGameEnd(e) {
 
 }
 
-var configId;
+let configId;
 function init() {
     loadJSON(function (response) {
         // Parse JSON string to an object
-        var jsonData = JSON.parse(response);
+        let jsonData = JSON.parse(response);
         //if you want to spin it using your own button, then create a reference and pass it in as spinTrigger
-        var mySpinBtn = document.querySelector('.spinBtn');
-        //create a new instance of Spin2Win Wheel and pass in the vars object
-        var myWheel = new Spin2WinWheel();
+        let mySpinBtn = document.querySelector(".spinBtn");
+        //create a new instance of Spin2Win Wheel and pass in the lets object
+        let myWheel = new Spin2WinWheel();
 
         configId = jsonData.configId;
 

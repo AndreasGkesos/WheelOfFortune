@@ -23,6 +23,12 @@ namespace WheelOfFortune.Repos
             return _context.Balances.First(x => x.User.Id == userId);
         }
 
+        public string GetUser()
+        {
+            return  HttpContext.Current.User.Identity.GetUserName();
+
+        }
+
         public Tuple<Balance, Exception> UpdateBalance(decimal balance)
         {
             try
@@ -62,6 +68,22 @@ namespace WheelOfFortune.Repos
             _context.Balances.Add(balance);
             _context.SaveChanges();
             return balance;
+        }
+
+        public decimal GetBalanceByUserId(string userId)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+
+            if (user == null)
+                throw new InvalidOperationException();
+
+            var balance = _context.Balances.FirstOrDefault(x => x.User.Id == userId);
+
+            if(balance == null)
+                throw new InvalidOperationException($"Balance not found for user {user.UName}");
+
+            return balance.BalanceValue;
+
         }
     }
 }

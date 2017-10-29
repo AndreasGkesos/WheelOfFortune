@@ -8,5 +8,6 @@ namespace WheelOfFortune.Repos.Interfaces
         Balance GetByUserId(string userId);
         Tuple<Balance, Exception> UpdateBalance(decimal balance);
         Balance CreateBalance(string userId);
+        decimal GetBalanceByUserId(string userId);
     }
 }

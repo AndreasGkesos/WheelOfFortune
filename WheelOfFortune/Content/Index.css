@@ -1,2 +1,19 @@
 ﻿body {
+    overflow-y: visible!important;
 }
+
+.container {
+    top: 5%;
+    width: 90% !important;
+    height: 90% !important;
+    background: #586073;
+
+}
+#usersPlatform {
+    float: left;
+    margin-left: 15%;
+    margin-top: 15%;
+    background-color: #DCDCDC;
+    color: black;
+}
+

@@ -7812,3 +7812,7 @@ a.link{
 .logo-container img {
 	animation: beat 0.55s infinite alternate;
 }
+
+#initialContainer {
+    background: black!important;
+}
