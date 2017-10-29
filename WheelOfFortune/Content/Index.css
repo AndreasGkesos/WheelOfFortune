@@ -1,2 +1,41 @@
 ﻿body {
+    overflow-y: visible!important;
 }
+
+.container {
+    top: 5%;
+    width: 90% !important;
+    height: 90% !important;
+    background: #586073;
+
+}
+#usersPlatform {
+    min-width: 400px;
+    min-height: 200px;
+    height: auto;
+    font-size: large;
+    border-radius: 30px;
+    font-family: Open Sans;
+    float: left;
+    margin-left: 5%;
+    margin-top: 7%;
+    background-color: white;
+    color: black;
+}
+
+#balanceValueContainer {
+    font-size: large;
+    background-color: aliceblue;
+}
+
+#depositCodeSubmit {
+    margin: 0;
+    padding: 0;
+    width: 65%!important;
+    top: 0 !important;
+    left: 32% !important;
+    box-shadow: none !important;
+    display: inline !important;
+
+}
+

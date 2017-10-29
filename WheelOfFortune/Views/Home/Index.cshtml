@@ -1,11 +1,40 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@model WheelOfFortune.Models.Domain.Balance
+    
+
+@{
     ViewBag.Title = "Wheel Of Fortune";
 }
 
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
-@Styles.Render("~/Content//Wheel/style.css")
+@Styles.Render("~/Content/Wheel/style.css")
+@Styles.Render("~/Content/index.css")
 
-@Html.Partial("WheelContainer")
+
+<div class="container">
+    
+    <div class="panel panel-default" id="usersPlatform">
+        <div class="panel-heading">
+           Balance Value
+        </div>
+        <div class="panel-body" id="balanceValueContainer" data-userId="@User.Identity.GetUserId()">
+            
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="despositCodesContainer">
+            <div class="panel-info">Enter Deposit Code</div>
+            @Html.TextBox("DepositCodes")
+            <button id="depositCodeSubmit" class="btn btn-group">Enter Code</button>
+        </div>
+
+    </div>
+
+
+
+
+    @Html.Partial("WheelContainer")
+
+</div>
 
 @section scripts {
     @Scripts.Render("~/bundles/IndexView")

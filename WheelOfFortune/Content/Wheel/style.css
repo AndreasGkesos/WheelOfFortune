@@ -1,12 +1,17 @@
-, .peg, .wheelSVG {
+ .peg, .wheelSVG {
  visibility: hidden;
 }
-.wheelContainer, body, html {
- width: 100%;
- height: 100%;
- margin: 0;
- padding: 0;
+ body, html {
+     width: 100%;
+     height: 100%;
 }
+.wheelContainer {
+  width: 100%;
+  height: 65%;
+  margin: 0;
+  padding: 0;
+}
+
 .centerCircle, .valueContainer, .wheelOutline, .wheelText {
  pointer-events: none;
 }
@@ -21,8 +26,8 @@
  background-color: #E81D62;
 }
 body {
- background-color: #2d2d2d;
- overflow: hidden;
+    background-color: #2d2d2d;
+    overflow: hidden;
 }
 body, html {
  margin: 0;
@@ -33,14 +38,14 @@ body, html {
  max-width: 1000px;
  margin-left: auto;
  margin-right: auto;
- left: 50%;
- top: 100px;
+ left: 70%;
+ top: 150px;
 }
 .wheelSVG {
  position: absolute;
  overflow: visible;
  width: 100%;
- height: auto; 
+ height: 95%; 
 }
 .wheelText {
  text-anchor: middle;
@@ -70,10 +75,10 @@ body, html {
  transition: line-height .2s ease;
 }
 button {
- left:50%;
- width: 80%;
- top: 20px;
- max-width: 400px;
+ left:70%;
+ width: 60%;
+ top: 70px;
+ max-width: 300px;
  padding: 20px;
  font-weight: 700;
  font-size: 32px;
@@ -83,6 +88,7 @@ button {
  box-shadow: 0 2px 0 #D71559;
  cursor: pointer;
  font-family: "Fjalla One", Helvetica, Arial, sans-serif;
+  z-index: 99999;
 }
 @media only screen and (max-width: 480px) {
  .toast p, .toast span {
@@ -98,7 +104,7 @@ button {
 }
 @media only screen and (min-width: 801px) {
  .toast p, .toast span {
-  font-size: 58px;
+  font-size: 53px;
   line-height: 60px;
  }
 }
@@ -113,7 +119,8 @@ button {
   width: 40%;
  }
  .wheelContainer {
-  top: 70px;
+  top: 100px;
+ 
  }
 }
 button:focus {
