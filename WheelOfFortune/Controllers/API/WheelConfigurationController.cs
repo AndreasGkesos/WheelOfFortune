@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Linq;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
@@ -23,7 +24,7 @@ namespace WheelOfFortune.Controllers.API
         public WheelDataViewModel GetWheelConfiguration()
         {
             var config = _repo.GetWheelConfiguration();
-            var slices = _slicesRepo.GetByWheelConfigurationId(config.Id);
+            var slices = _slicesRepo.GetByWheelConfigurationId(config.Id).Select(x => TransformModels.ToWheelConfigurationSliceViewModel(x));
 
             return new WheelDataViewModel
             {
@@ -65,18 +66,19 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
-        public Tuple<WheelConfiguration, Exception> AddWheelConfiguration(WheelConfigurationBindingModel model)
+        public WheelConfigurationViewModel AddWheelConfiguration(WheelConfigurationBindingModel model)
         {
             var wheel = _repo.CreateWheelConfig();
 
-            if (wheel.Item2 != null) return new Tuple<WheelConfiguration, Exception>(null, wheel.Item2);
+            if (wheel == null)
+                throw new Exception("Wheel config could not be created");
 
             foreach (var s in model.Slices)
             {
-                s.WheelConfiguration = wheel.Item1;
+                s.WheelConfiguration = wheel;
                 _slicesRepo.CreateSlice(s);
             }
-            return new Tuple<WheelConfiguration, Exception>(wheel.Item1, null);
+            return TransformModels.ToWheelConfigurationViewModel(wheel);
         }
     }
 }

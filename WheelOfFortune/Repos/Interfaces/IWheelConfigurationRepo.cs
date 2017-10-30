@@ -8,6 +8,6 @@ namespace WheelOfFortune.Repos.Interfaces
     {
         IEnumerable<WheelConfiguration> GetByUserId(string userId);
         WheelConfiguration GetWheelConfiguration();
-        Tuple<WheelConfiguration, Exception> CreateWheelConfig();
+        WheelConfiguration CreateWheelConfig();
     }
 }

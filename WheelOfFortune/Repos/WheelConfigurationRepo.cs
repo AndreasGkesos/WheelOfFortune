@@ -19,32 +19,24 @@ namespace WheelOfFortune.Repos
             _context = context;
         }
 
-        public Tuple<WheelConfiguration, Exception> CreateWheelConfig()
+        public WheelConfiguration CreateWheelConfig()
         {
-            try
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+
+            if (user == null)
+                throw new Exception("You are not Logged In");
+
+            var wheel = new WheelConfiguration
             {
-                var userId = HttpContext.Current.User.Identity.GetUserId();
-                var user = _context.Users.First(x => x.Id == userId);
+                User = user,
+                DateCreated = DateTime.Now
+            };
 
-                if (user == null)
-                    return new Tuple<WheelConfiguration, Exception>(null, new Exception("You are not Logged In"));
-                
-                   var wheel = new WheelConfiguration
-                    {
-                        User = user,
-                        DateCreated = DateTime.Now
-                    };
+            _context.WheelConfigurations.Add(wheel);
+            _context.SaveChanges();
 
-                    _context.WheelConfigurations.Add(wheel);
-                    _context.SaveChanges();
-
-                    return new Tuple<WheelConfiguration, Exception>(wheel, null);
-               
-            }
-            catch (NullReferenceException e)
-            {
-                return new Tuple<WheelConfiguration, Exception>(null, new Exception($"You are not Logged In {e.Message}"));
-            }
+            return wheel;
         }
 
         public IEnumerable<WheelConfiguration> GetByUserId(string userId)
@@ -56,7 +48,7 @@ namespace WheelOfFortune.Repos
         {
             var currentWheel = Convert.ToInt32(ConfigurationManager.AppSettings["CurrentWheelConfiguration"]);
 
-            return _context.WheelConfigurations.First(x => x.Id == currentWheel);
+            return _context.WheelConfigurations.FirstOrDefault(x => x.Id == currentWheel);
         }
     }
 }
