@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Linq;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
@@ -24,34 +25,25 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<SpinViewModel> GetAll()
         {
-            List<SpinViewModel> list = new List<SpinViewModel>();
-            foreach (Spin s in _repo.GetAll())
-            {
-                list.Add(TransformModels.ToSpinViewModel(s));
-            }
-            return list;
+            return _repo.GetAll().Select(x => TransformModels.ToSpinViewModel(x));
         }
+        
 
         [HttpGet]
         public IEnumerable<SpinViewModel> GetByUserId(string userId)
         {
-            List<SpinViewModel> list = new List<SpinViewModel>();
-            foreach (Spin s in _repo.GetByUserId(userId))
-            {
-                list.Add(TransformModels.ToSpinViewModel(s));
-            }
-            return list;
+            return _repo.GetByUserId(userId).Select(x => TransformModels.ToSpinViewModel(x));
         }
 
         [HttpPost]
         public SpinViewModel AddSpin(SpinBindingModel model)
         {
             var spin = _repo.CreateSpin(model);
-            UpdateTransactionAndBalance(spin.Item1);
-            return spin.Item1;
+            UpdateTransactionAndBalance(spin);
+            return TransformModels.ToSpinViewModel(spin);
         }
 
-        private void UpdateTransactionAndBalance(SpinViewModel spin)
+        private void UpdateTransactionAndBalance(Spin spin)
         {
             var t = _transactionRepo.CreateTransaction(
                 new TransactionBindingModel
@@ -60,7 +52,7 @@ namespace WheelOfFortune.Controllers.API
                     Type = TransactionType.FromSpin,
                     Value = spin.ResultValue
                 });
-            _balanceRepo.UpdateBalance(t.Item1.Value);
+            _balanceRepo.UpdateBalance(t.Value);
         }
     }
 }

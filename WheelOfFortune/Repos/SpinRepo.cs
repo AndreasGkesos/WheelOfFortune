@@ -30,37 +30,28 @@ namespace WheelOfFortune.Repos
             return _context.Spins.Where(x => x.User.Id == userId).Include(x => x.User).Include(w => w.WheelConfiguration).ToList();
         }
 
-        public Tuple<SpinViewModel, Exception> CreateSpin(SpinBindingModel model)
+        public Spin CreateSpin(SpinBindingModel model)
         {
-            try
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+
+            if (user == null)
+                throw new Exception("You are not Logged In");
+
+            var spin = new Spin
             {
-                var userId = HttpContext.Current.User.Identity.GetUserId();
-                var user = _context.Users.First(x => x.Id == userId);
+                BetValue = model.BetValue,
+                ResultValue = model.ResultValue,
+                ScoreValue = model.ScoreValue,
+                User = user,
+                ExecutionDate = DateTime.Now,
+                WheelConfiguration = _context.WheelConfigurations.FirstOrDefault(x => x.Id == model.WheelConfigurationId)
+            };
 
-               
+            _context.Spins.Add(spin);
+            _context.SaveChanges();
 
-                if(user == null)
-                    return new Tuple<SpinViewModel, Exception>(null, new Exception("You are not Logged In"));
-
-                var spin = new Spin
-                {
-                    BetValue = model.BetValue,
-                    ResultValue = model.ResultValue,
-                    ScoreValue = model.ScoreValue,
-                    User = user,
-                    ExecutionDate = DateTime.Now,
-                    WheelConfiguration = _context.WheelConfigurations.First(x => x.Id == model.WheelConfigurationId)                
-                };
-
-                _context.Spins.Add(spin);
-                _context.SaveChanges();
-                return new Tuple<SpinViewModel, Exception>(TransformModels.ToSpinViewModel(spin), null);
-               
-            }
-            catch (NullReferenceException e )
-            {
-                return new Tuple<SpinViewModel, Exception>(null, new Exception($"You are not Logged In {e.Message}"));
-            }          
+            return spin;         
         }
     }
 }

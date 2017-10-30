@@ -8,7 +8,7 @@ namespace WheelOfFortune.Repos.Interfaces
     public interface ISpinRepo
     {
         IEnumerable<Spin> GetByUserId(string userId);
-        Tuple<SpinViewModel, Exception> CreateSpin(SpinBindingModel model);
+        Spin CreateSpin(SpinBindingModel model);
         IEnumerable<Spin> GetAll();
     }
 }
