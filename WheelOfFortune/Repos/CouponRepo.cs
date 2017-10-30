@@ -24,9 +24,14 @@ namespace WheelOfFortune.Repos
           _context = context;
         }
 
-        public IEnumerable<CouponViewModel> GetByUserId(string userId)
+        public IEnumerable<Coupon> GetAll()
         {
-            return _context.Coupons.Where(x => x.User.Id == userId).Select(x => TransformModels.ToCouponViewModel(x)).ToList();
+            return _context.Coupons.Include(x => x.User).Include(c => c.Value).ToList();
+        }
+
+        public IEnumerable<Coupon> GetByUserId(string userId)
+        {
+            return _context.Coupons.Where(x => x.User.Id == userId).Include(x => x.User).Include(c => c.Value).ToList();
         }
 
         public CouponViewModel UpdateExpirationDate(Coupon coupon, DateTime date)
@@ -59,7 +64,6 @@ namespace WheelOfFortune.Repos
                 return null; // value does not exist
             }
             
-
             var prefix = "";
             switch(model.Value)
             {
@@ -111,6 +115,22 @@ namespace WheelOfFortune.Repos
 
                 return sb.ToString();
             }
+        }
+
+        public decimal? Exchange(string code)
+        {
+            var coupon = _context.Coupons.Where(x => x.Code == code).Include(x => x.User).Include(c => c.Value).First();
+
+            var now = DateTime.Now;
+            if (coupon == null || !coupon.Active || coupon.DateExpired < now)
+                return null;
+
+            coupon.Active = false;
+            coupon.DateExchanged = now;
+            _context.Entry(coupon).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return coupon.Value.Value;
         }
     }
 }
