@@ -20,7 +20,7 @@ namespace WheelOfFortune.Repos
 
         public Balance GetByUserId(string userId)
         {
-            return _context.Balances.First(x => x.User.Id == userId);
+            return _context.Balances.Where(x => x.User.Id == userId).Include(x => x.User).First();
         }
 
         public string GetUser()
@@ -36,7 +36,7 @@ namespace WheelOfFortune.Repos
                 var userId = HttpContext.Current.User.Identity.GetUserId();
                 var blc = GetByUserId(userId);
 
-                if(userId==null)
+                if(userId == null)
                     return new Tuple<Balance, Exception>(null, new Exception("You are not Logged In"));
 
                
