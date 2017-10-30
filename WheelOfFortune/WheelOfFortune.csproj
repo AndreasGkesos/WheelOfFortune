@@ -240,6 +240,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BalanceController.cs" />
+    <Compile Include="Controllers\API\TransanctionController.cs" />
     <Compile Include="Controllers\API\WheelConfigurationController.cs" />
     <Compile Include="Controllers\API\SpinController.cs" />
     <Compile Include="Controllers\API\CouponController.cs" />
@@ -286,6 +287,10 @@
     <Compile Include="Migrations\201710221159284_Change all money properties to decimal.cs" />
     <Compile Include="Migrations\201710221159284_Change all money properties to decimal.Designer.cs">
       <DependentUpon>201710221159284_Change all money properties to decimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710292337058_Add DateExchanged property to Coupon domain.cs" />
+    <Compile Include="Migrations\201710292337058_Add DateExchanged property to Coupon domain.Designer.cs">
+      <DependentUpon>201710292337058_Add DateExchanged property to Coupon domain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -458,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710221159284_Change all money properties to decimal.resx">
       <DependentUpon>201710221159284_Change all money properties to decimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710292337058_Add DateExchanged property to Coupon domain.resx">
+      <DependentUpon>201710292337058_Add DateExchanged property to Coupon domain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

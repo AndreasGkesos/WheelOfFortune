@@ -7,6 +7,7 @@ using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Repos.Interfaces;
 using WheelOfFortune.Models.ViewModels;
+using System.Data.Entity;
 
 namespace WheelOfFortune.Repos
 {
@@ -19,39 +20,42 @@ namespace WheelOfFortune.Repos
             _context = context;
         }
 
-        public Tuple<Transaction, Exception> CreateTransaction(TransactionBindingModel model)
+        public IEnumerable<Transaction> GetAll()
+        {
+            return _context.Transactions.Include(x => x.User).ToList();
+        }
+
+        public IEnumerable<Transaction> GetByUserId(string userId)
+        {
+            return _context.Transactions.Where(x => x.User.Id == userId).Include(x => x.User).ToList();
+        }
+
+        public Tuple<TransactionViewModel, Exception> CreateTransaction(TransactionBindingModel model)
         {
             try
             {
                 var userId = HttpContext.Current.User.Identity.GetUserId();
                 var user = _context.Users.First(x => x.Id == userId);
 
-              if(user==null)
-                  return new Tuple<Transaction, Exception>(null, new Exception("You are not Logged In"));
+              if(user == null)
+                  return new Tuple<TransactionViewModel, Exception>(null, new Exception("You are not Logged In"));
 
                 var transaction = new Transaction
-                    {
-                        TransactionDate = model.TransactionDate,
-                        Value = model.Value,
-                        Type = model.Type,
-                        User = user
-                    };
+                {
+                    TransactionDate = model.TransactionDate,
+                    Value = model.Value,
+                    Type = model.Type,
+                    User = user
+                };
 
-                    _context.Transactions.Add(transaction);
-                    _context.SaveChanges();
-                    return new Tuple<Transaction, Exception>(transaction, null);
-              
-               
+                _context.Transactions.Add(transaction);
+                _context.SaveChanges();
+                return new Tuple<TransactionViewModel, Exception>(TransformModels.ToTransactionViewModel(transaction), null);
             }
             catch (NullReferenceException e)
             {
-                return new Tuple<Transaction, Exception>(null, new Exception($"You are not Logged In {e.Message }"));
+                return new Tuple<TransactionViewModel, Exception>(null, new Exception($"You are not Logged In {e.Message }"));
             }
-        }
-
-        public IEnumerable<Transaction> GetByUserId(string userId)
-        {
-            return _context.Transactions.Where(x => x.User.Id == userId).ToList();
         }
     }
 }
