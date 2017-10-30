@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
+using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelOfFortune.Repos
@@ -29,26 +30,22 @@ namespace WheelOfFortune.Repos
 
         }
 
-        public Tuple<Balance, Exception> UpdateBalance(decimal balance)
+        public Balance UpdateBalance(decimal balance)
         {
-            try
-            {
-                var userId = HttpContext.Current.User.Identity.GetUserId();
-                var blc = GetByUserId(userId);
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var blc = _context.Balances.Where(x => x.User.Id == userId).Include(x => x.User).First();
 
-                if(userId == null)
-                    return new Tuple<Balance, Exception>(null, new Exception("You are not Logged In"));
+            if (userId == null)
+                throw new Exception("You are not Logged In");
 
-               
-                    blc.BalanceValue = blc.BalanceValue + balance;
-                    _context.Entry(blc).State = EntityState.Modified;
-                    _context.SaveChanges();
-                    return new Tuple<Balance, Exception>(blc, null);
-                
-                
-            }
-            catch (NullReferenceException e) {
-                return new Tuple<Balance, Exception>(null, new Exception($"You are not Logged In {e.Message}")); }
+            if (blc == null)
+                throw new Exception("Balance not found");
+
+            blc.BalanceValue = blc.BalanceValue + balance;
+            _context.Entry(blc).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return blc;
         }
 
         public Balance CreateBalance(string userId)
