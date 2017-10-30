@@ -14,10 +14,14 @@ namespace WheelOfFortune.Models.Domain
         [Required]
         public CouponValue Value { get; set; }
 
+        [Required]
         public DateTime DateCreated { get; set; }
 
         [Required]
         public DateTime DateExpired { get; set; }
+
+        [Required]
+        public DateTime DateExchanged { get; set; }
 
         [Required]
         public bool Active { get; set; }
