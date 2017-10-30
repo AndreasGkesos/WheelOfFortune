@@ -30,32 +30,26 @@ namespace WheelOfFortune.Repos
             return _context.Transactions.Where(x => x.User.Id == userId).Include(x => x.User).ToList();
         }
 
-        public Tuple<TransactionViewModel, Exception> CreateTransaction(TransactionBindingModel model)
+        public Transaction CreateTransaction(TransactionBindingModel model)
         {
-            try
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = _context.Users.First(x => x.Id == userId);
+
+            if (user == null)
+                throw new Exception("You are not Logged In");
+
+            var transaction = new Transaction
             {
-                var userId = HttpContext.Current.User.Identity.GetUserId();
-                var user = _context.Users.First(x => x.Id == userId);
+                TransactionDate = model.TransactionDate,
+                Value = model.Value,
+                Type = model.Type,
+                User = user
+            };
 
-              if(user == null)
-                  return new Tuple<TransactionViewModel, Exception>(null, new Exception("You are not Logged In"));
+            _context.Transactions.Add(transaction);
+            _context.SaveChanges();
 
-                var transaction = new Transaction
-                {
-                    TransactionDate = model.TransactionDate,
-                    Value = model.Value,
-                    Type = model.Type,
-                    User = user
-                };
-
-                _context.Transactions.Add(transaction);
-                _context.SaveChanges();
-                return new Tuple<TransactionViewModel, Exception>(TransformModels.ToTransactionViewModel(transaction), null);
-            }
-            catch (NullReferenceException e)
-            {
-                return new Tuple<TransactionViewModel, Exception>(null, new Exception($"You are not Logged In {e.Message }"));
-            }
+            return transaction;
         }
     }
 }

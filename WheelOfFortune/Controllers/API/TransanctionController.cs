@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Linq;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
@@ -20,23 +20,13 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<TransactionViewModel> GetAll()
         {
-            List<TransactionViewModel> list = new List<TransactionViewModel>();
-            foreach (Transaction t in _repo.GetAll())
-            {
-                list.Add(TransformModels.ToTransactionViewModel(t));
-            }
-            return list;
+            return _repo.GetAll().Select(x => TransformModels.ToTransactionViewModel(x));
         }
 
         [HttpGet]
         public IEnumerable<TransactionViewModel> GetByUserId(string userId)
         {
-            List<TransactionViewModel> list = new List<TransactionViewModel>();
-            foreach (Transaction t in _repo.GetByUserId(userId))
-            {
-                list.Add(TransformModels.ToTransactionViewModel(t));
-            }
-            return list;
+            return _repo.GetByUserId(userId).Select(x => TransformModels.ToTransactionViewModel(x));
         }
     }
 }
