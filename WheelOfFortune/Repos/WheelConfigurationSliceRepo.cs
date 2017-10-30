@@ -19,49 +19,35 @@ namespace WheelOfFortune.Repos
            _context = context;
         }
 
-        public Tuple<WheelConfigurationSlice, Exception> CreateSlice(WheelConfigurationSliceBindingModel model)
+        public WheelConfigurationSlice CreateSlice(WheelConfigurationSliceBindingModel model)
         {
-            try
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+
+            if (user == null)
+                throw new Exception("You are not Logged In");
+
+            var slice = new WheelConfigurationSlice
             {
-                var userId = HttpContext.Current.User.Identity.GetUserId();
-                var user = _context.Users.First(x => x.Id == userId);
+                Propability = model.Probability,
+                Value = model.Value,
+                Type = model.Type,
+                Win = model.Win,
+                ResultText = model.ResultText,
+                Score = model.Score,
+                User = user,
+                WheelConfiguration = model.WheelConfiguration
+            };
 
-                if (user == null)
-                    return new Tuple<WheelConfigurationSlice, Exception>(null, new Exception("You are not Logged In"));
+            _context.WheelConfigurationSlices.Add(slice);
+            _context.SaveChanges();
 
-
-
-                var slice = new WheelConfigurationSlice
-                {
-                    Propability = model.Probability,
-                    Value = model.Value,
-                    Type = model.Type,
-                    Win = model.Win,
-                    ResultText = model.ResultText,
-                    Score = model.Score,
-                    User = user,
-                    WheelConfiguration = model.WheelConfiguration
-                };
-
-                _context.WheelConfigurationSlices.Add(slice);
-                _context.SaveChanges();
-                return new Tuple<WheelConfigurationSlice, Exception>(slice, null);
-            }
-            catch (NullReferenceException e)
-            {
-                return new Tuple<WheelConfigurationSlice, Exception>(null, new Exception($"You are not Logged In {e.Message}"));
-            }
+            return slice;
         }
 
-        public IEnumerable<WheelConfigurationSliceViewModel> GetByWheelConfigurationId(int configId)
+        public IEnumerable<WheelConfigurationSlice> GetByWheelConfigurationId(int configId)
         {
-            var slices = _context.WheelConfigurationSlices.Where(x => x.WheelConfiguration.Id == configId);
-            var results = new List<WheelConfigurationSliceViewModel>();
-            foreach (WheelConfigurationSlice w in slices)
-            {
-                results.Add(TransformModels.ToWheelConfigurationSliceViewModel(w));
-            }
-            return results.ToList();
+            return _context.WheelConfigurationSlices.Where(x => x.WheelConfiguration.Id == configId).ToList();
         } 
     }
 }

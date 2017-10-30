@@ -7,7 +7,7 @@ namespace WheelOfFortune.Repos.Interfaces
 {
     public interface IWheelConfigurationSliceRepo
     {
-        IEnumerable<WheelConfigurationSliceViewModel> GetByWheelConfigurationId(int configId);
-        Tuple<WheelConfigurationSlice, Exception> CreateSlice(WheelConfigurationSliceBindingModel model);
+        IEnumerable<WheelConfigurationSlice> GetByWheelConfigurationId(int configId);
+        WheelConfigurationSlice CreateSlice(WheelConfigurationSliceBindingModel model);
     }
 }
