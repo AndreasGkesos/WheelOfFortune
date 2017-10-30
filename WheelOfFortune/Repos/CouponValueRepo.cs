@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -23,17 +24,15 @@ namespace WheelOfFortune.Repos
             var user = _context.Users.First(x => x.Id == userId);
 
             if (user == null)
-                return null;
+                throw new Exception("You are not Logged In");
 
             var cv = new CouponValue{
                Value = value
             };
 
-                _context.CouponValues.Add(cv);
-                _context.SaveChanges();
-                return cv;
-            
-           
+            _context.CouponValues.Add(cv);
+            _context.SaveChanges();
+            return cv;
         }
 
         public CouponValue UpdateCouponValue(int id, int value)
@@ -41,16 +40,14 @@ namespace WheelOfFortune.Repos
             var cv = _context.CouponValues.SingleOrDefault(c => c.Id == id);
 
             if (cv == null)
-                return null;
+                throw new Exception("Value does not exist");
 
             cv.Value = value;
 
-            using (var dbCtx = new ApplicationDbContext())
-            {
-                dbCtx.Entry(cv).State = EntityState.Modified;
-                dbCtx.SaveChanges();
-                return cv;
-            }
+            _context.Entry(cv).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return cv;
         }
     }
 }

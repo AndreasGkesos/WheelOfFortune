@@ -34,7 +34,7 @@ namespace WheelOfFortune.Repos
             return _context.Coupons.Where(x => x.User.Id == userId).Include(x => x.User).Include(c => c.Value).ToList();
         }
 
-        public CouponViewModel UpdateExpirationDate(Coupon coupon, DateTime date)
+        public Coupon UpdateExpirationDate(Coupon coupon, DateTime date)
         {
             var c = _context.Coupons.SingleOrDefault(code => code.Id == coupon.Id);
             if (c == null) return null;
@@ -43,27 +43,22 @@ namespace WheelOfFortune.Repos
 
             _context.Entry(c).State = EntityState.Modified;
             _context.SaveChanges();
-            return TransformModels.ToCouponViewModel(c);
+            return c;
         }
 
-        public CouponViewModel CreateCoupon(CouponBindingModel model)
+        public Coupon CreateCoupon(CouponBindingModel model)
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = _context.Users.First(x => x.Id == userId);        
 
             if (user == null)
-                return null;
+                throw new Exception("You are not Logged In");
 
-            var cv = new CouponValue();
-            try
-            {
-                cv = _context.CouponValues.First(x => x.Value == model.Value);
-            }
-            catch (InvalidOperationException e)
-            {
-                return null; // value does not exist
-            }
+            var cv = _context.CouponValues.FirstOrDefault(x => x.Value == model.Value);
             
+            if (cv == null)
+                throw new Exception("Value does not exist");
+
             var prefix = "";
             switch(model.Value)
             {
@@ -94,7 +89,7 @@ namespace WheelOfFortune.Repos
 
             _context.Coupons.Add(coupon);
             _context.SaveChanges();
-            return TransformModels.ToCouponViewModel(coupon);
+            return coupon;
         }
 
         private string GetCode()

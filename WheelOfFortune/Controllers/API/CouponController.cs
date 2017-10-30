@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
@@ -23,29 +24,19 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<CouponViewModel> GetAll()
         {
-            List<CouponViewModel> list = new List<CouponViewModel>();
-            foreach (Coupon c in _repo.GetAll())
-            {
-                list.Add(TransformModels.ToCouponViewModel(c));
-            }
-            return list;
+            return _repo.GetAll().Select(x => TransformModels.ToCouponViewModel(x));
         }
 
         [HttpGet]
         public IEnumerable<CouponViewModel> GetByUserId(string userId)
         {
-            List<CouponViewModel> list = new List<CouponViewModel>();
-            foreach (Coupon c in _repo.GetByUserId(userId))
-            {
-                list.Add(TransformModels.ToCouponViewModel(c));
-            }
-            return list;
+            return _repo.GetByUserId(userId).Select(x => TransformModels.ToCouponViewModel(x));
         }
 
         [HttpPost]
         public CouponViewModel AddCoupon(CouponBindingModel model)
         {
-            return _repo.CreateCoupon(model);
+            return TransformModels.ToCouponViewModel(_repo.CreateCoupon(model));
         }
 
         [HttpGet]
@@ -69,7 +60,7 @@ namespace WheelOfFortune.Controllers.API
                     Type = TransactionType.FromCoupon,
                     Value = value
                 });
-            _balanceRepo.UpdateBalance(t.Item1.Value);
+            _balanceRepo.UpdateBalance(t.Value);
         }
     }
 }

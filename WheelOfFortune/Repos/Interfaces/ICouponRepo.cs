@@ -8,8 +8,8 @@ namespace WheelOfFortune.Repos.Interfaces
     public interface ICouponRepo
     {
         IEnumerable<Coupon> GetByUserId(string userId);
-        CouponViewModel UpdateExpirationDate(Coupon coupon, DateTime date);
-        CouponViewModel CreateCoupon(CouponBindingModel model);
+        Coupon UpdateExpirationDate(Coupon coupon, DateTime date);
+        Coupon CreateCoupon(CouponBindingModel model);
         IEnumerable<Coupon> GetAll();
         decimal? Exchange(string code);
     }
