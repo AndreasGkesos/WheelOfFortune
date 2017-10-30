@@ -69,5 +69,25 @@ namespace WheelOfFortune.Models.ViewModels
                 User = ToApplicationUserViewModel(model.User)
             };
         }
+
+        public static BalanceViewModel ToBalanceViewModel(Balance model)
+        {
+            return new BalanceViewModel
+            {
+                Id = model.Id,
+                BalanceValue = model.BalanceValue,
+                User = ToApplicationUserViewModel(model.User)
+            };
+        }
+
+        public static WheelConfigurationViewModel ToWheelConfigurationViewModel(WheelConfiguration model)
+        {
+            return new WheelConfigurationViewModel
+            {
+                Id = model.Id,
+                DateCreated = model.DateCreated,
+                User = ToApplicationUserViewModel(model.User)
+            };
+        }
     }
 }
