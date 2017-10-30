@@ -23,8 +23,10 @@ namespace WheelOfFortune.Models.ViewModels
             return new CouponViewModel
             {
                 Value = Convert.ToInt32(model.Value.Value),
+                Code = model.Code,
                 DateCreated = model.DateCreated,
                 DateExpired = model.DateExpired,
+                DateExchanged = model.DateExchanged,
                 User = ToApplicationUserViewModel(model.User),
                 Active = model.Active
             };
@@ -53,6 +55,18 @@ namespace WheelOfFortune.Models.ViewModels
                 UserName = model.UserName,
                 UName = model.UName,
                 UserPhoto = model.UserPhoto
+            };
+        }
+
+        public static TransactionViewModel ToTransactionViewModel(Transaction model)
+        {
+            return new TransactionViewModel
+            {
+                Id = model.Id,
+                Value = model.Value,
+                Type = model.Type,
+                TransactionDate = model.TransactionDate,
+                User = ToApplicationUserViewModel(model.User)
             };
         }
     }
