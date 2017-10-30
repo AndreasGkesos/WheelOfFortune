@@ -22,13 +22,28 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
+        public IEnumerable<SpinViewModel> GetAll()
+        {
+            List<SpinViewModel> list = new List<SpinViewModel>();
+            foreach (Spin s in _repo.GetAll())
+            {
+                list.Add(TransformModels.ToSpinViewModel(s));
+            }
+            return list;
+        }
+
+        [HttpGet]
         public IEnumerable<SpinViewModel> GetByUserId(string userId)
         {
-            return _repo.GetByUserId(userId);
+            List<SpinViewModel> list = new List<SpinViewModel>();
+            foreach (Spin s in _repo.GetByUserId(userId))
+            {
+                list.Add(TransformModels.ToSpinViewModel(s));
+            }
+            return list;
         }
 
         [HttpPost]
-        
         public SpinViewModel AddSpin(SpinBindingModel model)
         {
             var spin = _repo.CreateSpin(model);

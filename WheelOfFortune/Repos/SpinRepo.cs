@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WheelOfFortune.Models;
@@ -19,9 +20,14 @@ namespace WheelOfFortune.Repos
             _context = context;
         }
 
-        public IEnumerable<SpinViewModel> GetByUserId(string userId)
+        public IEnumerable<Spin> GetAll()
         {
-            return _context.Spins.Where(x => x.User.Id == userId).Select(x => TransformModels.ToSpinViewModel(x)).ToList();
+            return _context.Spins.Include(x => x.User).Include(w => w.WheelConfiguration).ToList();
+        }
+
+        public IEnumerable<Spin> GetByUserId(string userId)
+        {
+            return _context.Spins.Where(x => x.User.Id == userId).Include(x => x.User).Include(w => w.WheelConfiguration).ToList();
         }
 
         public Tuple<SpinViewModel, Exception> CreateSpin(SpinBindingModel model)
@@ -48,8 +54,7 @@ namespace WheelOfFortune.Repos
 
                 _context.Spins.Add(spin);
                 _context.SaveChanges();
-                var v = TransformModels.ToSpinViewModel(spin);
-                return new Tuple<SpinViewModel, Exception>(v, null);
+                return new Tuple<SpinViewModel, Exception>(TransformModels.ToSpinViewModel(spin), null);
                
             }
             catch (NullReferenceException e )
