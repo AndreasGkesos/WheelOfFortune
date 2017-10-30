@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WheelOfFortune.Models.Domain;
 
 namespace WheelOfFortune.Models.ViewModels
@@ -63,6 +64,13 @@ namespace WheelOfFortune.Models.ViewModels
         public bool win { get; set; }
         public string resultText { get; set; }
         public UserDataViewModel userData { get; set; }
+    }
+
+    public class WheelConfigurationViewModel
+    {
+        public int Id { get; set; }
+        public DateTime DateCreated { get; set; }
+        public ApplicationUserViewModel User { get; set; }
     }
 
     public class UserDataViewModel
