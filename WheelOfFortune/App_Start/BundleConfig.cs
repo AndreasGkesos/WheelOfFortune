@@ -25,6 +25,7 @@ namespace WheelOfFortune
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
 
 
@@ -43,12 +44,21 @@ namespace WheelOfFortune
 
             //Spins View
             bundles.Add(new ScriptBundle("~/bundles/SpinsHistoryView").Include(
-                "~/Scripts/Controllers/SpinsControllerJs.js"
+                "~/Scripts/Controllers/SpinsControllerJs.js",
+                
+                "~/scripts/datatables/jquery.datatables.js",
+                "~/scripts/datatables/datatables.bootstrap.js"
+
             ));
 
             //Transactions View
             bundles.Add(new ScriptBundle("~/bundles/TransactionHistoryView").Include(
-                "~/Scripts/Controllers/TransactionsControllerJs.js"
+                "~/Scripts/Controllers/TransactionsControllerJs.js",
+                
+                
+                "~/scripts/datatables/jquery.datatables.js",
+                "~/scripts/datatables/datatables.bootstrap.js"
+
             ));
 
 
@@ -56,7 +66,10 @@ namespace WheelOfFortune
             bundles.Add(new ScriptBundle("~/bundles/GsBundle").Include(
                 "~/Scripts/Core/jquery.3.2.1.js",
                 "~/Scripts/Core/popper.js",
-                "~/Scripts/Core/bootstrap.js",
+                "~/Scripts/Core/bootstrap.js", 
+                
+                "~/scripts/bootbox.js",
+
                 "~/Scripts/Core/indexGs.js"));
 
             bundles.Add(new StyleBundle("~/Content/Core/css").Include(
