@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -158,50 +160,63 @@ namespace WheelOfFortune.Controllers
             {
                 ModelState.AddModelError("error", @"Please Select a profile picture");
             }
-           
-            if (ModelState.IsValid)
-          {
-              if (userPhoto != null)
-              {
-                  var picture = new byte[userPhoto.ContentLength];
-                  userPhoto.InputStream.Read(picture, 0, userPhoto.ContentLength);
-                  model.UserPhoto = picture;
-              }
 
+            if (!ModelState.IsValid) return View(model);
 
-              var user = new ApplicationUser
-                    {
-                        UserName = model.Email,
-                        Email = model.Email,
-                        UName = model.Username,
-                        UserPhoto = model.UserPhoto
-                    };
+            if (userPhoto != null)
+            {
+                var filePath = Path.GetTempFileName();
 
-                    var result = await UserManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                var picture = new byte[userPhoto.ContentLength];
+                userPhoto.InputStream.Read(picture, 0, userPhoto.ContentLength);
+                model.UserPhoto = picture;
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                        try
-                        {
-                            balanceRepo.CreateBalance(user.Id);
-                        }
-                        catch (Exception e)
-                        {
-                        Console.WriteLine(e.Message + @"Account Controller");
-                    }
-                        
-                        return RedirectToAction("Index", "Home");
-                    }
-                    AddErrors(result);
-               
+                //                var faceApiresult = new FaceRecognitionController().MakeAnalysisRequest(picture);
+                //                Debug.Write(faceApiresult);
+                var faceApiresult = await new FaceRecognitionController().GetDetectedFaces(filePath);
+
+                if (!faceApiresult)
+                {
+                    ModelState.AddModelError("error", @"Your picture does not include your face");
+                    return RedirectToAction("Index", "Home");
+                }
             }
-       
+
+                       
+                                 
+
+
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                UName = model.Username,
+                UserPhoto = model.UserPhoto
+            };
+
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                try
+                {
+                    balanceRepo.CreateBalance(user.Id);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message + @"Account Controller");
+                }
+                        
+                return RedirectToAction("Index", "Home");
+            }
+            AddErrors(result);
+
 
             // If we got this far, something failed, redisplay form
             return View(model);
