@@ -26,9 +26,10 @@ namespace WheelOfFortune.Controllers
                 [HttpGet]
                 public  async Task<dynamic> GetDetectedFaces(string path)
                 {
-                  //var photo = new byte[userPhoto.ContentLength];
-                  
-                     if (path.IsNullOrWhiteSpace()) return false;
+              
+                   if (path.IsNullOrWhiteSpace()) return false;
+
+
                     try
                     {
                       
@@ -39,8 +40,6 @@ namespace WheelOfFortune.Controllers
 
 
                             return results != 0;
-                
-
                       
                     }
                     catch (FaceAPIException)

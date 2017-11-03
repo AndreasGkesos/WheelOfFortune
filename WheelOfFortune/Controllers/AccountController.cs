@@ -171,8 +171,6 @@ namespace WheelOfFortune.Controllers
                 userPhoto.InputStream.Read(picture, 0, userPhoto.ContentLength);
                 model.UserPhoto = picture;
 
-                //                var faceApiresult = new FaceRecognitionController().MakeAnalysisRequest(picture);
-                //                Debug.Write(faceApiresult);
                 var faceApiresult = await new FaceRecognitionController().GetDetectedFaces(filePath);
 
                 if (!faceApiresult)
@@ -181,10 +179,6 @@ namespace WheelOfFortune.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-
-                       
-                                 
-
 
             var user = new ApplicationUser
             {
