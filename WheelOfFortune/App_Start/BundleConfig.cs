@@ -20,8 +20,8 @@ namespace WheelOfFortune
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/respond.js"));
 
 
             //Index View
@@ -37,12 +37,16 @@ namespace WheelOfFortune
 
             //Spins View
             bundles.Add(new ScriptBundle("~/bundles/SpinsHistoryView").Include(
-                "~/Scripts/Controllers/SpinsControllerJs.js"
+                "~/Scripts/Controllers/SpinsControllerJs.js",
+                "~/scripts/datatables/jquery.datatables.js",
+                "~/scripts/datatables/datatables.bootstrap.js"
             ));
 
             //Transactions View
             bundles.Add(new ScriptBundle("~/bundles/TransactionHistoryView").Include(
                 "~/Scripts/Controllers/TransactionsControllerJs.js"
+                //"~/scripts/datatables/jquery.datatables.js",
+                //"~/scripts/datatables/datatables.bootstrap.js"
             ));
 
 
@@ -51,12 +55,18 @@ namespace WheelOfFortune
                 "~/Scripts/Core/jquery.3.2.1.js",
                 "~/Scripts/Core/popper.js",
                 "~/Scripts/Core/bootstrap.js",
+                "~/Scripts/bootbox.js",
                 "~/Scripts/respond.js",
+                "~/Scripts/datatables/jquery.datatables.js",
+                "~/Scripts/datatables/datatables.bootstrap.js",
                 "~/Scripts/Core/indexGs.js"));
 
             bundles.Add(new StyleBundle("~/Content/Core/css").Include(
                 "~/Content/Core/bootstrap.css",
-                "~/Content/Core/site.css"));
+                "~/content/datatables/css/datatables.bootstrap.css",
+                "~/Content/Core/site.css"
+                
+));
         }
     }
 }
