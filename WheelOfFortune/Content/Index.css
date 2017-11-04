@@ -39,3 +39,13 @@
 
 }
 
+#betValueSubmit {
+    margin: 0;
+    padding: 0;
+    width: 65% !important;
+    top: -20% !important;
+    left: 32% !important;
+    box-shadow: none !important;
+    display: inline !important;
+}
+

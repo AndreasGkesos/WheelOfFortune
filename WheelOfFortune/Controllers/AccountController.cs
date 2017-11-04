@@ -147,7 +147,7 @@ namespace WheelOfFortune.Controllers
             return View();
         }
 
-        //[Bind(Exclude = "UserPhoto")]
+     
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -156,6 +156,8 @@ namespace WheelOfFortune.Controllers
         {
             var appContext = new ApplicationDbContext();
             var balanceRepo = new BalanceRepo(appContext);
+
+
             if ((userPhoto==null) || (userPhoto.ContentLength <= 0))
             {
                 ModelState.AddModelError("error", @"Please Select a profile picture");
@@ -176,7 +178,7 @@ namespace WheelOfFortune.Controllers
                 if (!faceApiresult)
                 {
                     ModelState.AddModelError("error", @"Your picture does not include your face");
-                    return RedirectToAction("Index", "Home");
+                   
                 }
             }
 
