@@ -171,13 +171,13 @@ namespace WheelOfFortune.Controllers
                 userPhoto.InputStream.Read(picture, 0, userPhoto.ContentLength);
                 model.UserPhoto = picture;
 
-                var faceApiresult = await new FaceRecognitionController().GetDetectedFaces(filePath);
+                //var faceApiresult = await new FaceRecognitionController().GetDetectedFaces(filePath);
 
-                if (!faceApiresult)
-                {
-                    ModelState.AddModelError("error", @"Your picture does not include your face");
-                    return RedirectToAction("Index", "Home");
-                }
+                //if (!faceApiresult)
+                //{
+                //    ModelState.AddModelError("error", @"Your picture does not include your face");
+                //    return RedirectToAction("Index", "Home");
+                //}
             }
 
             var user = new ApplicationUser

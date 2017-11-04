@@ -370,6 +370,7 @@
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\Wheel\Draggable.min.js" />
+    <Content Include="Content\img\unnamed.jpg" />
     <Content Include="Scripts\Wheel\TextPlugin.min.js" />
     <Content Include="Scripts\Wheel\TweenMax.min.js" />
     <Content Include="Scripts\Wheel\media\pencil_draw.svg" />
