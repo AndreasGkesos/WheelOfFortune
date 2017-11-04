@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNet.Identity;
+
 @{
     ViewBag.Title = "ShowTransactionHistory";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,18 +10,55 @@
 
 <h2>ShowTransactionHistory</h2>
 
+<div id="container" style="z-index:99999999!important;background-color:white!important;color:black;">
+    <table id="transactions" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Transaction Date</th>
+                <th> Value</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
 
 
 
-
-
+@{
+    string user = @User.Identity.GetUserId().ToString();
+}
 
 
 @section scripts {
     @Scripts.Render("~/bundles/TransactionHistoryView")
     <script type="text/javascript">
-        $(function() {
-            TransactionsController_init();
+        $(function () {
+
+            var userId = "@user";
+
+            $(document).ready(function () {
+                var table = $("#transactions").DataTable
+                    (
+                    {
+
+                        ajax:
+                        {
+                            url: "/api/Transaction/GetByUserId?userId=" + userId,
+                            dataSrc: ""
+                        },
+                        columns: [
+                            {
+                                data: "TransactionDate"
+                            },
+                            {
+                                data: "Value"
+                            }
+                        ]
+
+                    });
         });
     </script>
 }

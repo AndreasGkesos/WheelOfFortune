@@ -9,13 +9,13 @@ using WheelOfFortune.Repos.Interfaces;
 namespace WheelOfFortune.Controllers.API
 {   
     
-    public class SpinController : ApiController
+    public class SpinsController : ApiController
     {
         private readonly ISpinRepo _repo;
         private readonly ITransactionRepo _transactionRepo;
         private readonly IBalanceRepo _balanceRepo;
 
-        public SpinController(ISpinRepo repo, ITransactionRepo transactionRepo, IBalanceRepo balanceRepo)
+        public SpinsController(ISpinRepo repo, ITransactionRepo transactionRepo, IBalanceRepo balanceRepo)
         {
            _repo = repo;
            _transactionRepo = transactionRepo;

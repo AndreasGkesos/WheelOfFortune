@@ -1,3 +1,12 @@
-﻿function SpinsController_init() {
-    console.log("its all wired up");
+﻿
+var _spinsController_config = {};
+
+function SpinsController_init(config) {
+    spinsController_config = config;
+
+
+    let userId = config.UserId;
+    console.log(userId);
+   
 }
+        

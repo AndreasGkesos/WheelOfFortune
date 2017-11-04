@@ -1,25 +1,72 @@
-﻿
+﻿@model IEnumerable<WheelOfFortune.Models.Domain.Spin>
+@using Microsoft.AspNet.Identity;
+
+
 @{
     ViewBag.Title = "My Spins History";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    @Styles.Render("~/Content/SpinHistoryView.css")
     
+
+    @Styles.Render("~/Content/SpinsHistoryView.css")
+    @*@Styles.Render("~/Content/Core/css")*@ 
 
 
 <h2>My Spins History</h2>
 
 
+<div id="container" style="z-index:99999999!important;background-color:white!important;color:black;">
+    <table id="spins" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th> Bet Value</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
 
 
 
-
+@{ 
+    string user = @User.Identity.GetUserId().ToString();
+}
 
 @section scripts {
+  
     @Scripts.Render("~/bundles/SpinsHistoryView")
     <script type="text/javascript">
-        $(function() {
-            SpinsController_init();
+        $(function () {
+
+            
+            var userId = "@user";
+            $(document).ready(function () {
+                var table = $("#spins").DataTable
+                    (
+                    {
+   
+                        ajax:
+                        {
+                            url: "/api/Spins/GetByUserId?userId=" + userId,
+                            dataSrc: ""
+                        },
+                        columns: [
+                            {
+                                data: "Id"
+                            },
+                            {
+                                data: "BetValue"
+                            },
+                            {
+                                data: "ResultValue"
+                            }
+                        ]
+
+                    });
+            });
+           
         });
     </script>
 }
