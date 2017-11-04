@@ -1,6 +1,6 @@
 ﻿function IndexController_init() {
 
-
+  
     UpdateBalanceContainer();
 
 
@@ -8,6 +8,7 @@
 
 
 function UpdateBalanceContainer() {
+
     let userId = $("#balanceValueContainer").attr("data-userId");
 
     $.ajax({

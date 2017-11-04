@@ -36,7 +36,7 @@ function myResult(e) {
          
              $.ajax({
                      type: "POST",
-                     url: "/api/Spin/AddSpin",
+                     url: "/api/Spins/AddSpin",
                      data: spinObjStringified,
                      contentType: "application/json; charset=utf-8",
                      dataType: "json",
@@ -72,11 +72,7 @@ function myResult(e) {
             
    
     // if you have defined a userData object...
-    if (e.userData) {
-
- 
-
-    }
+  
 }
 
 //your own function to capture any errors

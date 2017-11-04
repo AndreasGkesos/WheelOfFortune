@@ -25,14 +25,14 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<SpinViewModel> GetAll()
         {
-            return _repo.GetAll().Select(x => TransformModels.ToSpinViewModel(x));
+            return _repo.GetAll().Select(TransformModels.ToSpinViewModel);
         }
         
 
         [HttpGet]
         public IEnumerable<SpinViewModel> GetByUserId(string userId)
         {
-            return _repo.GetByUserId(userId).Select(x => TransformModels.ToSpinViewModel(x));
+            return _repo.GetByUserId(userId).Select(TransformModels.ToSpinViewModel);
         }
 
         [HttpPost]
