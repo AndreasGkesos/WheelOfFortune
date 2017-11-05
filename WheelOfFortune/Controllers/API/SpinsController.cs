@@ -52,6 +52,7 @@ namespace WheelOfFortune.Controllers.API
                     Type = TransactionType.FromSpin,
                     Value = spin.ResultValue
                 });
+
             _balanceRepo.UpdateBalance(t.Value);
         }
     }

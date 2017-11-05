@@ -10,13 +10,11 @@
 @Styles.Render("~/Content/Wheel/style.css")
 @Styles.Render("~/Content/index.css")
 
-@Html.AntiForgeryToken()
-
 <div class="container">
     
     <div class="panel panel-default" id="usersPlatform">
         <div class="panel-heading">
-           Balance Value
+            <h3>Balance Value</h3>
         </div>
         <div class="panel-body" id="balanceValueContainer" data-userId="@User.Identity.GetUserId()">
             
