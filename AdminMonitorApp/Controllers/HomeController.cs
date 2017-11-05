@@ -13,17 +13,18 @@ namespace AdminMonitorApp.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Users()
         {
-            ViewBag.Message = "Your application description page.";
-
+            return View();
+        }
+        
+        public ActionResult WheelSpinsConfiguration()
+        {
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult CouponsConfiguration()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
