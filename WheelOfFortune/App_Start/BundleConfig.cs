@@ -49,6 +49,23 @@ namespace WheelOfFortune
                 //"~/scripts/datatables/datatables.bootstrap.js"
             ));
 
+            // Custom Bundles for pages using stable bootstrap
+            bundles.Add(new ScriptBundle("~/bundles/stable").Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/bootbox.js",
+                        "~/Scripts/respond.js",
+                        "~/scripts/datatables/jquery.datatables.js",
+                        "~/scripts/datatables/datatables.bootstrap.js",
+                        "~/Scripts/scripts.js"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/stable/css").Include(
+                "~/Content/bootstrap-lumen.css",
+                "~/content/datatables/css/datatables.bootstrap.css",
+                "~/Content/Index.css"
+                ));
+
 
             // Custom ScriptBundle
             bundles.Add(new ScriptBundle("~/bundles/GsBundle").Include(
@@ -65,8 +82,7 @@ namespace WheelOfFortune
                 "~/Content/Core/bootstrap.css",
                 "~/content/datatables/css/datatables.bootstrap.css",
                 "~/Content/Core/site.css"
-                
-));
+                ));
         }
     }
 }

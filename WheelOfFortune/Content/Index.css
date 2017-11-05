@@ -1,51 +1,61 @@
-﻿body {
-    overflow-y: visible!important;
+﻿/* Layout */
+.page-header {
+    margin:0;
+    border: none;
+}
+/* Nav Bar */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
 }
 
-.container {
-    top: 5%;
-    width: 90% !important;
-    height: 90% !important;
-    background: #586073;
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
 
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
 }
-#usersPlatform {
-    min-width: 400px;
-    min-height: 200px;
-    height: auto;
-    font-size: large;
-    border-radius: 30px;
-    font-family: Open Sans;
-    float: left;
-    margin-left: 5%;
-    margin-top: 7%;
-    background-color: white;
-    color: black;
+.navbar-brand {
+    float: right;
+    color: white;
 }
 
-#balanceValueContainer {
-    font-size: large;
-    background-color: aliceblue;
-}
-
-#depositCodeSubmit {
-    margin: 0;
-    padding: 0;
-    width: 65%!important;
-    top: 0 !important;
-    left: 32% !important;
-    box-shadow: none !important;
-    display: inline !important;
+#despositCodesContainer {
+    padding: 8px 8px 8px 32px;
 
 }
 
-#betValueSubmit {
-    margin: 0;
-    padding: 0;
-    width: 65% !important;
-    top: -20% !important;
-    left: 32% !important;
-    box-shadow: none !important;
-    display: inline !important;
+#despositCodesContainer h3 {
+    color: #fff
 }
 
+#DepositCodes input {
+    color: #000;
+}
