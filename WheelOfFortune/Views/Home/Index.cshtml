@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@{
     ViewBag.Title = "Wheel Of Fortune";
 }
 
@@ -6,41 +7,11 @@
 @Styles.Render("~/Content/Wheel/style.css")
 @Styles.Render("~/Content/index.css")
 
-<<<<<<< HEAD
-@Html.AntiForgeryToken()
 
-    @Html.Partial("ControllBalance")
-=======
-<div class="container">
-    
-    <div class="panel panel-default" id="usersPlatform">
-        <div class="panel-heading">
-            <h3>Balance Value</h3>
-        </div>
-        <div class="panel-body" id="balanceValueContainer" data-userId="@User.Identity.GetUserId()">
-            
-        </div>
-        <div class="dropdown-divider"></div>
-        <div id="betValueContainer">
-            <div class="panel-info">Bet Value</div>
-            @Html.TextBox("BetValue")
-@*            <button id="betValueSubmit" class="btn btn-group">Bet</button>*@
-        </div>
-     
-        <div class="dropdown-divider"></div>
-        <div id="despositCodesContainer">
-            <div class="panel-info">Enter Deposit Code</div>
-            @Html.TextBox("DepositCodes")
-            <button id="depositCodeSubmit" class="btn btn-group">Enter Code</button>
-        </div>
-
-    </div>
+@Html.Partial("ControllBalance")
 
 
-
-
->>>>>>> 2ab9c787aa8944f966ec41ff38e4e711b1ba5760
-    @Html.Partial("WheelContainer")
+@Html.Partial("WheelContainer")
 
 
 @section scripts {
