@@ -1,33 +1,19 @@
 ﻿@if (Request.IsAuthenticated)
 {
+    <a class="nav-link">@User.Identity.Name</a>
+    <a class="nav-link" href="/Spin/ShowSpinsHistory">Spins</a>
+    <a class="nav-link" href="/Transactions/ShowTransactionsHistory">Transactions</a>
+    <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+    <div id="despositCodesContainer">
+        <h3>Enter Deposit Code</h3>
+        @Html.TextBox("DepositCodes")
+        <button id="depositCodeSubmit" class="btn btn-primary">Enter Code</button>
+    </div>
+
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
-
-
-        <div class="container" id="initialContainer">
-            <div class="dropdown button-dropdown">
-                <a href="#" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-header">@User.Identity.Name</a>
-                    <a class="dropdown-item" href="/Home/index">Home</a>
-                    <a class="dropdown-item" href="/Spin/ShowSpinsHistory">My Spin</a>
-                
-                    <a class="dropdown-item" href="/Transactions/ShowTransactionsHistory">My Transactions</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/Profile/Profile">Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                </div>
-            </div>
-        </div>
-            
-
-           
+    @Html.AntiForgeryToken()           
        }
 
  }

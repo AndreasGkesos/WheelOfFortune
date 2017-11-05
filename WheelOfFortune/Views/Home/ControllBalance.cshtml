@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNet.Identity
+@model WheelOfFortune.Models.Domain.Balance
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3 panel panel-default text-center" id="usersPlatform">
+        <div class="panel-heading">
+            Balance Value
+        </div>
+        <div class="panel-body" id="balanceValueContainer" data-userId="@User.Identity.GetUserId()"></div>
+        <div class="dropdown-divider"></div>
+        <div id="betValueContainer">
+            <div class="panel-info">Bet Value</div>
+            @Html.TextBox("BetValue")
+            <button id="betValueSubmit" class="btn btn-group">Bet</button>
+        </div>
+    </div>
+</div>
+
