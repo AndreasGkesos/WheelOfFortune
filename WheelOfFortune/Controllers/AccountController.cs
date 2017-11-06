@@ -86,10 +86,10 @@ namespace WheelOfFortune.Controllers
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
-                    ModelState.AddModelError("", @"Invalid login attempt.");
+                    ModelState.AddModelError("", @"Please Select a profile picture");
                     return View(model);
                 default:
-                    ModelState.AddModelError("", @"Invalid login attempt.");
+                    ModelState.AddModelError("", @"Please Select a profile picture");
                     return View(model);
             }
         }
@@ -131,10 +131,10 @@ namespace WheelOfFortune.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:
-                    ModelState.AddModelError("", @"Invalid code.");
+                    ModelState.AddModelError("", @"Please Select a profile picture");
                     return View(model);
                 default:
-                    ModelState.AddModelError("", @"Invalid code.");
+                    ModelState.AddModelError("", @"Please Select a profile picture");
                     return View(model);
             }
         }
@@ -160,7 +160,8 @@ namespace WheelOfFortune.Controllers
 
             if ((userPhoto==null) || (userPhoto.ContentLength <= 0))
             {
-                ModelState.AddModelError("error", @"Please Select a profile picture");
+                ModelState.AddModelError("UserPhoto", @"Please Select a profile picture");
+                return View(model);
             }
 
             if (!ModelState.IsValid) return View(model);
@@ -171,14 +172,14 @@ namespace WheelOfFortune.Controllers
 
                 var picture = new byte[userPhoto.ContentLength];
                 userPhoto.InputStream.Read(picture, 0, userPhoto.ContentLength);
-                model.UserPhoto = picture;
 
-                var faceApiresult = await new FaceRecognitionController().GetDetectedFaces(filePath);
+                var faceApiresult = await new FaceRecognitionController().MakeAnalysis(filePath,picture);
 
                 if (!faceApiresult)
                 {
-                    ModelState.AddModelError("error", @"Your picture does not include your face");
-                   
+                    ModelState.AddModelError("UserPhoto", @"Please select a picture with your face");
+                    return View(model);
+
                 }
             }
 
