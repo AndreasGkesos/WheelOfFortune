@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers
@@ -14,9 +15,12 @@ namespace WheelOfFortune.Controllers
         {
             var userid = HttpContext.User.Identity.GetUserId();
 
-            ViewBag.UserId = EncryptionService.EncryptString(userid);
+            //ViewBag.UserId = EncryptionService.EncryptString(userid);
 
-            return View("Index");
+            return View("Index", new ApplicationUserViewModel
+            {
+                Id = EncryptionService.EncryptString(userid)
+            });
         }
 
         public ActionResult About()

@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@model WheelOfFortune.Models.ViewModels.ApplicationUserViewModel
 @{
     ViewBag.Title = "Wheel Of Fortune";
 }
@@ -8,6 +8,11 @@
 @Styles.Render("~/Content/index.css")
 @Styles.Render("~/Content/toastr.css")
 
+
+<script>
+    toastr.success("Kalws ton malaka");
+
+</script>
 
 @Html.Partial("ControllBalance")
 
@@ -20,9 +25,9 @@
 
     <script type="text/javascript">
         $(function() {
-            var config = {
-            userId: "@ViewBag.UserId.ToString()"
-        };
+            const config = {
+                userId: "@Model.Id.ToString()"
+            };
             IndexController_init(config);
         });
     </script>
