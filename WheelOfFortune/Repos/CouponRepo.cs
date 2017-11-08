@@ -17,7 +17,7 @@ namespace WheelOfFortune.Repos
     {
         private readonly ApplicationDbContext _context;
         private readonly string _validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        private readonly int _codeLength = 8;
+        private readonly int _codeLength = 10;
 
         public CouponRepo(ApplicationDbContext context)
         {
@@ -46,41 +46,21 @@ namespace WheelOfFortune.Repos
             return c;
         }
 
-        public Coupon CreateCoupon(CouponBindingModel model)
+        public Coupon CreateCoupon(CouponBindingModel model, string userId)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = _context.Users.First(x => x.Id == userId);        
 
             if (user == null)
-                throw new Exception("You are not Logged In");
+                throw new Exception("User does not exist");
 
             var cv = _context.CouponValues.FirstOrDefault(x => x.Value == model.Value);
             
             if (cv == null)
                 throw new Exception("Value does not exist");
-
-            var prefix = "";
-            switch(model.Value)
-            {
-                case 5:
-                    prefix = "05";
-                    break;
-                case 10:
-                    prefix = "10";
-                    break;
-                case 20:
-                    prefix = "20";
-                    break;
-                case 50:
-                    prefix = "50";
-                    break;
-                default:
-                    return null;
-            }
            
             var  coupon = new Coupon
             {
-                Code = prefix + GetCode(),
+                Code = GetCode(),
                 Value = cv,
                 DateCreated = DateTime.Now,
                 DateExpired = DateTime.Now.AddHours(24),

@@ -30,13 +30,12 @@ namespace WheelOfFortune.Repos
             return _context.Transactions.Where(x => x.User.Id == userId).Include(x => x.User).ToList();
         }
 
-        public Transaction CreateTransaction(TransactionBindingModel model)
+        public Transaction CreateTransaction(TransactionBindingModel model, string userId)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = _context.Users.First(x => x.Id == userId);
 
             if (user == null)
-                throw new Exception("You are not Logged In");
+                throw new Exception("User does not exist");
 
             var transaction = new Transaction
             {

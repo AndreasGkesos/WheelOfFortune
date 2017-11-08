@@ -30,13 +30,12 @@ namespace WheelOfFortune.Repos
             return _context.Spins.Where(x => x.User.Id == userId).Include(x => x.User).Include(w => w.WheelConfiguration).ToList();
         }
 
-        public Spin CreateSpin(SpinBindingModel model)
+        public Spin CreateSpin(SpinBindingModel model, string userId)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = _context.Users.FirstOrDefault(x => x.Id == userId);
 
             if (user == null)
-                throw new Exception("You are not Logged In");
+                throw new Exception("User does not exist");
 
             var spin = new Spin
             {

@@ -9,7 +9,7 @@ namespace WheelOfFortune.Repos.Interfaces
     {
         IEnumerable<Coupon> GetByUserId(string userId);
         Coupon UpdateExpirationDate(Coupon coupon, DateTime date);
-        Coupon CreateCoupon(CouponBindingModel model);
+        Coupon CreateCoupon(CouponBindingModel model, string userId);
         IEnumerable<Coupon> GetAll();
         decimal? Exchange(string code);
     }

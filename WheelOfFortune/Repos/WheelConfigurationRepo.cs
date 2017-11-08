@@ -19,13 +19,12 @@ namespace WheelOfFortune.Repos
             _context = context;
         }
 
-        public WheelConfiguration CreateWheelConfig()
+        public WheelConfiguration CreateWheelConfig(string userId)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = _context.Users.FirstOrDefault(x => x.Id == userId);
 
             if (user == null)
-                throw new Exception("You are not Logged In");
+                throw new Exception("User does not exist");
 
             var wheel = new WheelConfiguration
             {
