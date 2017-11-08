@@ -5,6 +5,7 @@ using System.Linq;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
+using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers.API
 {   
@@ -31,8 +32,8 @@ namespace WheelOfFortune.Controllers.API
 
         [HttpGet]
         public IEnumerable<SpinViewModel> GetByUserId(string userId)
-        {
-            return _repo.GetByUserId(userId).Select(TransformModels.ToSpinViewModel);
+        {                
+                return _repo.GetByUserId(EncryptionService.DecryptString(userId)).Select(TransformModels.ToSpinViewModel);         
         }
 
         [HttpPost]

@@ -6,6 +6,7 @@
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
 @Styles.Render("~/Content/Wheel/style.css")
 @Styles.Render("~/Content/index.css")
+@Styles.Render("~/Content/toastr.css")
 
 
 @Html.Partial("ControllBalance")
@@ -16,9 +17,13 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/IndexView")
+
     <script type="text/javascript">
-        $(function () {
-           IndexController_init();
+        $(function() {
+            var config = {
+            userId: "@ViewBag.UserId.ToString()"
+        };
+            IndexController_init(config);
         });
     </script>
 }

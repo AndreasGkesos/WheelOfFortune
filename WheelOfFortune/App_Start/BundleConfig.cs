@@ -32,7 +32,8 @@ namespace WheelOfFortune
                 "~/Scripts/Wheel/ThrowPropsPlugin.min.js",
                 "~/Scripts/Wheel/Spin2WinWheel.min.js",
                 "~/Scripts/Wheel/TextPlugin.min.js",
-                "~/Scripts/Wheel/index.js"
+                "~/Scripts/Wheel/index.js",
+                "~/Scripts/toastr.min.js"
                 ));
 
             //Spins View

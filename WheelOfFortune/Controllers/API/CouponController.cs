@@ -5,6 +5,7 @@ using System.Web.Http;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
+using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers.API
 {
@@ -29,8 +30,8 @@ namespace WheelOfFortune.Controllers.API
 
         [HttpGet]
         public IEnumerable<CouponViewModel> GetByUserId(string userId)
-        {
-            return _repo.GetByUserId(userId).Select(x => TransformModels.ToCouponViewModel(x));
+        {       
+                return _repo.GetByUserId(EncryptionService.DecryptString(userId)).Select(x => TransformModels.ToCouponViewModel(x));   
         }
 
         [HttpPost]

@@ -166,7 +166,6 @@ namespace WheelOfFortune.Controllers
 
             if (!ModelState.IsValid) return View(model);
 
-            if (userPhoto != null)
             {
                 var filePath = Path.GetTempFileName();
 

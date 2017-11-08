@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity;
+﻿
 
 @{
     ViewBag.Title = "ShowTransactionHistory";
@@ -28,7 +28,7 @@
 
 
 @{
-    string user = @User.Identity.GetUserId().ToString();
+    var user = ViewBag.UserId;
 }
 
 
@@ -40,8 +40,8 @@
             var userId = "@user";
 
             $(document).ready(function () {
-                var table = $("#transactions").DataTable
-                    (
+                const table = $("#transactions").DataTable
+                (
                     {
 
                         ajax:
@@ -59,6 +59,6 @@
                         ]
 
                     });
-        });
+            });
     </script>
 }
