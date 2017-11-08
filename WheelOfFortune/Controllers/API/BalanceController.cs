@@ -3,7 +3,6 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WheelOfFortune.Models.ViewModels;
-using WheelOfFortune.Repos.Interfaces;
 using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers.API
@@ -21,7 +20,7 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IHttpActionResult GetBalance(string userId)
         {
-           var balance = _wheelService.GetBalanceByUserId(userId);
+           var balance = _wheelService.GetBalanceByUserId(EncryptionService.DecryptString(userId));
 
             return Ok(balance);
         }

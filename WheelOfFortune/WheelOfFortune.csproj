@@ -338,6 +338,7 @@
     <Compile Include="Repos\Interfaces\ISpinRepo.cs" />
     <Compile Include="Repos\Interfaces\IBalanceRepo.cs" />
     <Compile Include="Repos\Interfaces\ICouponRepo.cs" />
+    <Compile Include="Services\EncryptionService.cs" />
     <Compile Include="Services\IWheelService.cs" />
     <Compile Include="Services\WheelService.cs" />
     <Compile Include="Startup.cs" />

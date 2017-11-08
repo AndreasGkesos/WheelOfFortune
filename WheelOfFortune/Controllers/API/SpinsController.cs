@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Linq;
-using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
-using WheelOfFortune.Repos.Interfaces;
 using WheelOfFortune.Services;
 using System.Web;
 using Microsoft.AspNet.Identity;
@@ -29,7 +26,7 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<SpinViewModel> GetByUserId(string userId)
         {
-            return _wheelService.GetSpinByUserId(userId).Select(TransformModels.ToSpinViewModel);
+            return _wheelService.GetSpinByUserId(EncryptionService.DecryptString(userId)).Select(TransformModels.ToSpinViewModel);
         }
 
         [HttpPost]

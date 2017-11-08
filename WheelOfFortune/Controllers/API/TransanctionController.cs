@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Linq;
-using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
-using WheelOfFortune.Repos.Interfaces;
 using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers.API
@@ -26,7 +24,7 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<TransactionViewModel> GetByUserId(string userId)
         {
-            return _wheelService.GetTransactionsByUserId(userId).Select(x => TransformModels.ToTransactionViewModel(x));
+            return _wheelService.GetTransactionsByUserId(EncryptionService.DecryptString(userId)).Select(x => TransformModels.ToTransactionViewModel(x));
         }
     }
 }

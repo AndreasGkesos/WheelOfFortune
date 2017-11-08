@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Http;
-using System.Linq;
+﻿using System.Web.Http;
 using WheelOfFortune.Models.ViewModels;
-using WheelOfFortune.Repos.Interfaces;
 using WheelOfFortune.Services;
 using System.Web;
 using Microsoft.AspNet.Identity;
