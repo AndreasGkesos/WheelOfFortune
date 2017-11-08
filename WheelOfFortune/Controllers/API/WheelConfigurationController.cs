@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Linq;
-using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 using WheelOfFortune.Services;

@@ -1,13 +1,22 @@
 ﻿using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using WheelOfFortune.Models.ViewModels;
+using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers
 {
     public class ProfileController : Controller
     {
         // GET: Profile
-        public ActionResult Profile()
+        public new ActionResult Profile()
         {
-            return View();
+            var userid = HttpContext.User.Identity.GetUserId();
+            
+
+            return View("Profile", new ApplicationUserViewModel
+            {
+                Id = EncryptionService.EncryptString(userid)
+            });
         }
     }
 }

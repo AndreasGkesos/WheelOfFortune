@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity;
+﻿@model WheelOfFortune.Models.ViewModels.ApplicationUserViewModel
 
 @{
     ViewBag.Title = "ShowTransactionHistory";
@@ -10,7 +10,7 @@
 
 <h2>ShowTransactionHistory</h2>
 
-<div id="container" style="z-index:99999999!important;background-color:white!important;color:black;">
+<div class="container" style="z-index:99999999!important;background-color:white!important;color:black;">
     <table id="transactions" class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -27,9 +27,6 @@
 
 
 
-@{
-    string user = @User.Identity.GetUserId().ToString();
-}
 
 
 @section scripts {
@@ -37,16 +34,16 @@
     <script type="text/javascript">
         $(function () {
 
-            var userId = "@user";
+          
 
             $(document).ready(function () {
-                var table = $("#transactions").DataTable
-                    (
+                const table = $("#transactions").DataTable
+                (
                     {
 
                         ajax:
                         {
-                            url: "/api/Transaction/GetByUserId?userId=" + userId,
+                            url: "/api/Transaction/GetByUserId?userId=" + @Model.Id.ToString(),
                             dataSrc: ""
                         },
                         columns: [
@@ -59,6 +56,6 @@
                         ]
 
                     });
-        });
+            });
     </script>
 }

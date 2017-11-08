@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AdminMonitorApp.Controllers
 {
-    public class AdminController : Controller
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {
