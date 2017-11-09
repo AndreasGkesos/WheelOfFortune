@@ -9,12 +9,30 @@
 @Styles.Render("~/Content/toastr.css")
 
 
+<div class="scrub-transition">
+
+    <section class="gs-intro gs-main-content">
+        <div class="gs-intro-content mask-2">
+            <div class="content-wrapper">
+                <div>
+                    <h1>Welcome to Wheel Of Fortune</h1>
+                    <p>You Are Awesome, Play now we need your moneyyyyy.</p>
+                    <div class="action-wrapper">
+                        <a href="#0" class="gs-btn main-action gs-popup-trigger ">Play</a>
+                        <a href="#0" class="gs-btn">Learn How</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    @Html.Partial("ControllBalance")
 
 
-@Html.Partial("ControllBalance")
+    @Html.Partial("WheelContainer")
+</div>
 
 
-@Html.Partial("WheelContainer")
 
 
 @section scripts {

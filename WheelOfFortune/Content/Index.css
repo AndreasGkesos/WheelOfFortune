@@ -4,6 +4,9 @@
     border: none;
 }
 /* Nav Bar */
+.navbar {
+    z-index:1;
+}
 .sidenav {
     height: 100%;
     width: 0;
@@ -11,7 +14,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #633b63;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -21,7 +24,7 @@
         padding: 8px 8px 8px 32px;
         text-decoration: none;
         font-size: 25px;
-        color: #818181;
+        color: #fff;
         display: block;
         transition: 0.3s;
     }
@@ -59,3 +62,733 @@
 #DepositCodes input {
     color: #000;
 }
+
+
+
+/* Custom Css By George Simos */
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: "Open Sans", sans-serif;
+    color: #040404;
+    background-color: #ffffff;
+}
+
+a {
+    color: #2e416a;
+    text-decoration: none;
+}
+
+.hidden {
+    visibility: hidden;
+}
+input#BetValue {
+    padding: 20px;
+}
+/* -------------------------------- 
+  
+  General Style
+  
+  -------------------------------- */
+.gs-intro {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    /* vertically align its content */
+    display: table;
+    background: #2e416a;
+    overflow: hidden;
+}
+
+.gs-intro-content {
+    /* vertically align inside its parent */
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0 5%;
+    background: #2e416a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+    .gs-intro-content h1 {
+        font-size: 2.4rem;
+        color: #ffffff;
+    }
+
+    .gs-intro-content p {
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1.4;
+        margin: 1em 0;
+        color: #6d7a97;
+    }
+
+    .gs-intro-content .action-wrapper {
+        display: inline-block;
+    }
+
+        .gs-intro-content .action-wrapper::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+
+        .gs-intro-content .action-wrapper > * {
+            float: left;
+        }
+
+@media only screen and (min-width: 768px) {
+    .gs-intro-content h1 {
+        font-size: 5.2rem;
+        font-weight: 300;
+    }
+
+    .gs-intro-content p {
+        font-size: 1.6rem;
+        margin: 1.5em 0 1.9em;
+    }
+}
+
+.gs-btn {
+    display: inline-block;
+    padding: 1.2em 1.4em;
+    font-size: 1.3rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background-color: #202e4a;
+    border-radius: .25em;
+    margin-right: 1.5em;
+}
+
+    .gs-btn:nth-of-type(2) {
+        margin-right: 0;
+    }
+
+    .gs-btn.main-action {
+        background-color: #fb5e58;
+    }
+
+@media only screen and (min-width: 480px) {
+    .gs-btn {
+        padding: 1.2em 1.6em;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .gs-btn {
+        padding: 1.4em 1.8em;
+    }
+}
+
+.gs-intro-content h1,
+.gs-intro-content h1 span,
+.gs-intro-content p,
+.gs-intro-content .gs-btn {
+    opacity: 0;
+    -webkit-animation-duration: 0.8s;
+    -moz-animation-duration: 0.8s;
+    animation-duration: 0.8s;
+    -webkit-animation-delay: 0.3s;
+    -moz-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.no-cssanimations .gs-intro-content h1, .no-cssanimations .gs-intro-content h1 span, .no-cssanimations .gs-intro-content p, .no-cssanimations .gs-intro-content .gs-btn {
+    opacity: 1;
+}
+
+/* -------------------------------- 
+  
+  Mask 2
+  
+  -------------------------------- */
+.mask-2.gs-intro-content * {
+    /* overwrite default style */
+    opacity: 1;
+}
+
+.mask-2.gs-intro-content .content-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 2em 0;
+    overflow: hidden;
+}
+
+    .mask-2.gs-intro-content .content-wrapper::before {
+        /* vertical bar */
+        content: '';
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 2px;
+        background-color: #ffffff;
+        -webkit-animation: gs-pulse 1.3s 0.3s both;
+        -moz-animation: gs-pulse 1.3s 0.3s both;
+        animation: gs-pulse 1.3s 0.3s both;
+    }
+
+.no-cssanimations .mask-2.gs-intro-content .content-wrapper::before {
+    opacity: 0;
+}
+
+.mask-2.gs-intro-content .content-wrapper > div {
+    /* wrap the entire content */
+    position: relative;
+    z-index: 1;
+}
+
+.mask-2.gs-intro-content .content-wrapper,
+.mask-2.gs-intro-content .content-wrapper > div {
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-delay: 1.1s;
+    -moz-animation-delay: 1.1s;
+    animation-delay: 1.1s;
+    -webkit-animation-fill-mode: backwards;
+    -moz-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+}
+
+.mask-2.gs-intro-content .content-wrapper {
+    -webkit-animation-name: gs-mask-wrapper;
+    -moz-animation-name: gs-mask-wrapper;
+    animation-name: gs-mask-wrapper;
+}
+
+    .mask-2.gs-intro-content .content-wrapper > div {
+        -webkit-animation-name: gs-mask-content;
+        -moz-animation-name: gs-mask-content;
+        animation-name: gs-mask-content;
+    }
+
+@-webkit-keyframes gs-mask-wrapper {
+    0% {
+        -webkit-transform: translateX(50%);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+    }
+}
+
+@-moz-keyframes gs-mask-wrapper {
+    0% {
+        -moz-transform: translateX(50%);
+    }
+
+    100% {
+        -moz-transform: translateX(0);
+    }
+}
+
+@keyframes gs-mask-wrapper {
+    0% {
+        -webkit-transform: translateX(50%);
+        -moz-transform: translateX(50%);
+        -ms-transform: translateX(50%);
+        -o-transform: translateX(50%);
+        transform: translateX(50%);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes gs-mask-content {
+    0% {
+        -webkit-transform: translateX(-100%);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+    }
+}
+
+@-moz-keyframes gs-mask-content {
+    0% {
+        -moz-transform: translateX(-100%);
+    }
+
+    100% {
+        -moz-transform: translateX(0);
+    }
+}
+
+@keyframes gs-mask-content {
+    0% {
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes gs-pulse {
+    0%, 30.8% {
+        opacity: 0;
+    }
+
+    15.4%, 46.2%, 61.5%, 70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes gs-pulse {
+    0%, 30.8% {
+        opacity: 0;
+    }
+
+    15.4%, 46.2%, 61.5%, 70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes gs-pulse {
+    0%, 30.8% {
+        opacity: 0;
+    }
+
+    15.4%, 46.2%, 61.5%, 70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* -------------------------------- 
+
+xpopup 
+
+-------------------------------- */
+.gs-popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(94, 110, 141, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+
+    .gs-popup.is-visible {
+        opacity: 1;
+        visibility: visible;
+        -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+        -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+        transition: opacity 0.3s 0s, visibility 0s 0s;
+    }
+
+
+/* -------------------------------- 
+
+Shared style
+
+-------------------------------- */
+.gs-btn {
+    display: inline-block;
+    padding: 1.6em 2.4em;
+    font-size: 1.4rem;
+    letter-spacing: .15em;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    -webkit-transition: box-shadow .3s;
+    transition: box-shadow .3s;
+}
+
+    .gs-btn:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+h1 {
+    line-height: 1;
+}
+
+/* Main Content */
+.gs-main-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    /* vertically align its content */
+    display: table;
+}
+
+    .gs-main-content .center {
+        /* vertically align inside parent element */
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+/* Modal Window */
+.gs-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+    transition: opacity .3s 0s, visibility 0s .3s;
+}
+
+    .gs-modal .modal-content {
+        height: 100%;
+        overflow-y: auto;
+        padding: 3em 5%;
+    }
+
+    .gs-modal h1, .gs-modal h2 {
+        text-align: center;
+    }
+
+    .gs-modal p {
+        line-height: 1.6;
+        margin: 2em auto;
+        max-width: 800px;
+    }
+
+    .gs-modal .modal-close {
+        /* 'X' icon */
+        position: absolute;
+        z-index: 1;
+        top: 20px;
+        right: 5%;
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-indent: 100%;
+        color: transparent;
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        -webkit-transition: visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s;
+        transition: visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s;
+        transition: transform .3s 0s, visibility 0s .3s, opacity .3s 0s;
+        transition: transform .3s 0s, visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s;
+    }
+
+        .gs-modal .modal-close::before, .gs-modal .modal-close::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            height: 2px;
+            width: 20px;
+            top: calc(50% - 1px);
+            left: calc(50% - 10px);
+        }
+
+        .gs-modal .modal-close::before {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .gs-modal .modal-close::after {
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+    .gs-modal.visible {
+        opacity: 1;
+        visibility: visible;
+        -webkit-transition: opacity .7s, visibility 0s;
+        transition: opacity .7s, visibility 0s;
+    }
+
+        .gs-modal.visible .modal-content {
+            /* this fixes the buggy scrolling on webkit browsers - mobile devices only - when overflow property is applied */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gs-modal.visible .modal-close {
+            visibility: visible;
+            opacity: 1;
+            -webkit-transition: visibility 0s 0s, opacity .3s 0s, -webkit-transform .3s 0s;
+            transition: visibility 0s 0s, opacity .3s 0s, -webkit-transform .3s 0s;
+            transition: transform .3s 0s, visibility 0s 0s, opacity .3s 0s;
+            transition: transform .3s 0s, visibility 0s 0s, opacity .3s 0s, -webkit-transform .3s 0s;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+@media only screen and (min-width: 1100px) {
+    .gs-modal .modal-content {
+        padding: 6em 5%;
+    }
+
+    .gs-modal .modal-close {
+        height: 60px;
+        width: 60px;
+    }
+
+        .gs-modal .modal-close::before, .gs-modal .modal-close::after {
+            height: 2px;
+            width: 26px;
+            top: calc(50% - 1px);
+            left: calc(50% - 13px);
+        }
+
+    .gs-modal p {
+        font-size: 2rem;
+    }
+}
+
+/* Transition Layer */
+.gs-transition-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+    .gs-transition-layer .bg-layer {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translateY(-50%) translateX(-2%);
+        transform: translateY(-50%) translateX(-2%);
+        /* its dimentions will be overwritten using jQuery to proportionally fit the viewport */
+        height: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+    }
+
+    .gs-transition-layer.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+        .gs-transition-layer.visible .bg-layer {
+            -webkit-transform: translateY(-50%) translateX(-98%);
+            transform: translateY(-50%) translateX(-98%);
+        }
+
+    .gs-transition-layer.opening .bg-layer, .gs-transition-layer.closing .bg-layer {
+        -webkit-animation-duration: .8s;
+        animation-duration: .8s;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+    }
+
+.no-cssanimations .gs-transition-layer {
+    display: none;
+}
+
+/* -------------------------------- 
+  
+  Scrub Effect
+  
+  -------------------------------- */
+.scrub-transition {
+    font-family: "PT Sans", sans-serif;
+    color: #2c1a32;
+}
+
+    .scrub-transition h1, .scrub-transition h2 {
+        font-family: "Sigmar One", serif;
+        margin-bottom: .4em;
+        font-size: 4rem;
+    }
+
+    .scrub-transition .gs-btn {
+        background: #b24160;
+        color: #ffffff;
+    }
+
+    .scrub-transition .gs-main-content {
+        background: #ffbc59;
+    }
+
+    .scrub-transition .gs-modal {
+        background: #633b63;
+    }
+
+        .scrub-transition .gs-modal .modal-content {
+            color: #ffffff;
+        }
+
+        .scrub-transition .gs-modal .modal-close::before,
+        .scrub-transition .gs-modal .modal-close::after {
+            background: #ffffff;
+        }
+
+        .scrub-transition .gs-modal .modal-close {
+            background: #543254;
+        }
+
+            .scrub-transition .gs-modal .modal-close:hover {
+                background: #452945;
+            }
+
+    .scrub-transition .gs-transition-layer .bg-layer {
+        /* sprite composed of 25 frames */
+        width: 2500%;
+        background-image: url(img/scrub.png);
+    }
+
+    .scrub-transition .gs-transition-layer.opening .bg-layer {
+        -webkit-animation: gs-sequence 0.8s steps(24) forwards;
+        animation: gs-sequence 0.8s steps(24) forwards;
+    }
+
+    .scrub-transition .gs-transition-layer.closing .bg-layer {
+        -webkit-animation: gs-sequence 0.8s steps(24) forwards reverse;
+        animation: gs-sequence 0.8s steps(24) forwards reverse;
+    }
+
+@media only screen and (min-width: 768px) {
+    .scrub-transition h1 {
+        font-size: 8rem;
+    }
+
+    .scrub-transition h2 {
+        font-size: 6rem;
+    }
+}
+
+
+/* --------------------------------
+
+Animations
+
+-------------------------------- */
+@-webkit-keyframes gs-sequence {
+    0% {
+        /* translateX(-2%) is used to horizontally center the first frame inside the viewport */
+        -webkit-transform: translateY(-50%) translateX(-2%);
+        transform: translateY(-50%) translateX(-2%);
+    }
+
+    100% {
+        /* translateX(-98%) (2% + 96) is used to horizontally center the last frame inside the viewport  */
+        -webkit-transform: translateY(-50%) translateX(-98%);
+        transform: translateY(-50%) translateX(-98%);
+    }
+}
+
+@keyframes gs-sequence {
+    0% {
+        /* translateX(-2%) is used to horizontally center the first frame inside the viewport */
+        -webkit-transform: translateY(-50%) translateX(-2%);
+        transform: translateY(-50%) translateX(-2%);
+    }
+
+    100% {
+        /* translateX(-98%) (2% + 96) is used to horizontally center the last frame inside the viewport  */
+        -webkit-transform: translateY(-50%) translateX(-98%);
+        transform: translateY(-50%) translateX(-98%);
+    }
+}
+
+@-webkit-keyframes gs-sequence-2 {
+    0% {
+        -webkit-transform: translateY(-50%) translateX(-1.3158%);
+        transform: translateY(-50%) translateX(-1.3158%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-50%) translateX(-98.6842%);
+        transform: translateY(-50%) translateX(-98.6842%);
+    }
+}
+
+@keyframes gs-sequence-2 {
+    0% {
+        -webkit-transform: translateY(-50%) translateX(-1.3158%);
+        transform: translateY(-50%) translateX(-1.3158%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-50%) translateX(-98.6842%);
+        transform: translateY(-50%) translateX(-98.6842%);
+    }
+}
+
+@-webkit-keyframes gs-sequence-3 {
+    0% {
+        -webkit-transform: translateY(-50%) translateX(-2.5%);
+        transform: translateY(-50%) translateX(-2.5%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-50%) translateX(-97.5%);
+        transform: translateY(-50%) translateX(-97.5%);
+    }
+}
+
+@keyframes gs-sequence-3 {
+    0% {
+        -webkit-transform: translateY(-50%) translateX(-2.5%);
+        transform: translateY(-50%) translateX(-2.5%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-50%) translateX(-97.5%);
+        transform: translateY(-50%) translateX(-97.5%);
+    }
+}
+  

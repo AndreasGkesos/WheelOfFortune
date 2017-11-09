@@ -350,6 +350,7 @@
     <Content Include="Content\img\blurred-image-1.jpg" />
     <Content Include="Content\img\login.jpg" />
     <Content Include="Content\img\now-logo.png" />
+    <Content Include="Content\img\scrub.png" />
     <Content Include="Content\Index.css" />
     <Content Include="Content\Profile.css" />
     <Content Include="Content\SpinsHistoryView.css" />

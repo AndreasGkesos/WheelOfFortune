@@ -1,16 +1,11 @@
-﻿
-<div class="container">
-    <div class="col-md-6 col-md-offset-3 panel panel-default text-center" id="usersPlatform">
-        <div class="panel-heading">
-            Balance Value
-        </div>
-        <div class="panel-body" id="balanceValueContainer"></div>
-        <div class="dropdown-divider"></div>
-        <div id="betValueContainer">
-            <div class="panel-info">Bet Value</div>
+﻿<!-- Bet Pop up -->
+<div class="gs-popup">
+    <main class="gs-popup gs-main-content">
+        <div class="center">
+            <h1>Balance Value</h1>
+            <h1>Bet Value</h1>
             @Html.TextBox("BetValue")
-            <button id="betValueSubmit" class="btn btn-group">Bet</button>
+            <a id="betValueSubmit" href="#modal-1" class="gs-btn gs-modal-trigger" style="padding:20px;">Bet & Play</a>
         </div>
-    </div>
-</div>
-
+    </main> <!-- .gs-main-content -->
+</div> <!-- gs-popup -->
