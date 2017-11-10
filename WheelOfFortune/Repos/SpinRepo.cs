@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;

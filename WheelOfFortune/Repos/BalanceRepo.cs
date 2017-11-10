@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
-using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelOfFortune.Repos
