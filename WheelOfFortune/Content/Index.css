@@ -6,6 +6,8 @@
 
 body {
     font-family: 'Indie Flower', cursive !important;
+    font-weight: bold;
+    background-color: #30303F!important;
 }
 /* Nav Bar */
 .navbar {
@@ -18,7 +20,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #633b63;
+    background-color: #888BFC;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
