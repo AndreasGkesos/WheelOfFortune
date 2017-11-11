@@ -6,6 +6,7 @@ namespace WheelOfFortune.Models.Domain
     {
         public int Id { get; set; }
 
+        [Range(0, double.MaxValue)]
         [Required]
         public decimal BalanceValue { get; set; }
 

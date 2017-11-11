@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Repos.Interfaces;
@@ -18,13 +16,12 @@ namespace WheelOfFortune.Repos
             _context = context;
         }
 
-        public CouponValue CreateCouponValue(int value)
+        public CouponValue CreateCouponValue(int value, string userId)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = _context.Users.First(x => x.Id == userId);
 
             if (user == null)
-                throw new Exception("You are not Logged In");
+                throw new Exception("User does not exist");
 
             var cv = new CouponValue{
                Value = value

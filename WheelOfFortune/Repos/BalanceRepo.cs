@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
-using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelOfFortune.Repos
@@ -30,9 +29,8 @@ namespace WheelOfFortune.Repos
 
         }
 
-        public Balance UpdateBalance(decimal balance)
+        public Balance UpdateBalance(decimal balance, string userId)
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
             var blc = _context.Balances.Where(x => x.User.Id == userId).Include(x => x.User).First();
 
             if (userId == null)
@@ -50,7 +48,6 @@ namespace WheelOfFortune.Repos
 
         public Balance CreateBalance(string userId)
         {
-         
             var user = _context.Users.FirstOrDefault(x => x.Id == userId);
 
             if (user == null)

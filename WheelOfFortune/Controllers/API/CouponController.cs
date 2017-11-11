@@ -1,66 +1,46 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
-using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
-using WheelOfFortune.Repos.Interfaces;
+using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers.API
 {
     public class CouponController : ApiController
     {
-        private readonly ICouponRepo _repo;
-        private readonly ITransactionRepo _transactionRepo;
-        private readonly IBalanceRepo _balanceRepo;
+        private readonly IWheelService _wheelService;
 
-        public CouponController(ICouponRepo repo, ITransactionRepo transactionRepo, IBalanceRepo balanceRepo)
+        public CouponController(IWheelService wheelService)
         {
-            _repo = repo;
-            _transactionRepo = transactionRepo;
-            _balanceRepo = balanceRepo;
+            _wheelService = wheelService;
         }
 
         [HttpGet]
         public IEnumerable<CouponViewModel> GetAll()
         {
-            return _repo.GetAll().Select(x => TransformModels.ToCouponViewModel(x));
+            return _wheelService.GetAllCoupons().Select(x => TransformModels.ToCouponViewModel(x));
         }
 
         [HttpGet]
         public IEnumerable<CouponViewModel> GetByUserId(string userId)
         {
-            return _repo.GetByUserId(userId).Select(x => TransformModels.ToCouponViewModel(x));
+            return _wheelService.GetCouponByUserId(EncryptionService.DecryptString(userId)).Select(x => TransformModels.ToCouponViewModel(x));
         }
 
         [HttpPost]
         public CouponViewModel AddCoupon(CouponBindingModel model)
         {
-            return TransformModels.ToCouponViewModel(_repo.CreateCoupon(model));
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            return TransformModels.ToCouponViewModel(_wheelService.CreateCoupon(model, userId));
         }
 
         [HttpGet]
-        public bool ExchangeCoupon(string code)
+        public bool Exchange(string code)
         {
-            var value = _repo.Exchange(code);
-
-            if (value == null)
-                return false; //false for fail exchange
-
-            UpdateTransactionAndBalance(Convert.ToDecimal(value));
-            return true;
-        }
-
-        private void UpdateTransactionAndBalance(decimal value)
-        {
-            var t = _transactionRepo.CreateTransaction(
-                new TransactionBindingModel
-                {
-                    TransactionDate = DateTime.Now,
-                    Type = TransactionType.FromCoupon,
-                    Value = value
-                });
-            _balanceRepo.UpdateBalance(t.Value);
-        }
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            return _wheelService.ExchangeCoupon(code, userId);
+        }   
     }
 }

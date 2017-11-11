@@ -9,6 +9,7 @@ using SimpleInjector.Integration.Web.Mvc;
 using WheelOfFortune.Models;
 using WheelOfFortune.Repos.Interfaces;
 using WheelOfFortune.Repos;
+using WheelOfFortune.Services;
 
 [assembly: OwinStartupAttribute(typeof(WheelOfFortune.Startup))]
 namespace WheelOfFortune
@@ -40,6 +41,7 @@ namespace WheelOfFortune
             container.Register<IWheelConfigurationRepo, WheelConfigurationRepo>(Lifestyle.Scoped);
             container.Register<IWheelConfigurationSliceRepo, WheelConfigurationSliceRepo>(Lifestyle.Scoped);
             container.Register<ApplicationUserManager>(Lifestyle.Scoped);
+            container.Register<IWheelService, WheelService>(Lifestyle.Scoped);
 
             return container;
         }

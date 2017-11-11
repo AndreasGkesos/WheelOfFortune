@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity;
+﻿@model WheelOfFortune.Models.ViewModels.ApplicationUserViewModel
 
 @{
     ViewBag.Title = "ShowTransactionHistory";
@@ -27,9 +27,6 @@
 
 
 
-@{
-    string user = @User.Identity.GetUserId().ToString();
-}
 
 
 @section scripts {
@@ -37,16 +34,16 @@
     <script type="text/javascript">
         $(function () {
 
-            var userId = "@user";
+          
 
             $(document).ready(function () {
-                var table = $("#transactions").DataTable
-                    (
+                const table = $("#transactions").DataTable
+                (
                     {
 
                         ajax:
                         {
-                            url: "/api/Transaction/GetByUserId?userId=" + userId,
+                            url: "/api/Transaction/GetByUserId?userId=" + @Model.Id.ToString(),
                             dataSrc: ""
                         },
                         columns: [
@@ -59,6 +56,6 @@
                         ]
 
                     });
-        });
+            });
     </script>
 }

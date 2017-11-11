@@ -191,7 +191,7 @@ namespace WheelOfFortune.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", @"Failed to verify phone");
+            ModelState.AddModelError("", @"Please Select a profile picture");
             return View(model);
         }
 

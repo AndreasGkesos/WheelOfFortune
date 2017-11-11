@@ -1,6 +1,7 @@
 ﻿@if (Request.IsAuthenticated)
 {
     <a class="nav-link">@User.Identity.Name</a>
+    @Html.ActionLink("Wheel Of Fortune", "Index", "Home")
     <a class="nav-link" href="/Spin/ShowSpinsHistory">Spins</a>
     <a class="nav-link" href="/Transactions/ShowTransactionsHistory">Transactions</a>
     <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>

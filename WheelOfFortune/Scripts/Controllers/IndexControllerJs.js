@@ -1,20 +1,18 @@
-﻿function IndexController_init() {
+﻿function IndexController_init(config) {
 
-  
-    UpdateBalanceContainer();
+    const userId = config.userId;
+    UpdateBalanceContainer(userId);
 
 
 }
 
 
-function UpdateBalanceContainer() {
-
-    let userId = $("#balanceValueContainer").attr("data-userId");
+function UpdateBalanceContainer(user) {
 
     $.ajax({
         type: "GET",
         url: "/api/Balance/GetBalance/",
-        data: { userId: userId },
+        data: { userId: user },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {

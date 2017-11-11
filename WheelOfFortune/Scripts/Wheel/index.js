@@ -21,7 +21,8 @@ function myResult(e) {
     
     let betValue = $("input#BetValue").val();
 
-
+    console.log("betValue");
+    console.log(betValue);
  
         const resultValue = betValue * e.userData.score;
 
@@ -43,7 +44,7 @@ function myResult(e) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
-                alert("everything all right");
+               alert("everything all right");
             },
             fail: function (msg) {
                 alert("error");
@@ -51,11 +52,9 @@ function myResult(e) {
 
         });
 
-        alert('betValue' + betValue);
+        
 
-        let userId = $("#BetValue").attr("data-userId");
-
-        console.log(userId);
+       
 
 //    $("#balanceValueContainer").val("");
 //    $.ajax({
@@ -116,8 +115,7 @@ function init() {
             //WITH your own button
             myWheel.init({ data: jsonData, onResult: myResult, onGameEnd: myGameEnd, onError: myError, spinTrigger: mySpinBtn });
 
-            //WITHOUT your own button
-            //myWheel.init({data:jsonData, onResult:myResult, onGameEnd:myGameEnd, onError:myError);
+         
         });
     }
     

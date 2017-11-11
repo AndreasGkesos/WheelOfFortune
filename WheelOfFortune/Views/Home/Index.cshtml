@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@model WheelOfFortune.Models.ViewModels.ApplicationUserViewModel
 @{
     ViewBag.Title = "Wheel Of Fortune";
 }
@@ -6,19 +6,44 @@
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
 @Styles.Render("~/Content/Wheel/style.css")
 @Styles.Render("~/Content/index.css")
+@Styles.Render("~/Content/toastr.css")
 
 
-@Html.Partial("ControllBalance")
+<div class="scrub-transition">
+
+    <section class="gs-intro gs-main-content">
+        <div class="gs-intro-content mask-2">
+            <div class="content-wrapper">
+                <div>
+                    <h1>Welcome to Wheel Of Fortune</h1>
+                    <p>You Are Awesome, Play now we need your moneyyyyy.</p>
+                    <div class="action-wrapper">
+                        <a href="#0" class="gs-btn main-action gs-popup-trigger ">Play</a>
+                        <a href="#0" class="gs-btn">Learn How</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    @Html.Partial("ControllBalance")
 
 
-@Html.Partial("WheelContainer")
+    @Html.Partial("WheelContainer")
+</div>
+
+
 
 
 @section scripts {
     @Scripts.Render("~/bundles/IndexView")
+
     <script type="text/javascript">
-        $(function () {
-           IndexController_init();
+        $(function() {
+            const config = {
+                userId: "@Model.Id.ToString()"
+            };
+            IndexController_init(config);
         });
     </script>
 }

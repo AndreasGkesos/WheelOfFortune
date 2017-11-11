@@ -1,6 +1,4 @@
-﻿@model IEnumerable<WheelOfFortune.Models.Domain.Spin>
-@using Microsoft.AspNet.Identity;
-
+﻿@model WheelOfFortune.Models.ViewModels.ApplicationUserViewModel
 
 @{
     ViewBag.Title = "My Spins History";
@@ -9,7 +7,6 @@
     
 
     @Styles.Render("~/Content/SpinsHistoryView.css")
-    @*@Styles.Render("~/Content/Core/css")*@ 
 
 
 <h2>My Spins History</h2>
@@ -19,7 +16,7 @@
     <table id="spins" class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Spin No.</th>
                 <th> Bet Value</th>
                 <th>Result</th>
             </tr>
@@ -30,8 +27,8 @@
 
 
 
-@{ 
-    string user = @User.Identity.GetUserId().ToString();
+@{
+    string user = ViewBag.UserId;
 }
 
 @section scripts {
@@ -41,15 +38,15 @@
         $(function () {
 
             
-            var userId = "@user";
+           
             $(document).ready(function () {
-                var table = $("#spins").DataTable
-                    (
+                const table = $("#spins").DataTable
+                (
                     {
    
                         ajax:
                         {
-                            url: "/api/Spins/GetByUserId?userId=" + userId,
+                            url: "/api/Spins/GetByUserId?userId=" + @Model.Id.ToString(),
                             dataSrc: ""
                         },
                         columns: [
