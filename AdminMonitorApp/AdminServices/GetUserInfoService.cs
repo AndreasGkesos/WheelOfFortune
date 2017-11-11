@@ -7,7 +7,7 @@ namespace AdminMonitorApp.AdminServices
 {
     public class GetUserInfoService
     {
-        var 
+         
 
         public GetUserInfoService()
         {

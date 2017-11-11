@@ -207,21 +207,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="WheelOfFortuneDatabase.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WheelOfFortuneDatabase.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WheelOfFortuneDatabase.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WheelOfFortuneDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WheelOfFortuneDatabase.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WheelOfFortuneDatabase.edmx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -236,16 +221,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WheelOfFortuneDatabase.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WheelOfFortuneDatabase.edmx</DependentUpon>
-      <LastGenOutput>WheelOfFortuneDatabase.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="WheelOfFortuneDatabase.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WheelOfFortuneDatabase.edmx</DependentUpon>
-      <LastGenOutput>WheelOfFortuneDatabase.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -294,13 +269,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\WheelSpinsConfiguration.cshtml" />
     <Content Include="Views\Home\CouponsConfiguration.cshtml" />
-    <EntityDeploy Include="WheelOfFortuneDatabase.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WheelOfFortuneDatabase.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="WheelOfFortuneDatabase.edmx.diagram">
-      <DependentUpon>WheelOfFortuneDatabase.edmx</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
