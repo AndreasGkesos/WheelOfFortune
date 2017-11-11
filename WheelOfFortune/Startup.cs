@@ -40,6 +40,7 @@ namespace WheelOfFortune
             container.Register<ITransactionRepo, TransactionRepo>(Lifestyle.Scoped);
             container.Register<IWheelConfigurationRepo, WheelConfigurationRepo>(Lifestyle.Scoped);
             container.Register<IWheelConfigurationSliceRepo, WheelConfigurationSliceRepo>(Lifestyle.Scoped);
+            container.Register<IUserRepo, UserRepo>(Lifestyle.Scoped);
             container.Register<ApplicationUserManager>(Lifestyle.Scoped);
             container.Register<IWheelService, WheelService>(Lifestyle.Scoped);
 

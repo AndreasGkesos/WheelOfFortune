@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 
@@ -32,5 +33,8 @@ namespace WheelOfFortune.Services
         IEnumerable<WheelConfiguration> GetByUserId(string userId);
         WheelDataViewModel GetWheelConfiguration();
         WheelConfiguration CreateWheelConfig(WheelConfigurationBindingModel model, string userId);
+
+        IEnumerable<ApplicationUser> GetAllUsers();
+        ApplicationUser GetUserById(string userId);
     }
 }
