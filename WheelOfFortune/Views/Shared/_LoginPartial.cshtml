@@ -1,6 +1,18 @@
-﻿@if (Request.IsAuthenticated)
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
 {
-    <a class="nav-link">@User.Identity.Name</a>
+
+    <div class="form-group">
+        <a class="nav-link">@User.Identity.Name</a>
+
+        <div class="avatar-upload">
+            <div class="avatar-edit">
+            </div>
+            <div class="avatar-preview">
+                <img src="" id="imageProfiler" class="img-circle"/>
+            </div>
+        </div>
+    </div>
     @Html.ActionLink("Wheel Of Fortune", "Index", "Home")
     <a class="nav-link" href="/Spin/ShowSpinsHistory">Spins</a>
     <a class="nav-link" href="/Transactions/ShowTransactionsHistory">Transactions</a>
@@ -8,7 +20,7 @@
     <div id="despositCodesContainer">
         <h3>Enter Deposit Code</h3>
         @Html.TextBox("DepositCodes")
-        <button id="depositCodeSubmit" class="btn btn-primary">Enter Code</button>
+        <button id="depositCodeSubmit" class="btn btn-primary"><span class="glyphicon glyphicon-barcode"></span></button>
     </div>
 
 

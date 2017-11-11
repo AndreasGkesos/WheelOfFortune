@@ -10,5 +10,6 @@ namespace WheelOfFortune.Repos.Interfaces
     {
         IEnumerable<ApplicationUser> GetAll();
         ApplicationUser GetAllById(string userId);
+        byte[] GetUserPicture(string userId);
     }
 }

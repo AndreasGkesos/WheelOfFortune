@@ -8,14 +8,12 @@ namespace WheelOfFortune.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        
+         
 
 
         public ActionResult Index()
         {
             var userid = HttpContext.User.Identity.GetUserId();
-
-            //ViewBag.UserId = EncryptionService.EncryptString(userid);
 
             return View("Index", new ApplicationUserViewModel
             {

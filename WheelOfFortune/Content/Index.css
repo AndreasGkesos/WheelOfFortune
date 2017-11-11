@@ -3,6 +3,10 @@
     margin:0;
     border: none;
 }
+
+body {
+    font-family: 'Indie Flower', cursive !important;
+}
 /* Nav Bar */
 .navbar {
     z-index:1;
@@ -59,12 +63,22 @@
     color: #fff
 }
 
-#DepositCodes input {
-    color: #000;
+input#DepositCodes {
+    color: black !important;
+    font-weight: bold;
+    height: 5vh;
+    border: 1px solid #158cba;
 }
 
-
-
+#imageProfiler {
+    height: 22vh;
+    width: 22vh;
+    margin-left: 6vh;
+}
+.avatar-preview {
+    max-width: 50vh;
+    max-height: 50vh;
+}
 /* Custom Css By George Simos */
 /* -------------------------------- 
 
@@ -81,7 +95,7 @@ html {
 
 body {
     font-size: 1.6rem;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Indie Flower", sans-serif;
     color: #040404;
     background-color: #ffffff;
 }
@@ -104,9 +118,9 @@ input#BetValue { padding: 20px;
     margin-right: auto;
     margin-left: auto;
     background-color: white;
-    border-radius: 10%;
+    border-radius: 43%;
 }
-}
+
 /* -------------------------------- 
   
   General Style
@@ -659,17 +673,22 @@ h1 {
 }
 
     .scrub-transition h1, .scrub-transition h2 {
-        font-family: "Sigmar One", serif;
+        font-family: "Indie Flower", serif;
         margin-bottom: .4em;
         font-size: 4rem;
     }
+.scrub-transition p {
+     font-family: "Indie Flower", serif;
+}
 
     .scrub-transition .gs-btn {
+        font-family: "Indie Flower", serif;
         background: #b24160;
         color: #ffffff;
     }
 
     .scrub-transition .gs-main-content {
+        font-family: "Indie Flower", serif;
         background: #ffbc59;
     }
 

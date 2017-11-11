@@ -2,13 +2,17 @@
     document.getElementById("mySidenav").style.width = "400px";
     document.getElementById("main").style.marginLeft = "400px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    //load pic from local storage
+    var image = JSON.parse(localStorage.getItem("image"));
+    $("#imageProfiler").attr("src", "data:image/png;base64," + image).fadeIn();
 }
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
+    document.getElementById("main").style.marginLeft = "0";
     document.body.style.backgroundColor = "white";
 }
+
 
 
 jQuery(document).ready(function ($) {

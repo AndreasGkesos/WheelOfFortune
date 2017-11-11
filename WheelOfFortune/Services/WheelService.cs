@@ -227,5 +227,10 @@ namespace WheelOfFortune.Services
         {
             return _userRepo.GetAllById(userId);
         }
+
+        public byte[] GetUserImage(string userId)
+        {
+            return _userRepo.GetUserPicture(userId);
+        }
     }
 }

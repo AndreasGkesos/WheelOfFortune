@@ -25,5 +25,10 @@ namespace WheelOfFortune.Repos
         {
             return _context.Users.ToList();
         }
+
+        public byte[] GetUserPicture(string userId)
+        {
+            return _context.Users.Where(x => x.Id == userId).Select(x => x.UserPhoto).FirstOrDefault();
+        }
     }
 }

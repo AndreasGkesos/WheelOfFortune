@@ -1,23 +1,26 @@
 ﻿var balance=0;
-
+var imagedata;
 function IndexController_init(config) {
   
     const userId = config.userId;
     UpdateBalanceContainer(userId);
 
+    GetUserPhoto(userId);
+    
 
-   /* $(document).on("click", "#betValueSubmit", function () {
-        alert("sfdsadf");
-        var inputField = $("#BetValue");
-        console.log("inputField  :" + inputField.html());
-        if (!CheckBetInput(inputField)) {
-            console.log("mphke sto lathos");
-            $(this).attr("href", "#");
-        }
-        $(this).attr("href", "#modal - 1");
-        window.location.replace("#modal - 1");
-
-    });*/
+   
+    /* $(document).on("click", "#betValueSubmit", function () {
+         alert("sfdsadf");
+         var inputField = $("#BetValue");
+         console.log("inputField  :" + inputField.html());
+         if (!CheckBetInput(inputField)) {
+             console.log("mphke sto lathos");
+             $(this).attr("href", "#");
+         }
+         $(this).attr("href", "#modal - 1");
+         window.location.replace("#modal - 1");
+ 
+     });*/
 
 }
 
@@ -69,3 +72,22 @@ function CheckBetInput(event) {
   //2 user didnt enter bet smaller than his/her current balance
 
 
+function GetUserPhoto(user) {
+    $.ajax({
+        type: "GET",
+        url: "/api/User/GetUserPhoto/",
+        data: { userId: user },
+        cache:true
+    }).always(function (data) {
+        ImageData = data;
+        console.log(data);
+        if ((data === null) || (data === undefined) || (data.length <= 0)) {
+            $("#imageProfiler").attr("src", "../../Content/img/userPhotoImageFail.png").fadeIn();
+        }
+        localStorage.setItem("image", JSON.stringify(data));
+
+        $("#imageProfiler").attr("src", "data:image/png;base64,"+ data).fadeIn();
+    });
+
+
+}
