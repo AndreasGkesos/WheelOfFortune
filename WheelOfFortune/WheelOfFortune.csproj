@@ -449,6 +449,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
+    <Content Include="Scripts\scripts.js" />
     <Content Include="Scripts\Wheel\Draggable.min.js" />
     <Content Include="Scripts\Wheel\TextPlugin.min.js" />
     <Content Include="Scripts\Wheel\TweenMax.min.js" />
@@ -513,6 +514,7 @@
     <Content Include="Views\Transactions\ShowTransactionsHistory.cshtml" />
     <Content Include="Views\Home\WheelContainer.cshtml" />
     <Content Include="Views\Profile\Profile.cshtml" />
+    <Content Include="Views\Home\ControllBalance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

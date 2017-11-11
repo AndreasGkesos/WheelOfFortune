@@ -94,8 +94,18 @@ a {
 .hidden {
     visibility: hidden;
 }
-input#BetValue {
-    padding: 20px;
+input#BetValue { padding: 20px;
+    border-radius: 10%;
+}
+#balanceValue {
+    font-size: large;
+    width: 40vh;
+    height: 10vh;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+    border-radius: 10%;
+}
 }
 /* -------------------------------- 
   
