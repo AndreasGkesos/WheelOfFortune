@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
@@ -16,6 +17,7 @@ namespace WheelOfFortune.Services
         private readonly ICouponValueRepo _couponValueRepo;
         private readonly IWheelConfigurationRepo _wheelConfigurationRepo;
         private readonly IWheelConfigurationSliceRepo _wheelConfigurationSliceRepo;
+        private readonly IUserRepo _userRepo;
 
         public WheelService(ISpinRepo spinRepo,
                             ITransactionRepo transactionRepo,
@@ -23,7 +25,8 @@ namespace WheelOfFortune.Services
                             ICouponRepo couponRepo,
                             ICouponValueRepo couponValueRepo,
                             IWheelConfigurationRepo wheelConfigurationRepo,
-                            IWheelConfigurationSliceRepo wheelConfigurationSliceRepo)
+                            IWheelConfigurationSliceRepo wheelConfigurationSliceRepo,
+                            IUserRepo userRepo)
         {
             _spinRepo = spinRepo;
             _transactionRepo = transactionRepo;
@@ -32,6 +35,7 @@ namespace WheelOfFortune.Services
             _couponValueRepo = couponValueRepo;
             _wheelConfigurationRepo = wheelConfigurationRepo;
             _wheelConfigurationSliceRepo = wheelConfigurationSliceRepo;
+            _userRepo = userRepo;
         }
 
         public Spin CreateSpin(SpinBindingModel model, string userId)
@@ -212,6 +216,16 @@ namespace WheelOfFortune.Services
                 _wheelConfigurationSliceRepo.CreateSlice(s);
             }
             return wheel;
+        }
+
+        public IEnumerable<ApplicationUser> GetAllUsers()
+        {
+            return _userRepo.GetAll();
+        }
+
+        public ApplicationUser GetUserById(string userId)
+        {
+            return _userRepo.GetAllById(userId);
         }
     }
 }

@@ -1,46 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Repos.Interfaces;
 
 namespace WheelTestingProject.RepoTest
 {
-//    class SpinRepoTest : ISpinRepo
-//    {
-//        private List<Spin> list = new List<Spin>();
-//
-//        public SpinRepoTest ()
-//        {
-//
-//        }
-//
-//        public Spin CreateSpin(SpinBindingModel model)
-//        {
-//            var spin = new Spin
-//            {
-//                BetValue = model.BetValue,
-//                ResultValue = model.ResultValue,
-//                ScoreValue = model.ScoreValue,
-//                //User = user,
-//                ExecutionDate = DateTime.Now,
-//                //WheelConfiguration = _context.WheelConfigurations.FirstOrDefault(x => x.Id == model.WheelConfigurationId)
-//            };
-//
-//            list.Add(spin);
-//
-//            return spin;
-//        }
-//
-//        public IEnumerable<Spin> GetAll()
-//        {
-//            return list;
-//        }
-//
-//        public IEnumerable<Spin> GetByUserId(string userId)
-//        {
-//            return list.Where(x => x.User.Id == userId);
-//        }
-//    }
+    class SpinRepoTest : ISpinRepo
+    {
+        private List<Spin> list = new List<Spin>();
+
+        public SpinRepoTest()
+        {
+            ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas" };
+            WheelConfiguration wheel = new WheelConfiguration { Id = 1, DateCreated = DateTime.Now, User = user };
+
+            list.Add(new Spin { Id = 1, BetValue = 10, ScoreValue = 2.0m, ResultValue = 20.0m, ExecutionDate = new DateTime (2017, 11, 11, 8, 23, 4), User = user, WheelConfiguration = wheel });
+            list.Add(new Spin { Id = 2, BetValue = 20, ScoreValue = 2.0m, ResultValue = 40.0m, ExecutionDate = new DateTime(2017, 11, 10, 8, 23, 4), User = user, WheelConfiguration = wheel });
+        }
+
+        public Spin CreateSpin(SpinBindingModel model, string userId)
+        {
+            ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas" };
+            WheelConfiguration wheel = new WheelConfiguration { Id = 1, DateCreated = DateTime.Now, User = user };
+
+            return new Spin { Id = 6, BetValue = 20, ScoreValue = -1.0m, ResultValue = -20.0m, ExecutionDate = new DateTime(2017, 11, 11, 8, 20, 4), User = user, WheelConfiguration = wheel };
+        }
+
+        public IEnumerable<Spin> GetAll()
+        {
+            return list;
+        }
+
+        public IEnumerable<Spin> GetByUserId(string userId)
+        {
+            return list.Where(x => x.User.Id == userId);
+        }
+    }
 }
