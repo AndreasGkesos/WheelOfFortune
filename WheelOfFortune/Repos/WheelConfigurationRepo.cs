@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using WheelOfFortune.Models;
 using WheelOfFortune.Models.Domain;
@@ -43,9 +43,7 @@ namespace WheelOfFortune.Repos
 
         public WheelConfiguration GetWheelConfiguration()
         {
-            var currentWheel = Convert.ToInt32(ConfigurationManager.AppSettings["CurrentWheelConfiguration"]);
-
-            return _context.WheelConfigurations.FirstOrDefault(x => x.Id == currentWheel);
+            return _context.WheelConfigurations.OrderByDescending(x => x.Id).Include(x => x.User).First();
         }
     }
 }

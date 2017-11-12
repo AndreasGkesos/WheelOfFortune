@@ -19,13 +19,9 @@ namespace WheelOfFortune.Models
             return userIdentity;
         }
 
-      
-        public byte[] UserPhoto { get; set; }
-
-
+        public byte[] UserPhoto { get; set; }        
         public string UName { get; set; }
-//        [Required]
-//        public virtual Balance Balance { get; set; }
+        public bool Active { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

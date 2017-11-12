@@ -77,6 +77,17 @@ namespace WheelOfFortune.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
+
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null) {
+                ModelState.AddModelError("", @"User does not exist");
+                return View(model);
+            }
+            if (!user.Active) {
+                ModelState.AddModelError("", @"User is not active");
+                return View(model);
+            }
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -178,41 +189,40 @@ namespace WheelOfFortune.Controllers
                 {
                     ModelState.AddModelError("UserPhoto", @"Please select a picture with your face");
                     return View(model);
-
                 }
-            }
 
-            var user = new ApplicationUser
-            {
-                UserName = model.Email,
-                Email = model.Email,
-                UName = model.Username,
-                UserPhoto = model.UserPhoto
-            };
-
-            var result = await UserManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                try
+                var user = new ApplicationUser
                 {
-                    balanceRepo.CreateBalance(user.Id);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message + @"Account Controller");
-                }
-                        
-                return RedirectToAction("Index", "Home");
-            }
-            AddErrors(result);
+                    UserName = model.Email,
+                    Email = model.Email,
+                    UName = model.Username,
+                    UserPhoto = picture,
+                    Active = true
+                };
 
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    try
+                    {
+                        balanceRepo.CreateBalance(user.Id);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message + @"Account Controller");
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
 
             // If we got this far, something failed, redisplay form
             return View(model);

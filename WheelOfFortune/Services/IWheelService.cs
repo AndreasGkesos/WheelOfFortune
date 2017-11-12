@@ -36,7 +36,7 @@ namespace WheelOfFortune.Services
 
         IEnumerable<ApplicationUser> GetAllUsers();
         ApplicationUser GetUserById(string userId);
-
         byte[] GetUserImage(string userId);
+        bool UpdateUserActiveStatusById(bool status, string userId);
     }
 }

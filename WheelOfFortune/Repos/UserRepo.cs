@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WheelOfFortune.Models;
@@ -29,6 +30,19 @@ namespace WheelOfFortune.Repos
         public byte[] GetUserPicture(string userId)
         {
             return _context.Users.Where(x => x.Id == userId).Select(x => x.UserPhoto).FirstOrDefault();
+        }
+
+        public bool UpdateUserActiveStatusById(bool status, string userId)
+        {
+            var user = _context.Users.Where(x => x.Id == userId).FirstOrDefault();
+
+            if (user == null) { return false; }
+
+            user.Active = status;
+            _context.Entry(user).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }
