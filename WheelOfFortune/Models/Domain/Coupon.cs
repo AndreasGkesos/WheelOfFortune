@@ -20,7 +20,6 @@ namespace WheelOfFortune.Models.Domain
         [Required]
         public DateTime DateExpired { get; set; }
 
-        [Required]
         public DateTime DateExchanged { get; set; }
 
         [Required]
