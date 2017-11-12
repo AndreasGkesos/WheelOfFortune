@@ -1,7 +1,6 @@
 ﻿
 body {
-    font-family: 'Indie Flower', cursive!important;
-}
+    font-family:  'EB Garamond', serif!important;}
 
 .btn {
 	border-width: 2px;
@@ -1528,8 +1527,7 @@ input,
 optgroup,
 select,
 textarea {
-    font-family: "Indie Flower", "Helvetica Neue", Arial, sans-serif;
-}
+    font-family:  'EB Garamond', serif!important;}
 
 h1,
 h2,
@@ -1545,8 +1543,8 @@ small {
 }
 
 a {
-    font-family: 'Indie Flower', cursive !important;
-	color: #f96332;
+    font-family: 'EB Garamond', serif !important;
+    color: #f96332;
 }
 
 	a:hover,
@@ -1672,8 +1670,7 @@ p {
 body {
     color: #2c2c2c;
     font-size: 14px;
-    font-family: "Indie Flower", "Helvetica Neue", Arial, sans-serif;
-    -moz-osx-font-smoothing: grayscale;
+    font-family:  'EB Garamond', serif!important;    -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -2045,7 +2042,7 @@ img {
 
 .login-page .link,
 a.link {
-    font-family: "Indie Flower","Pacifico";
+    font-family: 'EB Garamond', serif !important;
     font-size: 10px;
     color: #FFFFFF;
     text-decoration: none;
