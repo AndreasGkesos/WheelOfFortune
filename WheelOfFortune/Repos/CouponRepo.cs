@@ -72,14 +72,14 @@ namespace WheelOfFortune.Repos
 
         private string GetCode()
         {
-            StringBuilder sb = new StringBuilder();
-            using (RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider())
+            var sb = new StringBuilder();
+            using (var provider = new RNGCryptoServiceProvider())
             {
                 while (sb.Length < _codeLength)
                 {
-                    byte[] oneByte = new byte[1];
+                    var oneByte = new byte[1];
                     provider.GetBytes(oneByte);
-                    char character = (char)oneByte[0];
+                    var character = (char)oneByte[0];
                     if (_validChars.Contains(character))
                     {
                         sb.Append(character);

@@ -36,5 +36,7 @@ namespace WheelOfFortune.Services
 
         IEnumerable<ApplicationUser> GetAllUsers();
         ApplicationUser GetUserById(string userId);
+
+        byte[] GetUserImage(string userId);
     }
 }

@@ -1,4 +1,8 @@
 ﻿
+body {
+    font-family: 'Indie Flower', cursive!important;
+}
+
 .btn {
 	border-width: 2px;
 	font-weight: 400;
@@ -11,6 +15,22 @@
 	cursor: pointer;
 	background-color: #888;
 	color: #FFFFFF;
+}
+
+#loginButton {
+    background-color: #433233;
+}
+
+#loginButton:hover {
+    background-color: #6B5052;
+}
+
+#registerButton {
+    background-color: #433233;
+}
+
+#registerButton:hover {
+   background-color: #6B5052;
 }
 
 	.btn:hover,
@@ -1508,7 +1528,7 @@ input,
 optgroup,
 select,
 textarea {
-	font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Indie Flower", "Helvetica Neue", Arial, sans-serif;
 }
 
 h1,
@@ -1525,6 +1545,7 @@ small {
 }
 
 a {
+    font-family: 'Indie Flower', cursive !important;
 	color: #f96332;
 }
 
@@ -1649,11 +1670,11 @@ p {
 
 
 body {
-	color: #2c2c2c;
-	font-size: 14px;
-	font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
+    color: #2c2c2c;
+    font-size: 14px;
+    font-family: "Indie Flower", "Helvetica Neue", Arial, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
 
 .main {
@@ -2023,10 +2044,11 @@ img {
 	}
 
 .login-page .link,
-a.link{
-	font-size: 10px;
-	color: #FFFFFF;
-	text-decoration: none;
+a.link {
+    font-family: "Indie Flower","Pacifico";
+    font-size: 10px;
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
 
@@ -4200,9 +4222,7 @@ a.link{
 
 
 /* Avatar image*/
-#imagePreview {
-	background-image: url(../img/unnamed.jpg);
-}
+#imagePreview { background-image: url(../img/registerPic.bmp); }   
 .avatar-upload {
 	position: relative;
 	max-width: 150px;
@@ -4212,6 +4232,7 @@ a.link{
 	.avatar-upload .avatar-edit {
 		position: absolute;
 		right: 25px;
+	   
 		z-index: 1;
 		top: 10px;
 	}
@@ -4268,3 +4289,7 @@ a.link{
 			background-repeat: no-repeat;
 			background-position: center;
 		}
+
+        .avatar-upload {
+            margin-left: 15vh;
+        }
