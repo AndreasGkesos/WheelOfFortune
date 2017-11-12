@@ -310,6 +310,10 @@
     <Compile Include="Migrations\201711121228506_Remove Required attribute from DateExchanged property.Designer.cs">
       <DependentUpon>201711121228506_Remove Required attribute from DateExchanged property.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711121232448_Add Active property to ApplicationUser.cs" />
+    <Compile Include="Migrations\201711121232448_Add Active property to ApplicationUser.Designer.cs">
+      <DependentUpon>201711121232448_Add Active property to ApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Domain\Coupon.cs" />
@@ -738,6 +742,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711121228506_Remove Required attribute from DateExchanged property.resx">
       <DependentUpon>201711121228506_Remove Required attribute from DateExchanged property.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711121232448_Add Active property to ApplicationUser.resx">
+      <DependentUpon>201711121232448_Add Active property to ApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
