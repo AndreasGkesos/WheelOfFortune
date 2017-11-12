@@ -23,7 +23,7 @@ namespace WheelOfFortune.Services
         IEnumerable<Coupon> GetAllCoupons();
         bool ExchangeCoupon(string code, string userId);
 
-        CouponValue CreateCouponValue(int value, string userId);
+        CouponValue CreateCouponValue(int value);
         CouponValue UpdateCouponValue(int id, int value);
 
         IEnumerable<Transaction> GetTransactionsByUserId(string userId);

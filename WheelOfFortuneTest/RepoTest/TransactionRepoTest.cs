@@ -11,11 +11,10 @@ namespace WheelTestingProject.RepoTest
     class TransactionRepoTest : ITransactionRepo
     {
         private List<Transaction> list = new List<Transaction>();
+        private ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas" };
 
         public TransactionRepoTest()
         {
-            ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas" };
-
             list.Add(new Transaction { Id = 1, TransactionDate = new DateTime(2017, 8, 9, 8, 23, 4), Type = TransactionType.FromCoupon, Value = 20, User = user });
             list.Add(new Transaction { Id = 1, TransactionDate = new DateTime(2017, 8, 10, 8, 13, 4), Type = TransactionType.FromCoupon, Value = 50, User = user });
             list.Add(new Transaction { Id = 1, TransactionDate = new DateTime(2017, 9, 11, 8, 33, 4), Type = TransactionType.FromSpin, Value = 40, User = user });
@@ -25,8 +24,6 @@ namespace WheelTestingProject.RepoTest
 
         public Transaction CreateTransaction(TransactionBindingModel model, string userId)
         {
-            ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas" };
-
             return new Transaction { Id = 1, TransactionDate = new DateTime(2017, 10, 10, 8, 53, 4), Type = TransactionType.FromSpin, Value = 20, User = user };
         }
 

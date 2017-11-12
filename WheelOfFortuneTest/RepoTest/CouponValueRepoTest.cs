@@ -13,23 +13,15 @@ namespace WheelTestingProject.RepoTest
 
         public CouponValueRepoTest()
         {
-
+            list.Add(new CouponValue { Id = 1, Value = 5 });
+            list.Add(new CouponValue { Id = 2, Value = 10 });
+            list.Add(new CouponValue { Id = 3, Value = 20 });
+            list.Add(new CouponValue { Id = 4, Value = 50 });
         }
 
         public CouponValue CreateCouponValue(int value)
         {
-            var cv = new CouponValue
-            {
-                Value = value
-            };
-
-            list.Add(cv);
-            return cv;
-        }
-
-        public CouponValue CreateCouponValue(int value, string userId)
-        {
-            throw new NotImplementedException();
+            return new CouponValue { Id = 1, Value = 5 };
         }
 
         public IEnumerable<CouponValue> GetAll()

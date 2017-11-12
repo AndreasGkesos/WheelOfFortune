@@ -146,9 +146,9 @@ namespace WheelOfFortune.Services
             return _transactionRepo.GetAll();
         }
 
-        public CouponValue CreateCouponValue(int value, string userId)
+        public CouponValue CreateCouponValue(int value)
         {
-            return _couponValueRepo.CreateCouponValue(value, userId);
+            return _couponValueRepo.CreateCouponValue(value);
         }
 
         public CouponValue UpdateCouponValue(int id, int value)
@@ -199,7 +199,6 @@ namespace WheelOfFortune.Services
                 hasSound = true,
                 gameId = "9a0232ec06bc431114e2a7f3aea03bbe2164f1aa",
                 clickToSpin = true
-
             };
         }
 

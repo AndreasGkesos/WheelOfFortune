@@ -16,13 +16,8 @@ namespace WheelOfFortune.Repos
             _context = context;
         }
 
-        public CouponValue CreateCouponValue(int value, string userId)
+        public CouponValue CreateCouponValue(int value)
         {
-            var user = _context.Users.First(x => x.Id == userId);
-
-            if (user == null)
-                throw new Exception("User does not exist");
-
             var cv = new CouponValue{
                Value = value
             };

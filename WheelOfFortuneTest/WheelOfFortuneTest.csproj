@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RepoTest\UserRepoTest.cs" />
     <Compile Include="RepoTest\WheelConfigurationSliceTest.cs" />
     <Compile Include="RepoTest\WheelConfigurationTest.cs" />
     <Compile Include="Test\WheelServiceTest.cs" />
