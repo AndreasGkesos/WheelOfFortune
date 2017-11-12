@@ -32,11 +32,8 @@ namespace WheelOfFortune.Controllers.API
         {
             var result = _wheelService.GetUserImage(EncryptionService.DecryptString(userId));
 
-            if (result.Length <= 0)
-            {
-                return Ok(result);//it will be taken care of from the vaildation in ajax method
-            }
-
+            if (result == null) { return Ok(result); }//it will be taken care of from the vaildation in ajax method}
+            if (result.Length <= 0) { return Ok(result); }
             return Ok(result);
         }
     }
