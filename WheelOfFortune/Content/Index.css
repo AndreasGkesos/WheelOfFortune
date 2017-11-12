@@ -691,7 +691,7 @@ h1 {
 
     .scrub-transition .gs-main-content {
         font-family: "Indie Flower", serif;
-        background: #ffbc59;
+        background: white;
     }
 
     .scrub-transition .gs-modal {
@@ -822,4 +822,42 @@ Animations
         transform: translateY(-50%) translateX(-97.5%);
     }
 }
+  /*Slider*/
+#slidecontainer {
+    width: 50%;
+    margin-left: 24vw;
+}
+.slider {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 15px;
+    border-radius: 5px;   
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+#betandBalanceContainer {
   
+    border-color: #6d7a97 !important;
+    background-color: #6d7a97;
+}
