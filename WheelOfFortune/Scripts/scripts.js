@@ -31,12 +31,6 @@ jQuery(document).ready(function ($) {
             $(this).removeClass("is-visible");
         }
     });
-    //close popup when clicking the esc keyboard button
-    $(document).keyup(function (event) {
-        if (event.which == "27") {
-            $(".gs-popup").removeClass("is-visible");
-        }
-    });
 });
 
 
@@ -142,3 +136,24 @@ jQuery(document).ready(function ($) {
 
 });
 
+
+
+// box js 
+jQuery(document).ready(function ($) {
+    //open/close box
+    $('.box-trigger').on('click', function (event) {
+        event.preventDefault();
+        if ($('.box-container').hasClass('open')) {
+            $('.box-container').removeClass('open');
+        } else {
+            $('.box-container').addClass('open');
+        }
+
+    });
+
+    $(".spinBtn").on("click", function (event) {
+        $('.box-container').removeClass('open');
+        $(".modal-close").addClass('disable');
+    });
+
+});

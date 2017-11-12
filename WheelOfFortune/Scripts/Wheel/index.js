@@ -23,6 +23,8 @@ function myResult(e) {
 
     console.log("betValue");
     console.log(betValue);
+
+    $(".modal-close").removeClass('disable');
  
         const resultValue = betValue * e.userData.score;
 

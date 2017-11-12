@@ -1,140 +1,117 @@
-    .wheel-container  {
-        
-    }  
-    .wheel-container .wheelContainer, .wheel-container body, .wheel-container html {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
+, .peg, .wheelSVG {
+    visibility: hidden;
+}
 
-    .wheel-container .centerCircle, .wheel-container .valueContainer, .wheel-container .wheelOutline, .wheel-container .wheelText {
-        pointer-events: none;
-    }
+.wheelContainer{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-    .wheel-container .toast, .wheel-container .wheelContainer, .wheel-container body, .wheel-container html {
-        text-align: center;
-    }
+.centerCircle, .valueContainer, .wheelOutline, .wheelText {
+    pointer-events: none;
+}
 
-    .wheel-container .wheelContainer, .wheel-container button {
-        transform: translate(-50%, 0);
-    }
+.toast, .wheelContainer{
+    text-align: center;
+}
 
-    .wheel-container .toast, .wheel-container button {
-        position: absolute;
-        background-color: #E81D62;
-    }
+.wheelContainer{
+    transform: translate(-50%, 0);
+}
 
-    .wheel-container body {
-        background-color: #2d2d2d;
-        overflow: hidden;
-    }
+.toast {
+    position: absolute;
+    background-color: #2c97de !important;
+}
 
-    .wheel-container body, .wheel-container html {
-        margin: 0;
-        padding: 0;
-    }
+.wheelContainer {
+    position: absolute;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
+    top: 5%;
+}
 
-    .wheel-container .wheelContainer {
-        position: absolute;
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-        left: 50%;
-        top: 100px;
-    }
+.wheelSVG {
+    position: absolute;
+    overflow: visible;
+    width: 100%;
+    height: auto;
+}
 
-    .wheel-container .wheelSVG {
-        position: absolute;
-        overflow: visible;
-        width: 100%;
-        height: auto;
-    }
+.wheelText {
+    text-anchor: middle;
+    font-family: 'Fjalla One', Arial, sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+}
 
-    .wheel-container .wheelText {
-        text-anchor: middle;
-        font-family: 'Fjalla One', Arial, sans-serif;
-        -webkit-user-select: none;
-        user-select: none;
-    }
+.toast {
+    border-radius: 12px;
+    opacity: 0;
+}
 
-    .wheel-container .toast {
-        border-radius: 12px;
-        opacity: 0;
-    }
-
-        .wheel-container .toast p {
-            clear: both;
-            font-family: 'Fjalla One', Arial, sand-serif;
-            margin: 23px;
-            font-size: 30px;
-            color: #ededed;
-            letter-spacing: 0;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            line-height: 32px;
-            -webkit-transition: line-height .2s ease;
-            transition: line-height .2s ease;
-        }
-
-    .wheel-container button {
-        left: 50%;
-        width: 100%;
-        top: 20px;
-        max-width: 250px;
-        padding: 20px;
-        font-weight: 700;
-        font-size: 32px;
+    .toast p {
+        clear: both;
+        font-family: 'Fjalla One', Arial, sand-serif;
+        margin: 23px;
+        font-size: 30px;
         color: #ededed;
-        border-radius: 6px;
-        border: none;
-        box-shadow: 0 2px 0 #D71559;
-        cursor: pointer;
-        font-family: "Fjalla One", Helvetica, Arial, sans-serif;
+        letter-spacing: 0;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        line-height: 32px;
+        -webkit-transition: line-height .2s ease;
+        transition: line-height .2s ease;
     }
+
+
 
 @media only screen and (max-width: 480px) {
-    .wheel-container .toast p, .wheel-container .toast span {
+    .toast p, .toast span {
         font-size: 18px;
         line-height: 18px;
     }
 }
 
 @media only screen and (min-width: 481px) and (max-width: 800px) {
-    .wheel-container .toast p, .wheel-container .toast span {
+    .toast p, .toast span {
         font-size: 38px;
         line-height: 38px;
     }
 }
 
 @media only screen and (min-width: 801px) {
-    .wheel-container .toast p, .wheel-container .toast span {
+    .wheelContainer {
+        position: absolute;
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 50%;
+        top: 4%;
+    }
+    .toast p, .toast span {
         font-size: 58px;
         line-height: 60px;
     }
 }
 
 @media only screen and (max-height: 480px) {
-    .wheel-container .toast p, .wheel-container .toast span {
+    .toast p, .toast span {
         font-size: 33px;
         line-height: 35px;
     }
 
-    .wheel-container button {
-        font-size: 22px;
-        padding: 10px;
-        width: 40%;
-    }
 
-    .wheel-container .wheelContainer {
+
+    .wheelContainer {
         top: 70px;
     }
-}
-
-.wheel-container button:focus {
-    outline: 0;
 }

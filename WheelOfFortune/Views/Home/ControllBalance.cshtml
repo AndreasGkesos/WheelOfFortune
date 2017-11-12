@@ -1,22 +1,39 @@
-﻿<!-- Bet Pop up -->
-<div class="gs-popup">
-    <main class="gs-popup gs-main-content">
-        <div class="center" id="betandBalanceContainer">
-            <h2>Balance Value</h2>
-            <div id="balanceValue"></div>
-            <h1>Bet Value</h1>
-            <div id="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-            </div>
-            <p>Value: <span id="bet"></span></p>
-            @Html.TextBox("BetValue")
-            <a id="betValueSubmit" href="#modal-1" class="gs-btn gs-modal-trigger" style="padding:20px;">Bet & Play</a>
-        </div>
-    </main> <!-- .gs-main-content -->
-</div> <!-- gs-popup -->
+﻿
+<div class="box-container ">
+    <a href="#0" class="box-trigger">
+        Bet
+    </a>
 
+    <div class="the-box">
+        <div class="wrapper">
+            <header>
+                <h2>Box</h2>
+            </header>
+
+            <div class="body">
+                <ul>
+                    <li class="item">
+                        <div class="item-details">
+                            <h2>Balance Value</h2>
+                            <div id="balanceValue"></div>
+                            <h1>Bet Value</h1>
+                            <div id="slidecontainer">
+                                <input type="range" min="1" max="100" value="50" class="slider" id="BetValue">
+                            </div>
+                            <p>Value: <span id="bet"></span></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <footer>
+                <a href="#0" class="checkout btn spinBtn">Play</a>
+            </footer>
+        </div>
+    </div> <!-- .the-box -->
+</div> <!-- box-container -->
 <script>
-    var slider = document.getElementById("myRange");
+    var slider = document.getElementById("BetValue");
     var output = document.getElementById("bet");
     output.innerHTML = slider.value;
 

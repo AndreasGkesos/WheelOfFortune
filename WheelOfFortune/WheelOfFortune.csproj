@@ -509,6 +509,8 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\img\blurred-image-1.jpg" />
+    <Content Include="Content\img\cartoon.png" />
+    <Content Include="Content\img\close.svg" />
     <Content Include="Content\img\login.jpg" />
     <Content Include="Content\img\now-logo.png" />
     <Content Include="Content\img\registerPic.bmp" />
