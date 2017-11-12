@@ -61,10 +61,7 @@ jQuery(document).ready(function ($) {
         event.preventDefault();
 
 
-        var inputField = $(this).prev();
-        console.log(checkBetInput(inputField));
-//        if (checkBetInput(inputField)) {
-//            console.log("mphke sto swsto");
+
            var modalId = $(event.target).attr("href");
            transitionLayer.addClass("visible opening");
            wheelShow.removeClass("hidden");
@@ -73,13 +70,7 @@ jQuery(document).ready(function ($) {
                modalWindow.filter(modalId).addClass("visible");
                transitionLayer.removeClass("opening");
            }, delay);
-//       // }
-//        var delay = ($(".no-cssanimations").length > 0) ? 0 : 800;
-//        setTimeout(function () {
-//            modalWindow.filter(modalId).addClass("visible");
-//            transitionLayer.removeClass("opening");
-//        }, delay);
-//     
+
     });
 
     //close modal window

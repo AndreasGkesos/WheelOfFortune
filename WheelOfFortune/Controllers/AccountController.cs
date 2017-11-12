@@ -76,9 +76,11 @@ namespace WheelOfFortune.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
 
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            //var user = await UserManager.FindByIdAsync(User.Identity.Name);
+           // var user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            var user = await UserManager.FindAsync(model.Username, model.Password);
             if (user == null) {
                 ModelState.AddModelError("", @"User does not exist");
                 return View(model);
@@ -486,13 +488,7 @@ namespace WheelOfFortune.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private void AddErrors(IdentityResult result)
         {
