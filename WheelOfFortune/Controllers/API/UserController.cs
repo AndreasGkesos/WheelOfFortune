@@ -28,6 +28,12 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
+        public bool UpdateUserActiveStatus(bool status, string userId)
+        {
+            return _wheelService.UpdateUserActiveStatusById(status, userId);
+        }
+
+        [HttpGet]
         public IHttpActionResult GetUserPhoto(string userId)
         {
             var result = _wheelService.GetUserImage(EncryptionService.DecryptString(userId));

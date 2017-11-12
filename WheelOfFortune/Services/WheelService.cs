@@ -232,5 +232,10 @@ namespace WheelOfFortune.Services
         {
             return _userRepo.GetUserPicture(userId);
         }
+
+        public bool UpdateUserActiveStatusById(bool status, string userId)
+        {
+            return _userRepo.UpdateUserActiveStatusById(status, userId);
+        }
     }
 }
