@@ -6,7 +6,7 @@
  */
 
 body {
-    font-family: 'Indie Flower', cursive!important;
+    font-family:  'EB Garamond', serif!important;
 }
 @media print {
     *,
@@ -116,7 +116,7 @@ section {
 
 body {
     margin: 0;
-    font-family: 'Indie Flower',cursive!important;
+    font-family:  'EB Garamond', serif!important;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -319,7 +319,7 @@ optgroup,
 select,
 textarea {
     margin: 0;
-    font-family: 'Indie Flower',cursive!important;
+    font-family: 'EB Garamond', serif !important;
     font-size: inherit;
     line-height: inherit
 }
@@ -1763,7 +1763,8 @@ pre {
 }
 
 .form-control {
-    font-family: 'Indie Flower', cursive!important;
+    font-family:  'EB Garamond', serif!important;
+
     display: block;
     width: 100%;
     padding: .5rem .75rem;

@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Indie Flower', cursive !important;
+    font-family:  'EB Garamond', serif!important;
     font-weight: bold;
     background-color: #30303F!important;
 }
@@ -97,7 +97,7 @@ html {
 
 body {
     font-size: 1.6rem;
-    font-family: "Indie Flower", sans-serif;
+    font-family:  'EB Garamond', serif!important;
     color: #040404;
     background-color: #ffffff;
 }
@@ -670,27 +670,27 @@ h1 {
   
   -------------------------------- */
 .scrub-transition {
-    font-family: "PT Sans", sans-serif;
+    font-family:  'EB Garamond', serif!important;
     color: #2c1a32;
 }
 
     .scrub-transition h1, .scrub-transition h2 {
-        font-family: "Indie Flower", serif;
+        font-family: 'EB Garamond', serif !important;
         margin-bottom: .4em;
         font-size: 4rem;
     }
-.scrub-transition p {
-     font-family: "Indie Flower", serif;
-}
+    .scrub-transition p {
+        font-family: 'EB Garamond', serif !important;
+    }
 
     .scrub-transition .gs-btn {
-        font-family: "Indie Flower", serif;
+        font-family: 'EB Garamond', serif !important;
         background: #b24160;
         color: #ffffff;
     }
 
     .scrub-transition .gs-main-content {
-        font-family: "Indie Flower", serif;
+        font-family: 'EB Garamond', serif !important;
         background: white;
     }
 
