@@ -77,6 +77,17 @@ namespace WheelOfFortune.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
+
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null) {
+                ModelState.AddModelError("", @"User does not exist");
+                return View(model);
+            }
+            if (!user.Active) {
+                ModelState.AddModelError("", @"User is not active");
+                return View(model);
+            }
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -185,7 +196,8 @@ namespace WheelOfFortune.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     UName = model.Username,
-                    UserPhoto = picture
+                    UserPhoto = picture,
+                    Active = true
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
