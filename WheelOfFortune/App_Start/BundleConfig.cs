@@ -33,7 +33,8 @@ namespace WheelOfFortune
                 "~/Scripts/Wheel/Spin2WinWheel.min.js",
                 "~/Scripts/Wheel/TextPlugin.min.js",
                 "~/Scripts/Wheel/index.js",
-                "~/Scripts/toastr.min.js"
+                "~/Scripts/toastr.min.js",
+                "~/Scripts/bootbox.min.js"
                 ));
 
             //Spins View

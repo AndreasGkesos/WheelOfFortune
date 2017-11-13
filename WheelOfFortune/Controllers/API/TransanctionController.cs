@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Web.Http;
 using System.Linq;
+using System.Web.Http;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers.API
-{   
+{
     public class TransactionController : ApiController
     {
         private readonly IWheelService _wheelService;

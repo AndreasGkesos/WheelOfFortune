@@ -1,4 +1,5 @@
-﻿function openNav() {
+﻿
+function openNav() {
     document.getElementById("mySidenav").style.width = "400px";
     document.getElementById("main").style.marginLeft = "400px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
@@ -13,138 +14,38 @@ function closeNav() {
     document.body.style.backgroundColor = "white";
 }
 
-
-
-jQuery(document).ready(function ($) {
-    //open popup
-    $(".gs-popup-trigger").on("click",
-        function(event) {
-            event.preventDefault();
-            $(".gs-popup").addClass("is-visible");
-            $(".gs-intro").addClass("hidden");
-        });
-
-    //close popup
-    $(".gs-popup").on("click", function (event) {
-        if ($(event.target).is(".gs-popup-close") || $(event.target).is(".gs-popup") || $(event.target).is(".popup-back") || $(event.target).is(".gs-modal-trigger")) {
-            event.preventDefault();
-            $(this).removeClass("is-visible");
-        }
-    });
-});
-
-
-jQuery(document).ready(function ($) {
-    //cache some jQuery objects
-    var modalTrigger = $(".gs-modal-trigger"),
-        transitionLayer = $(".gs-transition-layer"),
-        transitionBackground = transitionLayer.children(),
-        modalWindow = $(".gs-modal");
-    previusWindow = $(".gs-popup");
-    wheelShow = $(".wheel-container");
-
-    var frameProportion = 1.78, //png frame aspect ratio
-        frames = transitionLayer.data("frame"), //number of png frames
-        resize = false;
-
-    //set transitionBackground dimentions
-    setLayerDimensions();
-    $(window).on("resize", function () {
-        if (!resize) {
-            resize = true;
-            (!window.requestAnimationFrame) ? setTimeout(setLayerDimensions, 300) : window.requestAnimationFrame(setLayerDimensions);
-        }
-    });
-
-    //open modal window
-    modalTrigger.on("click", function (event) {
-        event.preventDefault();
-
-
-
-           var modalId = $(event.target).attr("href");
-           transitionLayer.addClass("visible opening");
-           wheelShow.removeClass("hidden");
-           var delay = ($(".no-cssanimations").length > 0) ? 0 : 800;
-           setTimeout(function () {
-               modalWindow.filter(modalId).addClass("visible");
-               transitionLayer.removeClass("opening");
-           }, delay);
-
-    });
-
-    //close modal window
-    modalWindow.on("click", ".modal-close", function (event) {
-        event.preventDefault();
-        transitionLayer.addClass("closing");
-        modalWindow.removeClass("visible");
-        wheelShow.addClass("hidden");
-        transitionBackground.one("webkitAnimationEnd oanimationend msAnimationEnd animationend", function () {
-            transitionLayer.removeClass("closing opening visible");
-            transitionBackground.off("webkitAnimationEnd oanimationend msAnimationEnd animationend");
-        });
-        previusWindow.addClass("is-visible");
-    });
-
-    function setLayerDimensions() {
-        var windowWidth = $(window).width(),
-            windowHeight = $(window).height(),
-            layerHeight, layerWidth;
-
-        if (windowWidth / windowHeight > frameProportion) {
-            layerWidth = windowWidth;
-            layerHeight = layerWidth / frameProportion;
+$("#depositCodeSubmit").on("click",
+    function (event) {
+        let $button = $(this);
+        console.log($button);
+        let $input = $button.prev("input");
+        if ($input.val() === "") {
+            toastr.error("Please enter a valid coupon");
+        
         } else {
-            layerHeight = windowHeight * 1.2;
-            layerWidth = layerHeight * frameProportion;
+            $.ajax({
+                type: "GET",
+                url: "/api/Coupon/Exchange?code=" + $input.val(),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    alert("msg" + msg);
+                    $($input).val("");
+                    if (msg === "true") {
+                        toastr.success("Great you just turned your coupon to cash");
+                        toastr.success("Do not waste ay more time click the Bet And PLay button and start" +
+                            "making some money");
+                    }
+                    toastr.error("Wrong coupon value.Maybe your coupon has expired or it ts just invalid");
+                },
+                fail: function (msg) {
+                    toastr.error("Wrong coupon value.Maybe your coupon has expired or it ts just invalid");
+                }
+            })
         }
-
-        transitionBackground.css({
-            "width": layerWidth * frames + "px",
-            "height": layerHeight + "px",
-        });
-
-        resize = false;
-    }
-
-    function checkBetInput($inputElem) {
-        let $inputValue = $inputElem.text();
-        console.log($inputElem);
-        console.log("its inside");
-        if ($inputValue.length === 0) {//0
-            alert("Please enter a bet Value so you can play");
-            return false;
-        } else if (/^[0-9,.]*$/.test($inputValue)) {//1
-            alert("You didnt enter valid input");
-            return false;
-        } else if ($inputValue > balance) {//2
-            alert("You cant enter bet larger than your current balance");
-            return false;
-        }
-
-        return true;
-    }
-
-});
-
-
-
-// box js 
-jQuery(document).ready(function ($) {
-    //open/close box
-    $('.box-trigger').on('click', function (event) {
-        event.preventDefault();
-        if ($('.box-container').hasClass('open')) {
-            $('.box-container').removeClass('open');
-        } else {
-            $('.box-container').addClass('open');
-        }
-
+      
     });
 
-    $(".spinBtn").on("click", function (event) {
-        $('.box-container').removeClass('open');
-        $(".modal-close").addClass('disable');
-    });
+    
 
-});
+ 

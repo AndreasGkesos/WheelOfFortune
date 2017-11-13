@@ -18,15 +18,36 @@ function loadJSON(callback) {
 
 //your own function to capture the spin results
 function myResult(e) {
-    
-    let betValue = $("input#BetValue").val();
+    let resultValue = 0;
+    let betValue = $("span#bet").val();
 
-    console.log("betValue");
-    console.log(betValue);
+
 
     $(".modal-close").removeClass('disable');
- 
-        const resultValue = betValue * e.userData.score;
+
+    var value = e.msg;
+    console.log(e);
+    switch (value) {
+        case value.includes("x"):
+            resultValue = betValue * e.userData.score;
+            alert("mphke sto multiplier");
+            alert(resultValue);
+            break;
+        case value.includes("/"):
+            resultValue = betValue / Math.abs(e.userData.score);
+            alert("mphke sto /");
+            alert(resultValue);
+            break;
+        case value.includes("+"):
+        case value.includes("-"):
+            resultValue = betValue + e.userData.score;
+            alert("mphke sto + -");
+            alert(resultValue);
+            break;
+        default:
+            resultValue = betValue + e.userData.score;
+    }
+         
 
         const spinModelObject = {
             ScoreValue: e.userData.score,
@@ -58,22 +79,22 @@ function myResult(e) {
 
        
 
-//    $("#balanceValueContainer").val("");
-//    $.ajax({
-//        type: "GET",
-//        url: "/api/Balance/GetBalance?userId="+userId,
-//        data: { userId: userId },
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (msg) {
-//            $("#balanceValueContainer").hide(250).show(250);
-//            $("#balanceValueContainer").text(msg);
-//        },
-//        fail: function (msg) {
-//            alert("error in getting the balance");
-//        }
-//
-//    });
+
+    $.ajax({
+        type: "GET",
+        url: "/api/Balance/GetBalance?userId="+ window.userId.toString(),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            $("#balanceValue").hide(250).show(250);
+            $("#balanceValue").text(msg);
+            console.log("ksanaxtyphse th methodo");
+        },
+        fail: function (msg) {
+            alert("error in getting the balance");
+        }
+
+    });
 
     }
     

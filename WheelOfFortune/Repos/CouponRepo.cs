@@ -92,11 +92,13 @@ namespace WheelOfFortune.Repos
 
         public decimal? Exchange(string code)
         {
-            var coupon = _context.Coupons.Where(x => x.Code == code).Include(x => x.User).Include(c => c.Value).First();
+            var coupon = _context.Coupons.Where(x => x.Code == code).Include(x => x.User).Include(c => c.Value).FirstOrDefault();
+
 
             var now = DateTime.Now;
             if (coupon == null || !coupon.Active || coupon.DateExpired < now)
                 return null;
+
 
             coupon.Active = false;
             coupon.DateExchanged = now;
