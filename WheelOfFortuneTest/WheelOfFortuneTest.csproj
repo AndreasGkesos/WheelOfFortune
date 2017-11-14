@@ -71,15 +71,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RepoTest\UserRepoTest.cs" />
     <Compile Include="RepoTest\WheelConfigurationSliceTest.cs" />
     <Compile Include="RepoTest\WheelConfigurationTest.cs" />
+    <Compile Include="Test\WheelServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepoTest\BalanceRepoTest.cs" />
     <Compile Include="RepoTest\CouponRepoTest.cs" />
     <Compile Include="RepoTest\CouponValueRepoTest.cs" />
     <Compile Include="RepoTest\SpinRepoTest.cs" />
     <Compile Include="RepoTest\TransactionRepoTest.cs" />
-    <Compile Include="Test\WheelServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

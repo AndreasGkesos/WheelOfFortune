@@ -11,22 +11,18 @@ namespace WheelTestingProject.RepoTest
     class BalanceRepoTest : IBalanceRepo
     {
         private List<Balance> list = new List<Balance>();
+        private ApplicationUser user1 = new ApplicationUser { Id = "aaaaa", Email = "andreas1@gmail.com", UserName = "andreas1" };
+        private ApplicationUser user2 = new ApplicationUser { Id = "bbbbb", Email = "andreas2@gmail.com", UserName = "andreas2" };
 
-        public BalanceRepoTest()
+    public BalanceRepoTest()
         {
-            ApplicationUser user1 = new ApplicationUser { Id = "aaaaa", Email = "andreas1@gmail.com", UserName = "andreas1" };
-            ApplicationUser user2 = new ApplicationUser { Id = "bbbbb", Email = "andreas2@gmail.com", UserName = "andreas2" };
-
-
             list.Add(new Balance { Id = 1, BalanceValue = 100, User = user1 });
             list.Add(new Balance { Id = 2, BalanceValue = 120, User = user2 });
         }
 
         public Balance CreateBalance(string userId)
         {
-            ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas" };
-
-            return new Balance { Id = 1, BalanceValue = 100, User = user };
+            return new Balance { Id = 1, BalanceValue = 100, User = user1 };
         }
 
         public decimal GetBalanceByUserId(string userId)
@@ -41,8 +37,7 @@ namespace WheelTestingProject.RepoTest
 
         public Balance UpdateBalance(decimal balance, string userId)
         {
-            ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas" };
-            Balance blc = new Balance { Id = 1, BalanceValue = 100, User = user };
+            Balance blc = new Balance { Id = 1, BalanceValue = 100, User = user1 };
 
             blc.BalanceValue = blc.BalanceValue + balance;
             return blc;
