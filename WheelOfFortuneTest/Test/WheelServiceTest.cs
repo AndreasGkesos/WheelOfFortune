@@ -40,8 +40,10 @@ namespace WheelTestingProject.ControllerTest
             WheelConfiguration wheel = new WheelConfiguration { Id = 1, DateCreated = new DateTime(2017, 10, 10, 10, 20, 4), User = user };
 
             Spin spin = wheelService.CreateSpin(new WheelOfFortune.Models.ViewModels.SpinBindingModel { BetValue = 10, ExecutionDate = DateTime.Now, ResultValue = 20, ScoreValue = 2, WheelConfigurationId = 1}, "aaaaa");
-
-            Assert.True(spin.Equals(new Spin { Id = 6, BetValue = 20, ScoreValue = -1, ResultValue = -20.0m, ExecutionDate = new DateTime(2017, 11, 11, 8, 20, 4), User = user, WheelConfiguration = wheel }));
+            Spin tmpSpin = new Spin { Id = 6, BetValue = 20, ScoreValue = -1, ResultValue = -20.0m, ExecutionDate = new DateTime(2017, 11, 11, 8, 20, 4), User = user, WheelConfiguration = wheel };
+            Assert.True(spin.Id == tmpSpin.Id);
+            Assert.True(spin.WheelConfiguration.Id == tmpSpin.WheelConfiguration.Id);
+            Assert.True(spin.User.Id == tmpSpin.User.Id);
         }
 
         [Fact]
@@ -58,7 +60,9 @@ namespace WheelTestingProject.ControllerTest
             var balance = wheelService.GetBalanceObjectByUserId(testUserId);
             var blc = new Balance { Id = 1, BalanceValue = 100, User = user1 };
 
-            Assert.True(balance.Equals(blc));
+            Assert.True(balance.Id == blc.Id);
+            Assert.True(balance.BalanceValue == blc.BalanceValue);
+            Assert.True(balance.User.Id == blc.User.Id);
         }
 
         [Fact]
@@ -75,7 +79,9 @@ namespace WheelTestingProject.ControllerTest
             var balance = wheelService.CreateBalance(testUserId);
             var blc = new Balance { Id = 1, BalanceValue = 100, User = user1 };
 
-            Assert.True(balance == blc);
+            Assert.True(balance.Id == blc.Id);
+            Assert.True(balance.BalanceValue == blc.BalanceValue);
+            Assert.True(balance.User.Id == blc.User.Id);
         }
 
         [Fact]
@@ -111,8 +117,11 @@ namespace WheelTestingProject.ControllerTest
             var coupon = wheelService.CreateCoupon(
                 new CouponBindingModel(),
                 testUserId);
+            var tmpCoupon = new Coupon { Id = 1, Active = true, Code = "ASDFG12345", DateCreated = new DateTime(2017, 10, 10, 8, 23, 4), DateExpired = new DateTime(2017, 12, 10, 8, 23, 4), DateExchanged = new DateTime(2017, 11, 11, 8, 23, 4), Value = new CouponValue { Id = 1, Value = 10 }, User = user };
 
-            Assert.True(coupon == new Coupon { Id = 1, Active = true, Code = "ASDFG12345", DateCreated = new DateTime(2017, 10, 10, 8, 23, 4), DateExpired = new DateTime(2017, 12, 10, 8, 23, 4), DateExchanged = new DateTime(2017, 11, 11, 8, 23, 4), Value = new CouponValue { Id = 1, Value = 10 }, User = user });
+            Assert.True(coupon.Id == tmpCoupon.Id);
+            Assert.True(coupon.Value.Id == tmpCoupon.Value.Id);
+            Assert.True(coupon.User.Id == tmpCoupon.User.Id);
         }
 
         [Fact]
@@ -135,8 +144,10 @@ namespace WheelTestingProject.ControllerTest
         public void TestCreateCouponValue()
         {
             var cv = wheelService.CreateCouponValue(10);
+            var tmpcv = new CouponValue { Id = 1, Value = 5 };
 
-            Assert.True(cv == new CouponValue { Id = 1, Value = 5 });
+            Assert.True(cv.Id == tmpcv.Id);
+            Assert.True(cv.Value == tmpcv.Value);
         }
 
         [Fact]
@@ -160,7 +171,8 @@ namespace WheelTestingProject.ControllerTest
         {
             var user = wheelService.GetUserById(testUserId);
 
-            Assert.True(user == user1);
+            Assert.True(user.Id == user1.Id);
+            Assert.True(user.Email == user1.Email);
         }
     }
 }
