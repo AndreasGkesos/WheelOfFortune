@@ -107,5 +107,17 @@ namespace WheelOfFortune.Repos
 
             return coupon.Value.Value;
         }
+
+        public bool Delete(int id)
+        {
+            var coupon = _context.Coupons.Where(x => x.Id == id).FirstOrDefault();
+
+            if (coupon == null) { return false; }
+
+            _context.Entry(coupon).State = EntityState.Deleted;
+            _context.SaveChanges();
+
+            return true;
+        }
     }
 }

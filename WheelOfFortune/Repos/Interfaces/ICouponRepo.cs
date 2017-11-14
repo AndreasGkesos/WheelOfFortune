@@ -12,5 +12,6 @@ namespace WheelOfFortune.Repos.Interfaces
         Coupon CreateCoupon(CouponBindingModel model, string userId);
         IEnumerable<Coupon> GetAll();
         decimal? Exchange(string code);
+        bool Delete(int id);
     }
 }

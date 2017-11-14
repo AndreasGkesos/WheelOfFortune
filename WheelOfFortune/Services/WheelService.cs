@@ -119,6 +119,11 @@ namespace WheelOfFortune.Services
             return true;
         }
 
+        public bool DeleteCoupon(int id)
+        {
+            return _couponRepo.Delete(id);
+        }
+
         private void UpdateTransactionAndBalance(decimal value, string userId)
         {
             var t = _transactionRepo.CreateTransaction(

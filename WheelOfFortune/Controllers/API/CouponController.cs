@@ -41,6 +41,12 @@ namespace WheelOfFortune.Controllers.API
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
             return _wheelService.ExchangeCoupon(code, userId);
-        }   
+        }
+
+        [HttpPost]
+        public bool DeleteCoupon(int id)
+        {
+            return _wheelService.DeleteCoupon(id);
+        }
     }
 }

@@ -22,6 +22,7 @@ namespace WheelOfFortune.Services
         Coupon CreateCoupon(CouponBindingModel model, string userId);
         IEnumerable<Coupon> GetAllCoupons();
         bool ExchangeCoupon(string code, string userId);
+        bool DeleteCoupon(int id);
 
         CouponValue CreateCouponValue(int value, string userId);
         CouponValue UpdateCouponValue(int id, int value);
