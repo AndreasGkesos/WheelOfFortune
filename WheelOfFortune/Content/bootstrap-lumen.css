@@ -1432,7 +1432,7 @@ a {
 
     a:hover,
     a:focus {
-        color: #158cba;
+        color: #fff;
         text-decoration: underline;
     }
 
