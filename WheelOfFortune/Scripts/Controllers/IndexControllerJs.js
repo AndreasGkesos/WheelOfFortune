@@ -9,6 +9,7 @@ function IndexController_init(config) {
 
     UpdateBalanceContainer(userId);
     InitialListeners();
+    theTour();
     GetUserPhoto(userId);
     
 
@@ -229,41 +230,190 @@ function InitialListeners() {
     });
 
 }
-var dialog = bootbox.dialog({
-    title: 'Oops your current balance is too low',
-    message: '<p>Select Add Coupon to add one of your available coupons or unfortunately you cant play any more :(</p>',
-    buttons: {
-        Back: {
-            label: "Back to Index!",
-            className: 'btn-info',
-            callback: function() {
+
+function theTour() {
+    jQuery(document).ready(function ($) {
+        //check if a .ww-tour-wrapper exists in the DOM - if yes, initialize it
+        $('.ww-tour-wrapper').exists() && initTour();
+
+        function initTour() {
+            var tourWrapper = $('.ww-tour-wrapper'),
+                tourSteps = tourWrapper.children('li'),
+                stepsNumber = tourSteps.length,
+                coverLayer = $('.ww-cover-layer'),
+                tourStepInfo = $('.ww-more-info'),
+                tourTrigger = $('#ww-tour-trigger');
+
+            // Height Calculator 
+            function calcBottomVal(link,target) {
+                var offset = link.offset();
+                var top = offset.top;
+                var bottom = $(window).height() - top - link.height() - 15;
+                    target.css('bottom', bottom);               
+            }
+            
+
+            //create the navigation for each step of the tour
+            createNavigation(tourSteps, stepsNumber);
+
+            tourTrigger.on('click', function () {
+                calcBottomVal($('#betAndPlayBtn'), $('.ww-single-step:nth-of-type(1)'));
+                $('.ww-single-step:nth-of-type(2)').css({ 'bottom': 20 + 72 + 90 + 10 + 'px', 'right': '400px' });
+                
+                //start tour
+                if (!tourWrapper.hasClass('active')) {
+                    //in that case, the tour has not been started yet
+                    tourWrapper.addClass('active');
+                    showStep(tourSteps.eq(0), coverLayer);
+                }
+            });
+
+            //change visible step
+            tourStepInfo.on('click', '.ww-prev', function (event) {
+                //go to prev step - if available
+                (!$(event.target).hasClass('inactive')) && changeStep(tourSteps, coverLayer, 'prev');
+                if (tourSteps.eq(1)) {
+                    $('.box-container').removeClass('open');
+                    $('.gs-modal').removeClass('visible').fadeIn(900);
+                }
+            });
+            tourStepInfo.on('click', '.ww-next', function (event) {
+                //go to next step - if available
+                (!$(event.target).hasClass('inactive')) && changeStep(tourSteps, coverLayer, 'next');
+
+                $('.gs-modal').addClass('visible').fadeIn(900);
+                $('.box-container').addClass('open');
+
+
+
+
+
+            });
+
+            //close tour
+            tourStepInfo.on('click', '.ww-close', function (event) {
+                closeTour(tourSteps, tourWrapper, coverLayer);      
+                $('.box-container').removeClass('open');
+                $('.gs-modal').removeClass('visible').fadeIn(900);
+            });
+
+            //detect swipe event on mobile - change visible step
+            tourStepInfo.on('swiperight', function (event) {
+                //go to prev step - if available
+                if (!$(this).find('.ww-prev').hasClass('inactive') && viewportSize() == 'mobile') changeStep(tourSteps, coverLayer, 'prev');
+            });
+            tourStepInfo.on('swipeleft', function (event) {
+                //go to next step - if available
+                if (!$(this).find('.ww-next').hasClass('inactive') && viewportSize() == 'mobile') changeStep(tourSteps, coverLayer, 'next');
+            });
+
+            //keyboard navigation
+            $(document).keyup(function (event) {
+                if (event.which == '37' && !tourSteps.filter('.is-selected').find('.ww-prev').hasClass('inactive')) {
+                    changeStep(tourSteps, coverLayer, 'prev');
+                } else if (event.which == '39' && !tourSteps.filter('.is-selected').find('.ww-next').hasClass('inactive')) {
+                    changeStep(tourSteps, coverLayer, 'next');
+                } else if (event.which == '27') {
+                    closeTour(tourSteps, tourWrapper, coverLayer);
+                }
+            });
+        }
+
+        function createNavigation(steps, n) {
+            var tourNavigationHtml = '<div class="ww-nav"><span><b class="ww-actual-step">1</b> of ' + n + '</span><ul class="ww-tour-nav"><li><a href="#0" class="ww-prev">&#171; Previous</a></li><li><a href="#0" class="ww-next">Next &#187;</a></li></ul></div><a href="#0" class="ww-close">Close</a>';
+
+            steps.each(function (index) {
+                var step = $(this),
+                    stepNumber = index + 1,
+                    nextClass = (stepNumber < n) ? '' : 'inactive',
+                    prevClass = (stepNumber == 1) ? 'inactive' : '';
+                var nav = $(tourNavigationHtml).find('.ww-next').addClass(nextClass).end().find('.ww-prev').addClass(prevClass).end().find('.ww-actual-step').html(stepNumber).end().appendTo(step.children('.ww-more-info'));
+            });
+        }
+
+        function showStep(step, layer) {
+            step.addClass('is-selected').removeClass('move-left');
+            smoothScroll(step.children('.ww-more-info'));
+            showLayer(layer);
+        }
+
+        function smoothScroll(element) {
+            (element.offset().top < $(window).scrollTop()) && $('body,html').animate({ 'scrollTop': element.offset().top }, 100);
+            (element.offset().top + element.height() > $(window).scrollTop() + $(window).height()) && $('body,html').animate({ 'scrollTop': element.offset().top + element.height() - $(window).height() }, 100);
+        }
+
+        function showLayer(layer) {
+            layer.addClass('is-visible').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () {
+                layer.removeClass('is-visible');
+            });
+        }
+
+        function changeStep(steps, layer, bool) {
+            var visibleStep = steps.filter('.is-selected'),
+                delay = (viewportSize() == 'desktop') ? 300 : 0;
+            visibleStep.removeClass('is-selected');
+
+            (bool == 'next') && visibleStep.addClass('move-left');
+
+            setTimeout(function () {
+                (bool == 'next')
+                    ? showStep(visibleStep.next(), layer)
+                    : showStep(visibleStep.prev(), layer);
+            }, delay);
+        }
+
+        function closeTour(steps, wrapper, layer) {
+            steps.removeClass('is-selected move-left');
+            wrapper.removeClass('active');
+            layer.removeClass('is-visible');
+        }
+
+        function viewportSize() {
+            /* retrieve the content value of .ww-main::before to check the actua mq */
+            return window.getComputedStyle(document.querySelector('.ww-tour-wrapper'), '::before').getPropertyValue('content').replace(/"/g, "").replace(/'/g, "");
+        }
+    });
+
+    //check if an element exists in the DOM
+    jQuery.fn.exists = function () { return this.length > 0; }
+}
+
+
+//var dialog = bootbox.dialog({
+//    title: 'Oops your current balance is too low',
+//    message: '<p>Select Add Coupon to add one of your available coupons or unfortunately you cant play any more :(</p>',
+//    buttons: {
+//        Back: {
+//            label: "Back to Index!",
+//            className: 'btn-info',
+//            callback: function() {
                      
-                }
-             },
-            Add: {
-                label: "Add Coupon",
-                className: 'btn-success',
-                callback: function() {
-                    bootbox.prompt("Please enter a coupon so you can play more!!!",
-                        function(result) {
-                            console.log(result);
-                            while (result.lenght <= 5) {
-                                bootbox.prompt("Please enter a  valid coupon so you can play more!!!",
-                                    function(result) {
-                                        if (result <= 5) {
-                                            return;
-                                        }
-                                        var coupon = result;
-                                        console.log(result);
-                                        $("#betAndPlayBtn").attr("href", "#modal - 1");
-                                    });
-                            }
+//                }
+//             },
+//            Add: {
+//                label: "Add Coupon",
+//                className: 'btn-success',
+//                callback: function() {
+//                    bootbox.prompt("Please enter a coupon so you can play more!!!",
+//                        function(result) {
+//                            console.log(result);
+//                            while (result.lenght <= 5) {
+//                                bootbox.prompt("Please enter a  valid coupon so you can play more!!!",
+//                                    function(result) {
+//                                        if (result <= 5) {
+//                                            return;
+//                                        }
+//                                        var coupon = result;
+//                                        console.log(result);
+//                                        $("#betAndPlayBtn").attr("href", "#modal - 1");
+//                                    });
+//                            }
 
-                        });
+//                        });
 
-                }
+//                }
            
 
-        }
-    }
-});   
+//        }
+//    }
+//});   
