@@ -25,8 +25,7 @@ function myResult(e) {
 
     $(".modal-close").removeClass('disable');
 
-    var value = e.msg;
-    console.log(e);
+ 
     switch (value) {
         case value.includes("x"):
             resultValue = betValue * e.userData.score;
