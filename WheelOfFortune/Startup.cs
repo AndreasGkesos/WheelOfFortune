@@ -10,6 +10,7 @@ using WheelOfFortune.Models;
 using WheelOfFortune.Repos.Interfaces;
 using WheelOfFortune.Repos;
 using WheelOfFortune.Services;
+using System.Web.Http.Cors;
 
 [assembly: OwinStartupAttribute(typeof(WheelOfFortune.Startup))]
 namespace WheelOfFortune
@@ -19,7 +20,8 @@ namespace WheelOfFortune
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
-
+            var corsAttr = new EnableCorsAttribute("http://localhost:50576/", "*", "*");
+            config.EnableCors(corsAttr);
             var container = InitializeSimpleInjector(app, config);
             ConfigureAuth(app);
 

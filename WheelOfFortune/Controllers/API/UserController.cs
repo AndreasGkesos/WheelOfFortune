@@ -6,6 +6,7 @@ using WheelOfFortune.Services;
 
 namespace WheelOfFortune.Controllers.API
 {
+    
     public class UserController : ApiController
     {
         private readonly IWheelService _wheelService;
