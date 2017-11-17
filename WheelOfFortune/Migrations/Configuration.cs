@@ -33,6 +33,31 @@ namespace WheelOfFortune.Migrations
 
             var wheelConfigs = context.WheelConfigurations.Count();
             var wheelSlices = context.WheelConfigurationSlices.Count();
+            var couponValues = context.CouponValues.Count();
+
+            var cv1 = new CouponValue
+            {
+                Id = 1,
+                Value = 5
+            };
+
+            var cv2 = new CouponValue
+            {
+                Id = 2,
+                Value = 10
+            };
+
+            var cv3 = new CouponValue
+            {
+                Id = 3,
+                Value = 20
+            };
+
+            var cv4 = new CouponValue
+            {
+                Id = 4,
+                Value = 50
+            };
 
             var adminUser = new ApplicationUser
             {
@@ -289,6 +314,14 @@ namespace WheelOfFortune.Migrations
                 context.WheelConfigurationSlices.Add(slice12);
                 context.WheelConfigurationSlices.Add(slice13);
                 context.WheelConfigurationSlices.Add(slice14);
+            }
+
+            if (couponValues == 0)
+            {
+                context.CouponValues.Add(cv1);
+                context.CouponValues.Add(cv2);
+                context.CouponValues.Add(cv3);
+                context.CouponValues.Add(cv4);
             }
         }
     }
