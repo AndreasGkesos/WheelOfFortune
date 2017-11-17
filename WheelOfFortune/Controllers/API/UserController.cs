@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Services;
 
@@ -17,7 +18,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
         public IEnumerable<ApplicationUserViewModel> GetAll()
         {
             return _wheelService.GetAllUsers().Select(x => TransformModels.ToApplicationUserViewModel(x));
@@ -30,7 +31,6 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public bool UpdateUserActiveStatus(bool status, string userId)
         {
             return _wheelService.UpdateUserActiveStatusById(status, userId);
