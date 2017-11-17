@@ -18,6 +18,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<CouponViewModel> GetAll()
         {
             return _wheelService.GetAllCoupons().Select(x => TransformModels.ToCouponViewModel(x));
@@ -30,6 +31,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public CouponViewModel AddCoupon(CouponBindingModel model)
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
@@ -44,6 +46,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public bool DeleteCoupon(int id)
         {
             return _wheelService.DeleteCoupon(id);

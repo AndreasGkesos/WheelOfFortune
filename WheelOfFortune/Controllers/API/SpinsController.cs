@@ -18,6 +18,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<SpinViewModel> GetAll()
         {
             return _wheelService.GetAllSpins().Select(TransformModels.ToSpinViewModel);
