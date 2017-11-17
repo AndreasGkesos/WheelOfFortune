@@ -30,7 +30,7 @@
 
 .wheelContainer {
     position: absolute;
-    max-width: 100%;
+    max-width: 70%;
     margin-left: auto;
     margin-right: auto;
     left: 50%;
@@ -90,20 +90,13 @@
     }
 }
 
-@media only screen and (min-width: 801px) {
+@media only screen and (max-width: 750px){
     .wheelContainer {
-        position: absolute;
-        max-width: 60%;
-        margin-left: auto;
-        margin-right: auto;
-        left: 50%;
-        top: 4%;
-    }
-    .toast p, .toast span {
-        font-size: 58px;
-        line-height: 60px;
+       max-width:100%;
     }
 }
+
+
 
 @media only screen and (max-height: 480px) {
     .toast p, .toast span {
