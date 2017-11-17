@@ -12,10 +12,10 @@ using WheelOfFortune.Repos;
 using WheelOfFortune.Services;
 using System.Web.Http.Cors;
 
-[assembly: OwinStartupAttribute(typeof(WheelOfFortune.Startup))]
+[assembly: OwinStartupAttribute(typeof(WheelOfFortune.Startup2))]
 namespace WheelOfFortune
 {
-    public partial class Startup
+    public partial class Startup2
     {
         public void Configuration(IAppBuilder app)
         {

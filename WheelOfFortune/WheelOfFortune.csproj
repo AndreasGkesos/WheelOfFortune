@@ -259,7 +259,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\Startup2.Auth.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -364,7 +364,7 @@
     <Compile Include="Services\EncryptionService.cs" />
     <Compile Include="Services\IWheelService.cs" />
     <Compile Include="Services\WheelService.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="Startup2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\WheelOfFortune.mdf" />
