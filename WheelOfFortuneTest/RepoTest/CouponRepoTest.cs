@@ -36,7 +36,7 @@ namespace WheelTestingProject.RepoTest
         public bool Delete(int id)
         {
             var coupon = list.Where(x => x.Id == id).FirstOrDefault();
-            return coupon == null;
+            return coupon != null;
         }
 
         public decimal? Exchange(string code)

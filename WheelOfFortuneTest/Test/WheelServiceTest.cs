@@ -22,8 +22,8 @@ namespace WheelTestingProject.ControllerTest
                 new WheelConfigurationTest(),
                 new WheelConfigurationSliceTest(),
                 new UserRepoTest());
-        private ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas" };
-        private ApplicationUser user1 = new ApplicationUser { Id = "aaaaa", Email = "andreas1@gmail.com", UserName = "andreas1" };
+        private ApplicationUser user = new ApplicationUser { Id = "aaaaa", Email = "andreas@gmail.com", UserName = "andreas", Active = true };
+        private ApplicationUser user1 = new ApplicationUser { Id = "aaaaa", Email = "andreas1@gmail.com", UserName = "andreas1", Active = true };
         private string testUserId = "aaaaa";
 
         [Fact]
@@ -39,7 +39,7 @@ namespace WheelTestingProject.ControllerTest
         {
             WheelConfiguration wheel = new WheelConfiguration { Id = 1, DateCreated = new DateTime(2017, 10, 10, 10, 20, 4), User = user };
 
-            Spin spin = wheelService.CreateSpin(new WheelOfFortune.Models.ViewModels.SpinBindingModel { BetValue = 10, ExecutionDate = DateTime.Now, ResultValue = 20, ScoreValue = 2, WheelConfigurationId = 1}, "aaaaa");
+            Spin spin = wheelService.CreateSpin(new WheelOfFortune.Models.ViewModels.SpinBindingModel { BetValue = 10, ExecutionDate = DateTime.Now, ResultValue = 20, ScoreValue = 2, WheelConfigurationId = 1 }, "aaaaa");
             Spin tmpSpin = new Spin { Id = 6, BetValue = 20, ScoreValue = -1, ResultValue = -20.0m, ExecutionDate = new DateTime(2017, 11, 11, 8, 20, 4), User = user, WheelConfiguration = wheel };
             Assert.True(spin.Id == tmpSpin.Id);
             Assert.True(spin.WheelConfiguration.Id == tmpSpin.WheelConfiguration.Id);
@@ -125,6 +125,14 @@ namespace WheelTestingProject.ControllerTest
         }
 
         [Fact]
+        public void TestDeleteCoupon()
+        {
+            var couponStatus = wheelService.DeleteCoupon(1);
+
+            Assert.True(couponStatus);
+        }
+
+        [Fact]
         public void TestGetAllCoupons()
         {
             int count = wheelService.GetAllCoupons().Count();
@@ -173,6 +181,50 @@ namespace WheelTestingProject.ControllerTest
 
             Assert.True(user.Id == user1.Id);
             Assert.True(user.Email == user1.Email);
+        }
+
+        [Fact]
+        public void TestUpdateUserActiveStatusById()
+        {
+            var status = wheelService.UpdateUserActiveStatusById(false, testUserId);
+
+            Assert.True(status);
+        }
+
+        [Fact]
+        public void TestGetAllTransactions()
+        {
+            int count = wheelService.GetAllTransactions().Count();
+
+            Assert.Equal(5, count);
+        }
+
+        [Fact]
+        public void TestGetTransactionsByUserId()
+        {
+            int count = wheelService.GetTransactionsByUserId(testUserId).Count();
+
+            Assert.Equal(5, count);
+        }
+
+        [Fact]
+        public void TestCreateTransaction()
+        {
+            Transaction transaction = wheelService.CreateTransaction(new TransactionBindingModel { TransactionDate = new DateTime(2017, 11, 11, 8, 20, 4), Type = TransactionType.FromSpin, Value = 20, User = user }, testUserId);
+            Transaction tmpTransaction = new Transaction { Id = 1, TransactionDate = new DateTime(2017, 10, 10, 8, 53, 4), Type = TransactionType.FromSpin, Value = 20, User = user };
+            Assert.True(transaction.Id == tmpTransaction.Id);
+            Assert.True(transaction.TransactionDate == tmpTransaction.TransactionDate);
+            Assert.True(transaction.Type == tmpTransaction.Type);
+            Assert.True(transaction.Value == tmpTransaction.Value);
+            Assert.True(transaction.User.Id == tmpTransaction.User.Id);
+        }
+
+        [Fact]
+        public void TestGetWheelConfigurationByUserId()
+        {
+            int count = wheelService.GetWheelConfigurationByUserId(testUserId).Count();
+
+            Assert.Equal(2, count);
         }
     }
 }

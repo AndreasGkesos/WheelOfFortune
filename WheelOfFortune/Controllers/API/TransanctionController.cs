@@ -16,6 +16,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<TransactionViewModel> GetAll()
         {
             return _wheelService.GetAllTransactions().Select(x => TransformModels.ToTransactionViewModel(x));

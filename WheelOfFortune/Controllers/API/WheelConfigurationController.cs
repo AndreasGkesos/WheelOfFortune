@@ -23,6 +23,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public WheelConfigurationViewModel AddWheelConfiguration(WheelConfigurationBindingModel model)
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();

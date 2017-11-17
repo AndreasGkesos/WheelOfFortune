@@ -161,7 +161,7 @@ namespace WheelOfFortune.Services
             return _couponValueRepo.UpdateCouponValue(id, value);
         }
 
-        public IEnumerable<WheelConfiguration> GetByUserId(string userId)
+        public IEnumerable<WheelConfiguration> GetWheelConfigurationByUserId(string userId)
         {
             return _wheelConfigurationRepo.GetByUserId(userId);
         }
