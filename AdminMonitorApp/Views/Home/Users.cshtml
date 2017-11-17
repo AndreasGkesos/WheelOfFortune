@@ -10,7 +10,8 @@
         <thead>
             <tr>
                 <th>User Id</th>
-                <th> User Name</th>
+                <th>User Name</th>
+                <th>Delete</th>
                 
             </tr>
         </thead>
@@ -36,18 +37,41 @@
                             url: "/api/User/GetAll",
                             dataSrc: ""
                         },
-                        columns: [
+                        columns:
+                        [
                             {
                                 data: "Id"
                             },
                             {
                                 data: "UserName"
+                            },
+                            {
+                                data: "Id",
+                                render: function (data) {
+                                    return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
                             }
+                           
                         ]
 
                     });
             });
 
+        });
+
+        $("#user").on("click", ".js-delete", function () {
+            var button = $(this);
+
+            bootbox.confirm("Are you sure you want to delete this user?", function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "/api/user/GetAll" + button.attr("data-movie-id"),
+                        method: "DELETE",
+                        success: function () {
+                            table.row(button.parents("tr")).remove().draw();
+                        }
+                    });
+                }
+            });
         });
     </script>
 }

@@ -18,6 +18,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
         public IEnumerable<ApplicationUserViewModel> GetAll()
         {

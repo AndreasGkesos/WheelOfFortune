@@ -60,7 +60,8 @@ table {
 
 /* Nav Bar */
 .navbar {
-    z-index:1;
+    z-index: 1;
+    padding-top: 20px;
 }
 .sidenav {
     height: 100%;
@@ -106,6 +107,7 @@ table {
 .navbar-brand {
     float: right;
     color: white;
+    padding: 0;
 }
 
 #despositCodesContainer {
