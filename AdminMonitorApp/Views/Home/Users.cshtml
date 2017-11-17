@@ -5,8 +5,8 @@
 }
 
 
-<div class="user" style="z-index:99999999!important;background-color:white!important;color:black;">
-    <table id="spins" class="table table-bordered table-hover">
+<div class="userContainer" style="z-index:99999999!important;background-color:white!important;color:black;">
+    <table id="user" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>User Id</th>
@@ -21,21 +21,21 @@
 
 @section scripts {
 
-    @Scripts.Render("~/bundles/SpinsHistoryView")
+  
     <script type="text/javascript">
-        $(function () {
+        $(function() {
+            var table;
 
-
-
-            $(document).ready(function () {
-                const table = $("#user").DataTable
+            $(document).ready(function() {
+                table = $("#user").DataTable
                 (
                     {
-
                         ajax:
                         {
-                            url: "/api/User/GetAll",
-                            dataSrc: ""
+                            url: "http://localhost:63312/api/User/GetAll",
+                            dataSrc: "",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json"
                         },
                         columns:
                         [
@@ -47,10 +47,12 @@
                             },
                             {
                                 data: "Id",
-                                render: function (data) {
-                                    return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
+                                render: function(data,type,user) {
+                                    return "<button class='btn-link js-delete' data-user-id=" +
+                                        user.Id +
+                                        ">Delete</button>";
+                                }
                             }
-                           
                         ]
 
                     });
@@ -58,21 +60,24 @@
 
         });
 
-        $("#user").on("click", ".js-delete", function () {
-            var button = $(this);
+        $("#user").on("click",
+            ".js-delete",
+            function() {
+                var button = $(this);
 
-            bootbox.confirm("Are you sure you want to delete this user?", function (result) {
-                if (result) {
-                    $.ajax({
-                        url: "/api/user/GetAll" + button.attr("data-movie-id"),
-                        method: "DELETE",
-                        success: function () {
-                            table.row(button.parents("tr")).remove().draw();
+                bootbox.confirm("Are you sure you want to delete this user?",
+                    function(result) {
+                        if (result) {
+                            $.ajax({
+                                url: "http://localhost:63312/api/user/UpdateUserActiveStatus?status=false&userId=" + button.attr("data-movie-id"),
+                                method: "GET",
+                                success: function() {
+                                    table.row(button.parents("tr")).remove().draw();
+                                }
+                            });
                         }
                     });
-                }
             });
-        });
     </script>
 }
 

@@ -16,7 +16,7 @@ namespace AdminMonitorApp
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new { controller = "Account", action = "Login", id = UrlParameter.Optional },
                 new []{"AdminMonitorApp.Controllers"}
             );
         }
