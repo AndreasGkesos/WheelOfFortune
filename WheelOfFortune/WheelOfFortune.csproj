@@ -320,10 +320,6 @@
     <Compile Include="Migrations\201711121232448_Add Active property to ApplicationUser.Designer.cs">
       <DependentUpon>201711121232448_Add Active property to ApplicationUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711162232194_sampledata.cs" />
-    <Compile Include="Migrations\201711162232194_sampledata.Designer.cs">
-      <DependentUpon>201711162232194_sampledata.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Domain\Coupon.cs" />
@@ -768,9 +764,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711121232448_Add Active property to ApplicationUser.resx">
       <DependentUpon>201711121232448_Add Active property to ApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711162232194_sampledata.resx">
-      <DependentUpon>201711162232194_sampledata.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
