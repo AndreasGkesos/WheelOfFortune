@@ -9,7 +9,12 @@ namespace AdminMonitorApp
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                         "~/Scripts/bootstrap.js",
+                        "~/scripts/bootbox.js",
+                        "~/scripts/datatables/jquery.datatables.js",
+                        "~/scripts/datatables/datatables.bootstrap.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -26,6 +31,7 @@ namespace AdminMonitorApp
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-theme.css",
+                       "~/content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
         }
     }
