@@ -55,13 +55,15 @@ namespace WheelOfFortune.Repos
             
             if (cv == null)
                 throw new Exception("Value does not exist");
-           
-            var  coupon = new Coupon
+
+            var coupon = new Coupon
             {
                 Code = GetCode(),
                 Value = cv,
                 DateCreated = DateTime.Now,
-                DateExpired = DateTime.Now.AddHours(24),
+                DateExpired = DateTime.Now.AddDays(10),
+                DateExchanged = DateTime.Now,
+                User = user,
                 Active = true,                 
             };
 

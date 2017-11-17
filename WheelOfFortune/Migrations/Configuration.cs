@@ -34,6 +34,7 @@ namespace WheelOfFortune.Migrations
             var wheelConfigs = context.WheelConfigurations.Count();
             var wheelSlices = context.WheelConfigurationSlices.Count();
             var couponValues = context.CouponValues.Count();
+            var coupons = context.Coupons.Count();
 
             var cv1 = new CouponValue
             {
@@ -268,6 +269,246 @@ namespace WheelOfFortune.Migrations
                 WheelConfiguration = wheelConfig2
             };
 
+            var coupon1 = new Coupon
+            {
+                Id = 1,
+                Code = "WUY57QM1N3",
+                Value = cv1,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon2 = new Coupon
+            {
+                Id = 2,
+                Code = "25D9O94QMR",
+                Value = cv1,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon3 = new Coupon
+            {
+                Id = 3,
+                Code = "LIHUU6JKA2",
+                Value = cv1,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon4 = new Coupon
+            {
+                Id = 4,
+                Code = "8TCRCEHHG0",
+                Value = cv1,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon5 = new Coupon
+            {
+                Id = 5,
+                Code = "U3A1OM7610",
+                Value = cv1,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon6 = new Coupon
+            {
+                Id = 6,
+                Code = "KBZ9TSYK1K",
+                Value = cv2,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon7 = new Coupon
+            {
+                Id = 7,
+                Code = "CPWI6JF5GO",
+                Value = cv2,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon8 = new Coupon
+            {
+                Id = 8,
+                Code = "VIKGA3OGPP",
+                Value = cv2,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon9 = new Coupon
+            {
+                Id = 9,
+                Code = "4APAKZUIO9",
+                Value = cv2,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon10 = new Coupon
+            {
+                Id = 10,
+                Code = "1ARMMXQPTR",
+                Value = cv2,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon11 = new Coupon
+            {
+                Id = 11,
+                Code = "RJQU9LDIXT",
+                Value = cv3,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon12 = new Coupon
+            {
+                Id = 12,
+                Code = "RMHFZAVGCM",
+                Value = cv3,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon13 = new Coupon
+            {
+                Id = 13,
+                Code = "Y4F4DKT9JS",
+                Value = cv3,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon14 = new Coupon
+            {
+                Id = 14,
+                Code = "OG7PVPSDNJ",
+                Value = cv3,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon15 = new Coupon
+            {
+                Id = 15,
+                Code = "WYT0HHQ2PE",
+                Value = cv3,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon16 = new Coupon
+            {
+                Id = 16,
+                Code = "UXLCMGB7K9",
+                Value = cv4,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon17 = new Coupon
+            {
+                Id = 17,
+                Code = "LGZ3DTP6MB",
+                Value = cv4,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon18 = new Coupon
+            {
+                Id = 18,
+                Code = "OJN851B8W5",
+                Value = cv4,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon19 = new Coupon
+            {
+                Id = 19,
+                Code = "A4QOWRKQJK",
+                Value = cv4,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
+            var coupon20 = new Coupon
+            {
+                Id = 20,
+                Code = "MQ4ETIIL6A",
+                Value = cv4,
+                DateCreated = new DateTime(2017, 11, 17, 10, 10, 10),
+                DateExpired = new DateTime(2017, 11, 27, 10, 10, 10),
+                DateExchanged = new DateTime(2017, 11, 17, 10, 10, 10),
+                Active = true,
+                User = adminUser
+            };
+
             if (!context.Users.Select(x => x.Id).Contains(adminUser.Id))
             {
                 context.Users.Add(adminUser);
@@ -322,6 +563,30 @@ namespace WheelOfFortune.Migrations
                 context.CouponValues.Add(cv2);
                 context.CouponValues.Add(cv3);
                 context.CouponValues.Add(cv4);
+            }
+
+            if (coupons == 0)
+            {
+                context.Coupons.Add(coupon1);
+                context.Coupons.Add(coupon2);
+                context.Coupons.Add(coupon3);
+                context.Coupons.Add(coupon4);
+                context.Coupons.Add(coupon5);
+                context.Coupons.Add(coupon6);
+                context.Coupons.Add(coupon7);
+                context.Coupons.Add(coupon8);
+                context.Coupons.Add(coupon9);
+                context.Coupons.Add(coupon10);
+                context.Coupons.Add(coupon11);
+                context.Coupons.Add(coupon12);
+                context.Coupons.Add(coupon13);
+                context.Coupons.Add(coupon14);
+                context.Coupons.Add(coupon15);
+                context.Coupons.Add(coupon16);
+                context.Coupons.Add(coupon17);
+                context.Coupons.Add(coupon18);
+                context.Coupons.Add(coupon19);
+                context.Coupons.Add(coupon20);
             }
         }
     }
