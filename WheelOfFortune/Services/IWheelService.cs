@@ -31,7 +31,7 @@ namespace WheelOfFortune.Services
         Transaction CreateTransaction(TransactionBindingModel model, string userId);
         IEnumerable<Transaction> GetAllTransactions();
 
-        IEnumerable<WheelConfiguration> GetByUserId(string userId);
+        IEnumerable<WheelConfiguration> GetWheelConfigurationByUserId(string userId);
         WheelDataViewModel GetWheelConfiguration();
         WheelConfiguration CreateWheelConfig(WheelConfigurationBindingModel model, string userId);
 
