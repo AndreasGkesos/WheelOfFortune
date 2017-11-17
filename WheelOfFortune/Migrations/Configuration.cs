@@ -31,7 +31,6 @@ namespace WheelOfFortune.Migrations
             //    );
             //
 
-            var users = context.Users;
             var wheelConfigs = context.WheelConfigurations.Count();
             var wheelSlices = context.WheelConfigurationSlices.Count();
 
