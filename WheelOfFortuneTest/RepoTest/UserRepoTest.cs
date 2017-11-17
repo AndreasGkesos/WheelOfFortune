@@ -14,11 +14,11 @@ namespace WheelTestingProject.RepoTest
 
         public UserRepoTest()
         {
-            list.Add(new ApplicationUser { Id = "aaaaa", Email = "andreas1@gmail.com", UserName = "andreas1" });
-            list.Add(new ApplicationUser { Id = "bbbbb", Email = "andreas2@gmail.com", UserName = "andreas2" });
-            list.Add(new ApplicationUser { Id = "ccccc", Email = "andreas3@gmail.com", UserName = "andreas3" });
-            list.Add(new ApplicationUser { Id = "ddddd", Email = "andreas4@gmail.com", UserName = "andreas4" });
-            list.Add(new ApplicationUser { Id = "eeeee", Email = "andreas5@gmail.com", UserName = "andreas5" });
+            list.Add(new ApplicationUser { Id = "aaaaa", Email = "andreas1@gmail.com", UserName = "andreas1", Active = true });
+            list.Add(new ApplicationUser { Id = "bbbbb", Email = "andreas2@gmail.com", UserName = "andreas2", Active = true });
+            list.Add(new ApplicationUser { Id = "ccccc", Email = "andreas3@gmail.com", UserName = "andreas3", Active = true });
+            list.Add(new ApplicationUser { Id = "ddddd", Email = "andreas4@gmail.com", UserName = "andreas4", Active = true });
+            list.Add(new ApplicationUser { Id = "eeeee", Email = "andreas5@gmail.com", UserName = "andreas5", Active = true });
         }
 
         public ApplicationUser GetAllById(string userId)
@@ -33,7 +33,12 @@ namespace WheelTestingProject.RepoTest
 
         public bool UpdateUserActiveStatusById(bool status, string userId)
         {
-            throw new NotImplementedException();
+            var user = list.Where(x => x.Id == userId).First();
+
+            if (user == null) { return false; }
+
+            user.Active = status;
+            return true;
         }
 
         IEnumerable<ApplicationUser> IUserRepo.GetAll()
