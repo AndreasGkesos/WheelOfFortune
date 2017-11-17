@@ -5,5 +5,51 @@
 }
 
 
+<div class="user" style="z-index:99999999!important;background-color:white!important;color:black;">
+    <table id="spins" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th> User Name</th>
+                
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
 
-<p>Use this area to provide additional information.</p>
+@section scripts {
+
+    @Scripts.Render("~/bundles/SpinsHistoryView")
+    <script type="text/javascript">
+        $(function () {
+
+
+
+            $(document).ready(function () {
+                const table = $("#user").DataTable
+                (
+                    {
+
+                        ajax:
+                        {
+                            url: "/api/User/GetAll",
+                            dataSrc: ""
+                        },
+                        columns: [
+                            {
+                                data: "Id"
+                            },
+                            {
+                                data: "UserName"
+                            }
+                        ]
+
+                    });
+            });
+
+        });
+    </script>
+}
+
+
