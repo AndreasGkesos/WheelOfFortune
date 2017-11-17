@@ -20,6 +20,7 @@ namespace WheelOfFortune.Models.Domain
         public TransactionType Type { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTime TransactionDate { get; set; }
 
         [Required]

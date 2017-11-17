@@ -20,7 +20,7 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IHttpActionResult GetBalance(string userId)
         {
-           var balance = _wheelService.GetBalanceByUserId(EncryptionService.DecryptString(userId));
+           var balance = _wheelService.GetBalanceByUserId(userId);
 
             return Ok(balance);
         }

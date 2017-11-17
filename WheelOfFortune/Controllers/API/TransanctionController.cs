@@ -24,7 +24,7 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<TransactionViewModel> GetByUserId(string userId)
         {
-            return _wheelService.GetTransactionsByUserId(EncryptionService.DecryptString(userId)).Select(x => TransformModels.ToTransactionViewModel(x));
+            return _wheelService.GetTransactionsByUserId(userId).Select(x => TransformModels.ToTransactionViewModel(x));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace WheelOfFortune.Controllers
 
             return View("Profile", new ApplicationUserViewModel
             {
-                Id = EncryptionService.EncryptString(userid)
+                Id = userid
             });
         }
     }

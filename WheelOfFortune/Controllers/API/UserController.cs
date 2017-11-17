@@ -37,11 +37,9 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IHttpActionResult GetUserPhoto(string userId)
         {
-            var result = _wheelService.GetUserImage(EncryptionService.DecryptString(userId));
+            var result = _wheelService.GetUserImage(userId);
 
-            if (result == null) { return Ok(result); }//it will be taken care of from the vaildation in ajax method}
-            if (result.Length <= 0) { return Ok(result); }
-            return Ok(result);
+            return result == null ? Ok((byte[]) null) : Ok(result);
         }
     }
 }

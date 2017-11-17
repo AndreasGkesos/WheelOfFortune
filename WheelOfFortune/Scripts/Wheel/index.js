@@ -26,27 +26,28 @@ function myResult(e) {
     $(".modal-close").removeClass('disable');
 
  
-    switch (value) {
-        case value.includes("x"):
-            resultValue = betValue * e.userData.score;
-            alert("mphke sto multiplier");
-            alert(resultValue);
-            break;
-        case value.includes("/"):
-            resultValue = betValue / Math.abs(e.userData.score);
-            alert("mphke sto /");
-            alert(resultValue);
-            break;
-        case value.includes("+"):
-        case value.includes("-"):
-            resultValue = betValue + e.userData.score;
-            alert("mphke sto + -");
-            alert(resultValue);
-            break;
-        default:
-            resultValue = betValue + e.userData.score;
-    }
+//    switch (value) {
+//        case value.includes("x"):
+//            resultValue = betValue * e.userData.score;
+//            alert("mphke sto multiplier");
+//            alert(resultValue);
+//            break;
+//        case value.includes("/"):
+//            resultValue = betValue / Math.abs(e.userData.score);
+//            alert("mphke sto /");
+//            alert(resultValue);
+//            break;
+//        case value.includes("+"):
+//        case value.includes("-"):
+//            resultValue = betValue + e.userData.score;
+//            alert("mphke sto + -");
+//            alert(resultValue);
+//            break;
+//        default:
+//            resultValue = betValue + e.userData.score;
+//    }
          
+    resultValue = betValue + e.userData.score;
 
         const spinModelObject = {
             ScoreValue: e.userData.score,
@@ -58,7 +59,7 @@ function myResult(e) {
 
         let spinObjStringified = JSON.stringify(spinModelObject);
 
-
+    $.when(
         $.ajax({
             type: "POST",
             url: "/api/Spins/AddSpin",
@@ -66,34 +67,37 @@ function myResult(e) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
-               alert("everything all right");
-            },
-            fail: function (msg) {
-                alert("error");
-            }
-
-        });
-
-        
-
-       
-
-
+            alert("everything all right");
+        },
+        fail: function(msg) {
+            alert("error");
+        }
+    })
+).done(function (x) {
     $.ajax({
         type: "GET",
-        url: "/api/Balance/GetBalance?userId="+ window.userId.toString(),
+        url: "/api/Balance/GetBalance?userId=" + window.userId.toString(),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
             $("#balanceValue").hide(250).show(250);
             $("#balanceValue").text(msg);
-            console.log("ksanaxtyphse th methodo");
+            console.log(msg);
+
         },
         fail: function (msg) {
             alert("error in getting the balance");
         }
 
     });
+    });
+ 
+        
+
+       
+
+
+   
 
     }
     

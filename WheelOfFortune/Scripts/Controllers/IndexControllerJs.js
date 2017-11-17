@@ -27,7 +27,9 @@ function IndexController_init(config) {
             toastr.warning("Wheel OF fortune offers you 100$ as  a beginner gift.Have Fun");
         }
         if (balance <= 50) {
-            dialog.init();
+          //  dialog.init();
+            toastr.warning("Yor balance is getting very low ");
+            toastr.warning("Consider using one of your coupon to raise your balance");
         } 
 
     });

@@ -26,7 +26,7 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<SpinViewModel> GetByUserId(string userId)
         {
-            return _wheelService.GetSpinByUserId(EncryptionService.DecryptString(userId)).Select(TransformModels.ToSpinViewModel);
+            return _wheelService.GetSpinByUserId(userId).Select(TransformModels.ToSpinViewModel);
         }
 
         [HttpPost]

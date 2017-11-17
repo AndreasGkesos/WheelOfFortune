@@ -15,7 +15,7 @@ namespace WheelOfFortune.Controllers
 
             return View("ShowTransactionsHistory", new ApplicationUserViewModel
             {
-                Id = EncryptionService.EncryptString(userid)
+                Id = userid
             });
 
 

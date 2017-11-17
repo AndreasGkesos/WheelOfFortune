@@ -26,7 +26,7 @@ namespace WheelOfFortune.Controllers.API
         [HttpGet]
         public IEnumerable<CouponViewModel> GetByUserId(string userId)
         {
-            return _wheelService.GetCouponByUserId(EncryptionService.DecryptString(userId)).Select(x => TransformModels.ToCouponViewModel(x));
+            return _wheelService.GetCouponByUserId(userId).Select(x => TransformModels.ToCouponViewModel(x));
         }
 
         [HttpPost]

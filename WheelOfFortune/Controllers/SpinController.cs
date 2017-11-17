@@ -12,11 +12,9 @@ namespace WheelOfFortune.Controllers
         {
             var userid = HttpContext.User.Identity.GetUserId();
           
-                ViewBag.UserId = EncryptionService.EncryptString(userid); 
-
                 return View("ShowSpinsHistory", new ApplicationUserViewModel
                 {
-                    Id = EncryptionService.EncryptString(userid)
+                    Id = userid
                 });
             
            
