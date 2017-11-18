@@ -5,3 +5,72 @@
 
 <h2>CouponsConfigurations</h2>
 
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "couponForm" }))
+{
+
+    <div class="form-group">
+        <label>Coupons Value: </label>
+        <select class="custom-select" style="width: 100px; margin: 0 10px; padding: 9px 12px 7px; font-size: 12px; font-weight: bold;">
+
+            <option selected value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Generate</button>
+    </div>
+
+}
+
+<div class="couponsContainer" style="z-index:99999999!important;background-color:white!important;color:black;">
+    <table id="coupon" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Coupon Code</th>
+                <th>Coupon Value</th>
+
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@section scripts {
+
+
+    <script type="text/javascript">
+        $(function () {
+
+            var $table;
+
+            $(document).ready(function() {
+                $table = $("#coupon").DataTable
+                (
+                    {
+                        ajax:
+                        {
+                            url: "http://localhost:63312/api/Coupon/GetAll",
+                            dataSrc: "",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json"
+                        },
+                        columns:
+                        [
+                            {
+                                data: "Code"
+                            },
+                            {
+                                data: "Value"
+                            }
+                        ]
+
+                    });
+            });
+
+        });
+
+
+    </script>
+}
