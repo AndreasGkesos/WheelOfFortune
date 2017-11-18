@@ -23,11 +23,12 @@
 
   
     <script type="text/javascript">
-        $(function() {
-            var table;
+        $(function () {
+
+            var $table;
 
             $(document).ready(function() {
-                table = $("#user").DataTable
+                $table = $("#user").DataTable
                 (
                     {
                         ajax:
@@ -58,26 +59,29 @@
                     });
             });
 
+            $("#user").on("click",
+                ".js-delete",
+                function() {
+                    var button = $(this);
+
+                    bootbox.confirm("Are you sure you want to delete this user?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "http://localhost:63312/api/user/UpdateUserActiveStatus?status=false&userId=" + button.attr("data-movie-id"),
+                                    method: "GET",
+                                    success: function(response) {
+                                        $table.row(button.parents("tr").css("background-color", "grey")).draw();
+                                        console.log(response);
+                                    }
+                                });
+                            }
+                        });
+                });
+
         });
 
-        $("#user").on("click",
-            ".js-delete",
-            function() {
-                var button = $(this);
-
-                bootbox.confirm("Are you sure you want to delete this user?",
-                    function(result) {
-                        if (result) {
-                            $.ajax({
-                                url: "http://localhost:63312/api/user/UpdateUserActiveStatus?status=false&userId=" + button.attr("data-movie-id"),
-                                method: "GET",
-                                success: function() {
-                                    table.row(button.parents("tr")).remove().draw();
-                                }
-                            });
-                        }
-                    });
-            });
+        
     </script>
 }
 

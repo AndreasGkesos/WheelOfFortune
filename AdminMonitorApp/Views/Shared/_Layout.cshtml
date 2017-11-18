@@ -10,32 +10,74 @@
 </head>
 
 
-    <body class="index-page sidebar-collapse">
+    <body>
 
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                @Html.ActionLink("Wheel Of Fortune", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-                <div id="mySidenav" class="sidenav">
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    @Html.ActionLink("Home", "Index", "Home")
-                    @Html.ActionLink("Users", "Users", "Home")
-                    @Html.ActionLink("Manage Wheel Spins", "WheelSpinsConfiguration", "Home")
-                    @Html.ActionLink("Add Coupons", "CouponsConfiguration", "Home")
+        <!-- Dash && Navbar -->
+        <div class="sidebar-is-reduced">
+            <header class="masthead">
+                <div class="masthead__inner clearfix">
+                    <div class="header-icon js-hamburger">
+                        <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
+                    </div>
+                    <div class="header-icons-group">
+                        <div class="header-icon logout"><i class="fa fa-power-off"></i>
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                }
+                            }
+                    </div>
+                </div>
+            </header>
+            <div class="sidebar">
+                <div class="logo">
+                    <div class="logo__txt">
+                        <a class="menu__item__inner" href="/">
+                            <img src="../Content/img/now-logo.png" alt="Logo" width="30px;">
+                        </a>
+                    </div>
+                </div>
+                <div class="sidebar__content">
+                    <div class="menu js-menu">
+                        <ul class="list">
+                            <li class="menu__item" data-toggle="tooltip" title="Users">
+
+                                    <a class="menu__item__inner" href="/Home/Users">
+                                        <i class="fa fa-user-secret"></i>
+                                        <div class="menitem__title"><span>Users</span></div>
+                                    </a>
+                            </li>
+                            <li class="menu__item has-submenu" data-toggle="tooltip" title="Manage Wheel Spins">
+                                <a class="menu__item__inner" href="/Home/WheelSpinsConfiguration">
+                                    <i class="fa fa-spinner"></i>
+                                    <div class="menitem__title"><span>Manage Wheel Spins</span></div>
+                                </a>
+                            </li>
+                            <li class="menu__item has-submenu" data-toggle="tooltip" title="Add Coupons">
+                                <a class="menu__item__inner" href="/Home/CouponsConfiguration">
+                                    <i class="fa fa-id-card-o"></i>
+                                    <div class="menitem__title"><span>Add Coupons</span></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
-        </nav>
-
-        <!-- End Navbar -->
-
-        <div id="main" class="page-header" filter-color="black">
-            @RenderBody()
         </div>
+        <!--End Dash && Navbar -->
+        <main class="main">
+            <div class="content-wrapper content-wrapper--with-bg">
+                <div class="page-content">
 
+                    @RenderBody()
+
+                </div>
+            </div>
+        </main>
         @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/others")
         @RenderSection("scripts", required: false)
     </body>
 </html>

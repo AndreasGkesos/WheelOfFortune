@@ -10,6 +10,7 @@ namespace AdminMonitorApp
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/fontawesome.js",
                          "~/Scripts/bootstrap.js",
                         "~/scripts/bootbox.js",
                         "~/scripts/datatables/jquery.datatables.js",
@@ -24,13 +25,14 @@ namespace AdminMonitorApp
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+            bundles.Add(new ScriptBundle("~/bundles/others").Include(
                       "~/Scripts/respond.js",
                       "~/Scripts/scripts.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/normalize.min.css",
                       "~/Content/bootstrap-theme.css",
+                      "~/Content/animate.min.css",
                        "~/content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
 

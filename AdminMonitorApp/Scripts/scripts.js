@@ -1,11 +1,37 @@
-﻿function openNav() {
-    document.getElementById("mySidenav").style.width = "400px";
-    document.getElementById("main").style.marginLeft = "400px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
+﻿"use strict";
 
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-    document.body.style.backgroundColor = "white";
-}
+var Dashboard = function () {
+    var global = {
+        tooltipOptions: {
+            placement: "right"
+        },
+        menuClass: ".menu"
+    };
+
+    var sidebarChangeWidth = function sidebarChangeWidth() {
+        var $menuItemsTitle = $("li .menitem__title");
+
+        $("body").toggleClass("sidebar-is-reduced sidebar-is-expanded");
+        $(".hamburger-toggle").toggleClass("is-opened");
+
+        if ($("body").hasClass("sidebar-is-expanded")) {
+            $('[data-toggle="tooltip"]').tooltip("destroy");
+        } else {
+            $('[data-toggle="tooltip"]').tooltip(global.tooltipOptions);
+        }
+    };
+
+    return {
+        init: function init() {
+            $(".js-hamburger").on("click", sidebarChangeWidth);
+
+            $(".js-menu li").on("click", function (e) {
+                menuChangeActive(e.currentTarget);
+            });
+
+            $('[data-toggle="tooltip"]').tooltip(global.tooltipOptions);
+        }
+    };
+}();
+
+Dashboard.init();
