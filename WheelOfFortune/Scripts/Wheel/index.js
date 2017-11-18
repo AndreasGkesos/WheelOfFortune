@@ -20,11 +20,29 @@ function loadJSON(callback) {
 function myResult(e) {
     let resultValue = 0;
     let betValue = $("#BetValue").val();
+    let balance = $("#balanceValue").text();
+
+    console.log(balance);
+    console.log(e);
 
 
     $(".modal-close").removeClass('disable');
  
     resultValue = betValue * e.userData.score;
+    console.log(resultValue);
+    console.log(e.win);
+    if ((Math.abs(resultValue) > balance) && (e.win.toString() === "false")) {
+        console.log("mphke");
+        resultValue = -balance;
+        console.log("------------------------");
+        console.log(resultValue);
+        $("#BetValue").attr("max", 0);
+        $("#betAndPlayBtn").hide();
+        toastr.options.positionClass = "toast-top-right";
+        toastr.warning("Unfortunately you lost all your money");
+        toastr.info("Use your deposit codes to raise your balance");
+        
+    }
 
         let spinModelObject = {
             ScoreValue: e.userData.score,

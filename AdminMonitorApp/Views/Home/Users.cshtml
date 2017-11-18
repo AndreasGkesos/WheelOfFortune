@@ -13,8 +13,7 @@
                 <th>User Name</th>
                 <th>Spins</th>
                 <th>Transactions</th>
-                <th>Deactivate</th>
-
+                <th>Change user status</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -25,11 +24,14 @@
 
 
     <script type="text/javascript">
+        var $table;
+
         $(function () {
 
-            var $table;
-
+            
             $(document).ready(function () {
+
+                $("")
                 $table = $("#user").DataTable
                 (
                     {
@@ -69,9 +71,17 @@
 
                                 data: "Id",
                                 render: function (data, type, user) {
-                                    return "<button class='btn-link js-deactivate' data-user-id=" +
-                                        user.Id +
-                                        ">Deactivate</button>";
+
+                                    if (user.Active) {
+                                        return "<button class='btn-link js-deactivate active' data-user-id=" +
+                                            user.Id +
+                                            ">Deactivate</button>";
+                                    } else {
+                                        return "<button class='btn-link js-deactivate deactive' data-user-id=" +
+                                            user.Id +
+                                            ">Activate</button>";
+                                    }
+                                   
                                 }
                             }
                         ]
@@ -98,47 +108,63 @@
 
         });
 
-            $("#user").on("click",
-                ".js-usertransactions",
-                function () {
+        $("#user").on("click",
+            ".js-usertransactions",
+            function () {
+                var button = $(this);
+                var userId = button.attr("data-user-id");
+                bootbox.confirm("Are you sure you want to check this user's transactions?",
+                    function (result) {
+                        if (result) {
+                              
+                            window.location.href = "/Home/GetTransactions?userId="+userId;                                 
+                               
+                        }
+                    });
+            });
+
+        $("#user").on("click",
+            ".js-deactivate",
+            function () {
+                if ($(this).hasClass("active")) {
                     var button = $(this);
                     var userId = button.attr("data-user-id");
-                    bootbox.confirm("Are you sure you want to check this user's transactions?",
-                        function (result) {
-                            if (result) {
-                              
-                                        window.location.href = "/Home/GetTransactions?userId="+userId;                                 
-                               
-                            }
-                        });
-                });
-
-
-
-            $("#user").on("click",
-                ".js-deactivate",
-                function() {
-                    var button = $(this);
-
-
-
                     bootbox.confirm("Are you sure you want to deactivate this user?",
                         function(result) {
                             if (result) {
                                 $.ajax({
-                                    url: "http://localhost:63312/api/user/UpdateUserActiveStatus?status=false&userId=" + button.attr("data-user-id"),
-                                    method: "GET",
+                                    url: "http://localhost:63312/api/User/UpdateUserActiveStatus?status=false&userId=" +
+                                        userId,
+                                    method: "POST",
                                     success: function(response) {
-                                        $table.row(button.parents("tr").css("background-color", "grey")).draw();
+                                        $table.row(button.removeClass("active").addClass("deactive").text("Activate")).draw();
                                         console.log(response);
+
                                     }
                                 });
                             }
                         });
-                });
+                } else {
+                    var button2 = $(this);
+                    var userId2 = button2.attr("data-user-id");
+                    bootbox.confirm("Are you sure you want to activate this user?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "http://localhost:63312/api/User/UpdateUserActiveStatus?status=true&userId=" +
+                                        userId2,
+                                    method: "POST",
+                                    success: function(response) {
+                                        $table.row(button2.removeClass("deactive").addClass("active").text("Activate")).draw();
+                                        console.log(response);
 
-      
-
+                                    }
+                                });
+                            }
+                        });
+                }
+               
+            });
 
 
     </script>

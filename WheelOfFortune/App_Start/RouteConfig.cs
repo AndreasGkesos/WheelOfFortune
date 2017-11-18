@@ -17,7 +17,7 @@ namespace WheelOfFortune
                 "Default", // Route name
                 "{controller}/{action}/{id}",
                 new { controller = "Account", action = "Login", id = UrlParameter.Optional },
-                new[] { "WheelOfFortune.Controllers" }
+                new[] { " WheelOfFortune.Controllers" }
             );
         }
     }

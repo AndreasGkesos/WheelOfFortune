@@ -9,8 +9,7 @@
 @Styles.Render("~/Content/toastr.css")
 
 
-<div >
-
+<div>
     <section class="gs-intro gs-main-content">
         <div class="gs-intro-content mask-2">
             <div class="content-wrapper">
@@ -21,7 +20,7 @@
                     <h1>Wheel Of Fortune</h1>
                     <p>What is life if not a gamble?</p>
                     <div class="action-wrapper">
-                        <a href="#modal-1" class="add-to-box gs-modal-trigger" id ="betAndPlayBtn" style="padding:20px;">Bet & Play</a>
+                        <a href="#modal-1" class="add-to-box gs-modal-trigger" id ="betAndPlayBtn" data-userId="@Model.Id"style="padding:20px;">Bet & Play</a>
                         <a href="#modal-2" class="add-to-box " id="ww-tour-trigger" style="padding:20px; margin-left:20px;">How to</a>
                     </div>
                 </div>

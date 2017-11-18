@@ -28,24 +28,52 @@ $("#depositCodeSubmit").on("click",
                 url: "/api/Coupon/Exchange?code=" + $input.val(),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (msg) {
-                    alert("msg" + msg);
+                success: function(msg) {
                     $($input).val("");
-                    if (msg === "true") {
-                        toastr.success("Great you just turned your coupon to cash");
-                        toastr.success("Do not waste ay more time click the Bet And PLay button and start" +
+                    if (msg.toString() === "true") {
+                        toastr.options.fadeOut = 2500;
+                        toastr.success("Great you just turned your deposit code to cash");
+                        toastr.success("Do not waste any more time click \n the Bet And Play button and start " +
                             "making some money");
+                        $("#betAndPlayBtn").show();
+                        let user = $("#betAndPlayBtn").attr("data-userId");
+                        UpdateBalanceContainer(user);
+
+                    } else {
+                        toastr.error("Wrong code value . Maybe your code has expired or it ts just invalid");
+
                     }
-                    toastr.error("Wrong coupon value.Maybe your coupon has expired or it ts just invalid");
                 },
-                fail: function (msg) {
-                    toastr.error("Wrong coupon value.Maybe your coupon has expired or it ts just invalid");
+                fail: function(msg) {
+                    toastr.error("Wrong code value.Maybe your code has expired or it ts just invalid");
                 }
-            })
+            });
         }
       
     });
 
-    
+function UpdateBalanceContainer(user) {
+    $.ajax({
+        type: "GET",
+        url: "/api/Balance/GetBalance/",
+        data: { userId: user },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(msg) {
+            $("#balanceValue").hide(250).show(250);
+            $("#balanceValue").text(msg);
+            balance = msg;
+            $("#BetValue").attr("max", balance);
+            if (balance === 0.00) {
+                toastr.warning("Unfortunately you can not play anymore if you dont raise your balance");
+                toastr.warning("Consider using one of your coupon to raise your balance");
+                $("#betAndPlayBtn").hide();
+            }
 
- 
+        },
+        fail: function(msg) {
+            alert("error in getting the balance");
+        }
+
+    });
+}

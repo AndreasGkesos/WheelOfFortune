@@ -10,5 +10,6 @@ namespace WheelOfFortune.Models.ViewModels
         public string UName { get; set; }
         public string Email { get; set; }
         public byte[] UserPhoto { get; set; }
+        public bool   Active { get; set; }
     }
 }

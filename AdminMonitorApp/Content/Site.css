@@ -409,3 +409,10 @@ main.main {
 .sidebar-is-expanded main.main {
     padding-left: 220px;
 }
+
+.active {
+    color: blue;
+}
+.deactive {
+    color: red;
+}

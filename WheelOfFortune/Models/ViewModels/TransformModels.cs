@@ -54,7 +54,8 @@ namespace WheelOfFortune.Models.ViewModels
                 Email = model.Email,
                 UserName = model.UserName,
                 UName = model.UName,
-                UserPhoto = model.UserPhoto
+                UserPhoto = model.UserPhoto,
+                Active = model.Active
             };
         }
 

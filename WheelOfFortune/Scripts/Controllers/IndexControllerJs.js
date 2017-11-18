@@ -6,10 +6,15 @@ function IndexController_init(config) {
   
      userId = config.userId;
 
+  
 
-    UpdateBalanceContainer(userId);
+
+     UpdateBalanceContainer(userId);
+
+   
+
     InitialListeners();
-    theTour();
+    TheTour();
     GetUserPhoto(userId);
     
 
@@ -24,19 +29,18 @@ function IndexController_init(config) {
 
     $('#betAndPlayBtn').on('click', function (event) {
         if (balance === 100) {
-            toastr.warning("Wheel oF fortune offers you 100$ as  a beginner gift.Have Fun");
+            toastr.warning("Wheel of fortune offers you 100$ as a beginner gift. Have Fun :)");
         }
+       
         if (balance <= 50) {
-          //  dialog.init();
             toastr.warning("Yor balance is getting very low ");
-            toastr.warning("Consider using one of your coupon to raise your balance");
-        } 
+            toastr.warning("Consider using one of your codes to raise your balance");
+        }
+        
 
     });
 
 }
-
-
 function UpdateBalanceContainer(user) {
 
     $.ajax({
@@ -50,6 +54,15 @@ function UpdateBalanceContainer(user) {
             $("#balanceValue").text(msg);
             balance = msg;
             $("#BetValue").attr("max", balance);
+            if (balance === 0.00) {
+                toastr.warning("Unfortunately you can not play anymore if you dont raise your balance");
+                toastr.warning("Consider using one of your coupon to raise your balance");
+                $("#betAndPlayBtn").hide();
+//                $(".spinBtn").on("click", function (event) {
+//                        toastr.error("You can't play if you do not raise your balance through Deposit Codes");
+//                        toastr.info("Go to the menu and add your deposit codes");
+//                });
+            }      
         },
         fail: function(msg) {
             alert("error in getting the balance");
@@ -57,10 +70,6 @@ function UpdateBalanceContainer(user) {
 
     });
 }
-
-
-
-
 function GetUserPhoto(user) {
     $.ajax({
         type: "GET",
@@ -79,24 +88,29 @@ function GetUserPhoto(user) {
 
 
 }
-
 function InitialListeners() {
     // box js 
     $(document).ready(function ($) {
         //open/close box
-        $('.box-trigger').on('click', function (event) {
+        $('.box-trigger').on('click', function(event) {
             event.preventDefault();
-            if ($('.box-container').hasClass('open')) {
+            console.log(balance);
+            if ($("#balanceValue").text() ==="0") {
+                toastr.error("You can't play if you do not raise your balance through your deposit codes");
+                toastr.info("Go to the menu and add your deposit codes");
+            } else if ($('.box-container').hasClass('open')) {
                 $('.box-container').removeClass('open');
             } else {
                 $('.box-container').addClass('open');
             }
-
+        
         });
 
         $(".spinBtn").on("click", function (event) {
-            $('.box-container').removeClass('open');
-            $(".modal-close").addClass('disable');
+           
+                $('.box-container').removeClass('open');
+                $(".modal-close").addClass('disable');
+              
         });
 
         //cache some jQuery objects
@@ -124,16 +138,18 @@ function InitialListeners() {
         modalTrigger.on("click", function (event) {
             event.preventDefault();
 
-
-            $('.box-container').addClass('open').fadeIn(900);
-            var modalId = $(event.target).attr("href");
-            transitionLayer.addClass("visible opening");
-            wheelShow.removeClass("hidden");
-            var delay = ($(".no-cssanimations").length > 0) ? 0 : 800;
-            setTimeout(function () {
-                modalWindow.filter(modalId).addClass("visible");
-                transitionLayer.removeClass("opening");
-            }, delay);
+            
+                $('.box-container').addClass('open').fadeIn(900);
+                var modalId = $(event.target).attr("href");
+                transitionLayer.addClass("visible opening");
+                wheelShow.removeClass("hidden");
+                var delay = ($(".no-cssanimations").length > 0) ? 0 : 800;
+                setTimeout(function() {
+                        modalWindow.filter(modalId).addClass("visible");
+                        transitionLayer.removeClass("opening");
+                    },
+                    delay);
+            
 
         });
 
@@ -190,8 +206,7 @@ function InitialListeners() {
     });
 
 }
-
-function theTour() {
+function TheTour() {
     jQuery(document).ready(function ($) {
         //check if a .ww-tour-wrapper exists in the DOM - if yes, initialize it
         $('.ww-tour-wrapper').exists() && initTour();
@@ -338,42 +353,3 @@ function theTour() {
     jQuery.fn.exists = function () { return this.length > 0; }
 }
 
-
-//var dialog = bootbox.dialog({
-//    title: 'Oops your current balance is too low',
-//    message: '<p>Select Add Coupon to add one of your available coupons or unfortunately you cant play any more :(</p>',
-//    buttons: {
-//        Back: {
-//            label: "Back to Index!",
-//            className: 'btn-info',
-//            callback: function() {
-                     
-//                }
-//             },
-//            Add: {
-//                label: "Add Coupon",
-//                className: 'btn-success',
-//                callback: function() {
-//                    bootbox.prompt("Please enter a coupon so you can play more!!!",
-//                        function(result) {
-//                            console.log(result);
-//                            while (result.lenght <= 5) {
-//                                bootbox.prompt("Please enter a  valid coupon so you can play more!!!",
-//                                    function(result) {
-//                                        if (result <= 5) {
-//                                            return;
-//                                        }
-//                                        var coupon = result;
-//                                        console.log(result);
-//                                        $("#betAndPlayBtn").attr("href", "#modal - 1");
-//                                    });
-//                            }
-
-//                        });
-
-//                }
-           
-
-//        }
-//    }
-//});   

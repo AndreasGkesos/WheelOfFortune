@@ -31,7 +31,7 @@ namespace WheelOfFortune.Controllers.API
             return TransformModels.ToApplicationUserViewModel(_wheelService.GetUserById(userId));
         }
 
-        [HttpGet]
+        [HttpPost]
         public bool UpdateUserActiveStatus(bool status, string userId)
         {
             return _wheelService.UpdateUserActiveStatusById(status, userId);
