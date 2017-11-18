@@ -19,37 +19,17 @@ function loadJSON(callback) {
 //your own function to capture the spin results
 function myResult(e) {
     let resultValue = 0;
-    let betValue = $("span#bet").val();
+    let betValue = $("#BetValue").val();
 
+    alert(betValue);
 
+    alert("bet value" + betValue);
 
     $(".modal-close").removeClass('disable');
-
  
-//    switch (value) {
-//        case value.includes("x"):
-//            resultValue = betValue * e.userData.score;
-//            alert("mphke sto multiplier");
-//            alert(resultValue);
-//            break;
-//        case value.includes("/"):
-//            resultValue = betValue / Math.abs(e.userData.score);
-//            alert("mphke sto /");
-//            alert(resultValue);
-//            break;
-//        case value.includes("+"):
-//        case value.includes("-"):
-//            resultValue = betValue + e.userData.score;
-//            alert("mphke sto + -");
-//            alert(resultValue);
-//            break;
-//        default:
-//            resultValue = betValue + e.userData.score;
-//    }
-         
-    resultValue = betValue + e.userData.score;
+    resultValue = betValue * e.userData.score;
 
-        const spinModelObject = {
+        let spinModelObject = {
             ScoreValue: e.userData.score,
             BetValue: betValue,
             ResultValue: resultValue,

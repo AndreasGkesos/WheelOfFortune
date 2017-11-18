@@ -47,7 +47,15 @@
                         },
                         columns: [
                             {
-                                data: "TransactionDate"
+                                data: "TransactionDate",
+                                render:function(data) {
+                                    var dateString = data;
+                                    console.log(dateString);
+                                    var yearDate = dateString.substring(0, dateString.indexOf("T"));
+                                    var time = dateString.substring(dateString.indexOf("T")+1, dateString.length);
+
+                                    return yearDate + "  " + time;
+                                }
                             },
                             {
                                 data: "Value"
