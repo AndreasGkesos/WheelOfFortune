@@ -4,10 +4,12 @@ using System.Linq;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Services;
 using System.Web;
+using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 
 namespace WheelOfFortune.Controllers.API
-{   
+{
+    [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
     public class SpinsController : ApiController
     {
         private readonly IWheelService _wheelService;
@@ -25,6 +27,8 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
+        [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
+
         public IEnumerable<SpinViewModel> GetByUserId(string userId)
         {
             return _wheelService.GetSpinByUserId(userId).Select(TransformModels.ToSpinViewModel);

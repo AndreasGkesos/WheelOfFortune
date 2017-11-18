@@ -2,10 +2,6 @@
     ViewBag.Title = "GetSpinsView";
 }
 
-<script>
-    var userId = @ViewBag.userId;
-
-</script>
 
 <h2></h2>
 
@@ -23,14 +19,10 @@
     </table>
 </div>
 
-@**@
-@*@{*@
-@*    var user = '@(ViewBag.UserId)';*@
-@*}*@
+
 
 @section scripts {
 
-    @Scripts.Render("~/bundles/SpinsHistoryView")
     <script type="text/javascript">
        $(function () {
             $(document).ready(function () {
@@ -39,7 +31,7 @@
                     {
                        ajax:
                         {
-                            url: "http://localhost:63312/api/spins/GetByUserId&userId=" + user,    
+                            url: "http://localhost:63312/api/Spins/GetByUserId?userId=" + "@ViewBag.userId",
                             dataSrc: ""
                         },
                         columns: [

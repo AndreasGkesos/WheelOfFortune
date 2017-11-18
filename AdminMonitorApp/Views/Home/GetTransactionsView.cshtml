@@ -5,14 +5,6 @@
 
 <h2>GetTransactionsView</h2>
 
-
-<script>
-    var userId = @ViewBag.userId;
-
-</script>
-
-
-
 <div class="container" style="z-index:99999999!important;background-color:white!important;color:black;">
 
     <table id="transactions" class="table table-bordered table-hover">
@@ -27,13 +19,8 @@
 </div>
 
 
-@{
-    string user = ViewBag.UserId;
-}
-
 @section scripts {
 
-    @Scripts.Render("~/bundles/SpinsHistoryView")
     <script type="text/javascript">
         $(function () {
             $(document).ready(function () {
@@ -43,7 +30,7 @@
 
                         ajax:
                         {
-                            url: "http://localhost:63312/api/transactions/GetByUserId&userId=" + user,
+                            url: "http://localhost:63312/api/Transaction/GetByUserId?userId=" + "@ViewBag.userId",
                             dataSrc: ""
                         },
                         columns: [

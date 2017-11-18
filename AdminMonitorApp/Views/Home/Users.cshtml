@@ -91,7 +91,6 @@
                     bootbox.confirm("Are you sure you want to check this user's Spins?",
                         function (result) {
                             if (result) {
-                                @* @Html.ActionLink("Home", "GetSpins", new { userId ="userId" }, null)*@
                                 window.location.href = "/Home/GetSpins?userId="+userId;
                             }
                         });
@@ -103,19 +102,13 @@
                 ".js-usertransactions",
                 function () {
                     var button = $(this);
-
-                    bootbox.confirm("Are you sure you want to check this user's trasactions?",
+                    var userId = button.attr("data-user-id");
+                    bootbox.confirm("Are you sure you want to check this user's transactions?",
                         function (result) {
                             if (result) {
-                                $.ajax({
-                                    url: "http://localhost:63312/api/transaction/GetByUserId&userId=" + button.attr("data-user-id"),
-                                    method: "GET",
-                                    success: function (response) {
-                                       @*@Html.ActionLink("Home", "GetTransactions", new {userId=" @userId"}, null)*@
-
-
-                                    }
-                                });
+                              
+                                        window.location.href = "/Home/GetTransactions?userId="+userId;                                 
+                               
                             }
                         });
                 });
@@ -126,6 +119,8 @@
                 ".js-deactivate",
                 function() {
                     var button = $(this);
+
+
 
                     bootbox.confirm("Are you sure you want to deactivate this user?",
                         function(result) {
