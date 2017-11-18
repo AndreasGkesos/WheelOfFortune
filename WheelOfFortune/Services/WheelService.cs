@@ -40,6 +40,13 @@ namespace WheelOfFortune.Services
 
         public Spin CreateSpin(SpinBindingModel model, string userId)
         {
+            if (model.BetValue == null)
+                throw new Exception("You must set bet value");
+            if (model.ResultValue == null)
+                throw new Exception("You must set result value");
+            if (model.ScoreValue == null)
+                throw new Exception("You must set score value");
+
             var spin = _spinRepo.CreateSpin(model, userId);
             UpdateTransactionAndBalance(spin, userId);
             return spin;

@@ -37,9 +37,9 @@ namespace WheelOfFortune.Repos
 
             var spin = new Spin
             {
-                BetValue = model.BetValue,
-                ResultValue = model.ResultValue,
-                ScoreValue = model.ScoreValue,
+                BetValue = model.BetValue ?? 0,
+                ResultValue = model.ResultValue ?? 0,
+                ScoreValue = model.ScoreValue ?? 0,
                 User = user,
                 ExecutionDate = DateTime.Now,
                 WheelConfiguration = _context.WheelConfigurations.FirstOrDefault(x => x.Id == model.WheelConfigurationId)
