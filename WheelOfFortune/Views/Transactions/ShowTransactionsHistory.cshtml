@@ -52,7 +52,7 @@
                                     var dateString = data;
                                     console.log(dateString);
                                     var yearDate = dateString.substring(0, dateString.indexOf("T"));
-                                    var time = dateString.substring(dateString.indexOf("T")+1, dateString.length);
+                                    var time = dateString.substring(dateString.indexOf("T")+1, dateString.length-4);
 
                                     return yearDate + "  " + time;
                                 }
