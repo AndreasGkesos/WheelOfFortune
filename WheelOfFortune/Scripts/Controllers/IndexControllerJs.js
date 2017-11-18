@@ -24,7 +24,7 @@ function IndexController_init(config) {
 
     $('#betAndPlayBtn').on('click', function (event) {
         if (balance === 100) {
-            toastr.warning("Wheel OF fortune offers you 100$ as  a beginner gift.Have Fun");
+            toastr.warning("Wheel oF fortune offers you 100$ as  a beginner gift.Have Fun");
         }
         if (balance <= 50) {
           //  dialog.init();

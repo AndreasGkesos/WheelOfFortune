@@ -21,9 +21,6 @@ function myResult(e) {
     let resultValue = 0;
     let betValue = $("#BetValue").val();
 
-    alert(betValue);
-
-    alert("bet value" + betValue);
 
     $(".modal-close").removeClass('disable');
  
@@ -47,7 +44,7 @@ function myResult(e) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
-            alert("everything all right");
+           
         },
         fail: function(msg) {
             alert("error");
@@ -62,7 +59,8 @@ function myResult(e) {
         success: function (msg) {
             $("#balanceValue").hide(250).show(250);
             $("#balanceValue").text(msg);
-            console.log(msg);
+            $("#BetValue").attr("max", msg);
+
 
         },
         fail: function (msg) {

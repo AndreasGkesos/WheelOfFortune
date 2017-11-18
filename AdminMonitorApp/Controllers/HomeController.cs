@@ -27,5 +27,20 @@ namespace AdminMonitorApp.Controllers
         {
             return View();
         }
+        public ActionResult GetSpins(string userId)
+
+        {
+
+            ViewBag.userId = userId;
+            return View("GetSpinsView");
+
+        }
+
+        public ActionResult GetTransactions(string userId)
+        {
+            ViewBag.userId = userId;
+            return View("GetTransactionsView");
+
+        }
     }
 }

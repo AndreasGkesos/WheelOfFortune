@@ -505,6 +505,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\WheelSpinsConfiguration.cshtml" />
     <Content Include="Views\Home\CouponsConfiguration.cshtml" />
+    <Content Include="Views\Home\GetSpinsView.cshtml" />
+    <Content Include="Views\Home\GetTransactionsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

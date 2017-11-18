@@ -11,8 +11,10 @@
             <tr>
                 <th>User Id</th>
                 <th>User Name</th>
-                <th>Delete</th>
-                
+                <th>Spins</th>
+                <th>Transactions</th>
+                <th>Deactivate</th>
+
             </tr>
         </thead>
         <tbody></tbody>
@@ -21,13 +23,13 @@
 
 @section scripts {
 
-  
+
     <script type="text/javascript">
         $(function () {
 
             var $table;
 
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $table = $("#user").DataTable
                 (
                     {
@@ -48,10 +50,28 @@
                             },
                             {
                                 data: "Id",
-                                render: function(data,type,user) {
-                                    return "<button class='btn-link js-delete' data-user-id=" +
+                                render: function (data, type, user) {
+                                    return "<button class='btn-link js-userspins' data-user-id=" +
                                         user.Id +
-                                        ">Delete</button>";
+                                        ">User Spins</button>";
+
+                                }
+                            },
+                            {
+                                data: "Id",
+                                render: function (data, type, user) {
+                                    return "<button class='btn-link js-usertransactions' data-user-id=" +
+                                        user.Id +
+                                        ">User Transaction</button>";
+                                }
+                            },
+                            {
+
+                                data: "Id",
+                                render: function (data, type, user) {
+                                    return "<button class='btn-link js-deactivate' data-user-id=" +
+                                        user.Id +
+                                        ">Deactivate</button>";
                                 }
                             }
                         ]
@@ -60,15 +80,58 @@
             });
 
             $("#user").on("click",
-                ".js-delete",
+                ".js-userspins",
+                function () {
+                    var button = $(this);
+                    var userId = button.attr("data-user-id");
+                    alert(userId);
+                    
+                   
+                    
+                    bootbox.confirm("Are you sure you want to check this user's Spins?",
+                        function (result) {
+                            if (result) {
+                                @* @Html.ActionLink("Home", "GetSpins", new { userId ="userId" }, null)*@
+                                window.location.href = "/Home/GetSpins?userId="+userId;
+                            }
+                        });
+                });
+
+        });
+
+            $("#user").on("click",
+                ".js-usertransactions",
+                function () {
+                    var button = $(this);
+
+                    bootbox.confirm("Are you sure you want to check this user's trasactions?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "http://localhost:63312/api/transaction/GetByUserId&userId=" + button.attr("data-user-id"),
+                                    method: "GET",
+                                    success: function (response) {
+                                       @*@Html.ActionLink("Home", "GetTransactions", new {userId=" @userId"}, null)*@
+
+
+                                    }
+                                });
+                            }
+                        });
+                });
+
+
+
+            $("#user").on("click",
+                ".js-deactivate",
                 function() {
                     var button = $(this);
 
-                    bootbox.confirm("Are you sure you want to delete this user?",
+                    bootbox.confirm("Are you sure you want to deactivate this user?",
                         function(result) {
                             if (result) {
                                 $.ajax({
-                                    url: "http://localhost:63312/api/user/UpdateUserActiveStatus?status=false&userId=" + button.attr("data-movie-id"),
+                                    url: "http://localhost:63312/api/user/UpdateUserActiveStatus?status=false&userId=" + button.attr("data-user-id"),
                                     method: "GET",
                                     success: function(response) {
                                         $table.row(button.parents("tr").css("background-color", "grey")).draw();
@@ -79,9 +142,10 @@
                         });
                 });
 
-        });
+      
 
-        
+
+
     </script>
 }
 

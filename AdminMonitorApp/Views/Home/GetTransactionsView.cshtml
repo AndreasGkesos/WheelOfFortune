@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "GetTransactionsView";
+}
+
+<h2>GetTransactionsView</h2>
+
+
+<script>
+    var userId = @ViewBag.userId;
+
+</script>
+
+
+
+<div class="container" style="z-index:99999999!important;background-color:white!important;color:black;">
+
+    <table id="transactions" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Transaction Date</th>
+            <th> Value</th>         
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+
+@{
+    string user = ViewBag.UserId;
+}
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/SpinsHistoryView")
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                const table = $("#transactions").DataTable
+                (
+                    {
+
+                        ajax:
+                        {
+                            url: "http://localhost:63312/api/transactions/GetByUserId&userId=" + user,
+                            dataSrc: ""
+                        },
+                        columns: [
+                            {
+                                data: "TransactionDate",
+                                render:function(data) {
+                                    var dateString = data;
+                                    console.log(dateString);
+                                    var yearDate = dateString.substring(0, dateString.indexOf("T"));
+                                    var time = dateString.substring(dateString.indexOf("T")+1, dateString.length-4);
+
+                                    return yearDate + "  " + time;
+                                }
+                            },
+                            {
+                                data: "Value"
+                            }
+                        ]
+
+                    });
+            });
+
+        });
+    </script>
+}
