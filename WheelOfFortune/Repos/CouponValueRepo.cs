@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using WheelOfFortune.Models;
@@ -14,6 +15,11 @@ namespace WheelOfFortune.Repos
         public CouponValueRepo(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public IEnumerable<CouponValue> CouponValues()
+        {
+            return _context.CouponValues.ToList();
         }
 
         public CouponValue CreateCouponValue(int value, string userId)

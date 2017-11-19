@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WheelOfFortune.Models.ViewModels;
 using WheelOfFortune.Services;
 
@@ -18,8 +19,8 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Admin2")]
+//        [Authorize(Roles = "Admin")]
+        [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
         public IEnumerable<CouponViewModel> GetAll()
         {
             return _wheelService.GetAllCoupons().Select(x => TransformModels.ToCouponViewModel(x));
@@ -32,11 +33,11 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public CouponViewModel AddCoupon(CouponBindingModel model)
+        [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
+        public CouponViewModel AddCoupon(int value)
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
-            return TransformModels.ToCouponViewModel(_wheelService.CreateCoupon(model, userId));
+            return TransformModels.ToCouponViewModel(_wheelService.CreateCoupon(value, userId));
         }
 
         [HttpGet]
@@ -47,10 +48,17 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+//        [Authorize(Roles = "Admin")]
+        [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
+
         public bool DeleteCoupon(int id)
         {
             return _wheelService.DeleteCoupon(id);
+        }
+        [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
+        public IHttpActionResult GetCouponValues()
+        {
+            return Ok(_wheelService.GetCouponValues());
         }
     }
 }

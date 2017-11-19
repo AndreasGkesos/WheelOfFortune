@@ -19,7 +19,7 @@ namespace WheelOfFortune.Repos
 
         public CouponRepo(ApplicationDbContext context)
         {
-          _context = context;
+            _context = context;
         }
 
         public IEnumerable<Coupon> GetAll()
@@ -44,15 +44,15 @@ namespace WheelOfFortune.Repos
             return c;
         }
 
-        public Coupon CreateCoupon(CouponBindingModel model, string userId)
+        public Coupon CreateCoupon(int value, string userId)
         {
-            var user = _context.Users.First(x => x.Id == userId);        
+            var user = _context.Users.First(x => x.Id == userId);
 
             if (user == null)
                 throw new Exception("User does not exist");
 
-            var cv = _context.CouponValues.FirstOrDefault(x => x.Value == model.Value);
-            
+            var cv = _context.CouponValues.FirstOrDefault(x => x.Value == value);
+
             if (cv == null)
                 throw new Exception("Value does not exist");
 
@@ -64,7 +64,7 @@ namespace WheelOfFortune.Repos
                 DateExpired = DateTime.Now.AddDays(10),
                 DateExchanged = DateTime.Now,
                 User = user,
-                Active = true,                 
+                Active = true,
             };
 
             _context.Coupons.Add(coupon);
@@ -81,7 +81,7 @@ namespace WheelOfFortune.Repos
                 {
                     var oneByte = new byte[1];
                     provider.GetBytes(oneByte);
-                    var character = (char)oneByte[0];
+                    var character = (char) oneByte[0];
                     if (_validChars.Contains(character))
                     {
                         sb.Append(character);
@@ -94,7 +94,8 @@ namespace WheelOfFortune.Repos
 
         public decimal? Exchange(string code)
         {
-            var coupon = _context.Coupons.Where(x => x.Code == code).Include(x => x.User).Include(c => c.Value).FirstOrDefault();
+            var coupon = _context.Coupons.Where(x => x.Code == code).Include(x => x.User).Include(c => c.Value)
+                .FirstOrDefault();
 
 
             var now = DateTime.Now;
@@ -112,14 +113,19 @@ namespace WheelOfFortune.Repos
 
         public bool Delete(int id)
         {
-            var coupon = _context.Coupons.Where(x => x.Id == id).FirstOrDefault();
+            var coupon = _context.Coupons.FirstOrDefault(x => x.Id == id);
 
-            if (coupon == null) { return false; }
+            if (coupon == null)
+            {
+                return false;
+            }
 
             _context.Entry(coupon).State = EntityState.Deleted;
             _context.SaveChanges();
 
             return true;
         }
+
+
     }
 }

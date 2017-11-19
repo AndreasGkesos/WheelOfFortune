@@ -1,4 +1,5 @@
-﻿using WheelOfFortune.Models.Domain;
+﻿using System.Collections.Generic;
+using WheelOfFortune.Models.Domain;
 
 namespace WheelOfFortune.Repos.Interfaces
 {
@@ -6,5 +7,6 @@ namespace WheelOfFortune.Repos.Interfaces
     {
         CouponValue CreateCouponValue(int value, string userId);
         CouponValue UpdateCouponValue(int id, int value);
+        IEnumerable<CouponValue> CouponValues();
     }
 }

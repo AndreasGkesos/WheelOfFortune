@@ -22,6 +22,7 @@ namespace WheelOfFortune.Models.ViewModels
         {
             return new CouponViewModel
             {
+                Id = model.Id,
                 Value = Convert.ToInt32(model.Value.Value),
                 Code = model.Code,
                 DateCreated = model.DateCreated,

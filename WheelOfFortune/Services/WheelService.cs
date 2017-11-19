@@ -105,9 +105,9 @@ namespace WheelOfFortune.Services
             return _couponRepo.UpdateExpirationDate(coupon, date);
         }
 
-        public Coupon CreateCoupon(CouponBindingModel model, string userId)
+        public Coupon CreateCoupon(int value, string userId)
         {
-            return _couponRepo.CreateCoupon(model, userId);
+            return _couponRepo.CreateCoupon(value, userId);
         }
 
         public IEnumerable<Coupon> GetAllCoupons()
@@ -248,6 +248,11 @@ namespace WheelOfFortune.Services
         public bool UpdateUserActiveStatusById(bool status, string userId)
         {
             return _userRepo.UpdateUserActiveStatusById(status, userId);
+        }
+
+        public IEnumerable<CouponValue> GetCouponValues()
+        {
+           return  _couponValueRepo.CouponValues();
         }
     }
 }

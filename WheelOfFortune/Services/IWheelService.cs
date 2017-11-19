@@ -19,7 +19,7 @@ namespace WheelOfFortune.Services
 
         IEnumerable<Coupon> GetCouponByUserId(string userId);
         Coupon UpdateCouponExpirationDate(Coupon coupon, DateTime date);
-        Coupon CreateCoupon(CouponBindingModel model, string userId);
+        Coupon CreateCoupon(int value, string userId);
         IEnumerable<Coupon> GetAllCoupons();
         bool ExchangeCoupon(string code, string userId);
         bool DeleteCoupon(int id);
@@ -39,5 +39,7 @@ namespace WheelOfFortune.Services
         ApplicationUser GetUserById(string userId);
         byte[] GetUserImage(string userId);
         bool UpdateUserActiveStatusById(bool status, string userId);
+
+        IEnumerable<CouponValue> GetCouponValues();
     }
 }
