@@ -6,8 +6,6 @@ function IndexController_init(config) {
   
      userId = config.userId;
 
-  
-
 
      UpdateBalanceContainer(userId);
 

@@ -71,7 +71,7 @@
 
                                 data: "Id",
                                 render: function (data, type, user) {
-
+                                    console.log(user.Active);
                                     if (user.Active) {
                                         return "<button class='btn-link js-deactivate active' data-user-id=" +
                                             user.Id +
@@ -94,10 +94,7 @@
                 function () {
                     var button = $(this);
                     var userId = button.attr("data-user-id");
-                    alert(userId);
-                    
-                   
-                    
+             
                     bootbox.confirm("Are you sure you want to check this user's Spins?",
                         function (result) {
                             if (result) {
@@ -137,7 +134,7 @@
                                         userId,
                                     method: "POST",
                                     success: function(response) {
-                                        $table.row(button.removeClass("active").addClass("deactive").text("Activate")).draw();
+                                        $table.row(button.text("Activate").removeClass("active").addClass("deactive")).draw();
                                         console.log(response);
 
                                     }
@@ -155,7 +152,7 @@
                                         userId2,
                                     method: "POST",
                                     success: function(response) {
-                                        $table.row(button2.removeClass("deactive").addClass("active").text("Activate")).draw();
+                                        $table.row(button2.text("Deactivate").removeClass("deactive").addClass("active")).draw();
                                         console.log(response);
 
                                     }

@@ -19,6 +19,7 @@ namespace WheelOfFortune.Controllers.API
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin2")]
         public IEnumerable<CouponViewModel> GetAll()
         {
             return _wheelService.GetAllCoupons().Select(x => TransformModels.ToCouponViewModel(x));

@@ -19,7 +19,7 @@ namespace WheelOfFortune.Repos
 
         public ApplicationUser GetAllById(string userId)
         {
-            return _context.Users.Where(x => x.Id == userId).First();
+            return _context.Users.First(x => x.Id == userId);
         }
 
         IEnumerable<ApplicationUser> IUserRepo.GetAll()
@@ -34,7 +34,7 @@ namespace WheelOfFortune.Repos
 
         public bool UpdateUserActiveStatusById(bool status, string userId)
         {
-            var user = _context.Users.Where(x => x.Id == userId).FirstOrDefault();
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
 
             if (user == null) { return false; }
 

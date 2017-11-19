@@ -6,9 +6,8 @@
 
 <h2>WheelSpinsConfiguration</h2>
 
-@using (Html.BeginForm("Index", "Home", FormMethod.Post, new {id= "sliceForm" }))
-{
-    <div class="form-group">
+<div id="sliceForm">
+    <div class="form-group" data-slice-index="0">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="propability">Propability</label>
@@ -36,7 +35,7 @@
     </div>
 
 
-        <!-- The template for adding new field -->
+    <!-- The template for adding new field -->
 
     <div class="form-group hide " id="sliceTemplate">
         <div class="row">
@@ -67,13 +66,16 @@
     </div>
 
 
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <button class="btn btn-primary" style="margin-top: 20px;" type="submit">Submit form</button>
-            </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <button class="btn btn-primary" style="margin-top: 20px;" id="submitConfig">Submit Wheel Configuration</button>
         </div>
+    </div>
+</div>
+           
+     
 
-}
+
 
 @section scripts {
 
@@ -111,6 +113,13 @@
                     // Remove element containing the fields
                     $row.remove();
                 });
+            var formgroups;
+            $("#submitConfig").on('click',
+                function() {
+                    formgroups = $("div[data-slice-index]");
+                    console.log(formgroups);
+                });
+          
         });
 
     </script>

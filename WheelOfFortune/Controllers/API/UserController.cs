@@ -18,8 +18,9 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
+       
         [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
+       // [Authorize(Roles = "Admin")]
         public IEnumerable<ApplicationUserViewModel> GetAll()
         {
             return _wheelService.GetAllUsers().Select(x => TransformModels.ToApplicationUserViewModel(x));
@@ -32,6 +33,7 @@ namespace WheelOfFortune.Controllers.API
         }
 
         [HttpPost]
+        [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
         public bool UpdateUserActiveStatus(bool status, string userId)
         {
             return _wheelService.UpdateUserActiveStatusById(status, userId);
