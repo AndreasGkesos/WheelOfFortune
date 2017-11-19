@@ -148,7 +148,7 @@ function InitialListeners() {
                     },
                     delay);
             
-
+            document.querySelector(".pegContainer").style.transformOrigin = "50%";
         });
 
         //close modal window

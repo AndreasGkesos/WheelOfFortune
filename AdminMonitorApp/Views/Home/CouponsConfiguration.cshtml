@@ -118,10 +118,10 @@
             function () {
               
                 $.ajax({
-                    url: "http://localhost:63312/api/Coupon/AddCoupon/",
-                    method: "POST",
-                    data: JSON.stringify( { value: $("#couponValues").val()}),
-                   
+                    url: "http://localhost:63312/api/Coupon/AddCoupon",
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    data:{'value':$("#couponValues").val()},                 
                     dataType: "json",
                     success: function (data) {
                         console.log(data);

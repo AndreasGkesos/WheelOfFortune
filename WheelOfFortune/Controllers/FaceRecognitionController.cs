@@ -7,7 +7,7 @@ namespace WheelOfFortune.Controllers
 {
     public class FaceRecognitionController : Controller
     {
-        private const string ServiceKey = "b75c2e1cabfd41928697c1d953303f5b";
+        private const string ServiceKey = "cfafef21df96486a999d9bb161a41ddf";
         private const string EndPoint = "https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect";
 
 

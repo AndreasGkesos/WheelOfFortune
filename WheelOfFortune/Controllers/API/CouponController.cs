@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,12 +33,13 @@ namespace WheelOfFortune.Controllers.API
             return _wheelService.GetCouponByUserId(userId).Select(x => TransformModels.ToCouponViewModel(x));
         }
 
-        [HttpPost]
+        [HttpGet]
         [EnableCors(origins: "http://localhost:50576", headers: "*", methods: "*")]
-        public CouponViewModel AddCoupon(int value)
+        public CouponViewModel AddCoupon(string value)
         {
+            var converted = Convert.ToInt32(value);
             var userId = HttpContext.Current.User.Identity.GetUserId();
-            return TransformModels.ToCouponViewModel(_wheelService.CreateCoupon(value, userId));
+            return TransformModels.ToCouponViewModel(_wheelService.CreateCoupon(converted, userId));
         }
 
         [HttpGet]
